@@ -1,4 +1,4 @@
-
+ioioioi
 
 class Item:
     def __init__(self, nome_item: str, att_extra: int, hp_extra: int):
