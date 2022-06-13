@@ -9,5 +9,6 @@ class Mochila:
         return self.__itens
 
     @itens.setter
-    def itens(self, itens: []):
-        self.__itens = itens
+    def itens(self, itens: list):
+        if isinstance(itens, list):
+            self.__itens = itens

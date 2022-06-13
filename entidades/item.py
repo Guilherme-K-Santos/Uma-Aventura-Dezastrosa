@@ -1,11 +1,10 @@
 
 
 class Item:
-    def __init__(self, nome_item: str, att_extra: int, hp_extra: int, cura_inst: int):
+    def __init__(self, nome_item: str, att_extra: int, hp_extra: int):
         self.__nome_item = nome_item
         self.__att_extra = att_extra
         self.__hp_extra = hp_extra
-        self.__cura_inst = cura_inst
 
     @property
     def nome_item(self):
@@ -33,12 +32,3 @@ class Item:
     def hp_extra(self, hp_extra: int):
         if isinstance(hp_extra, int):
             self.__hp_extra = hp_extra
-
-    @property
-    def cura_inst(self):
-        return self.__cura_inst
-
-    @cura_inst.setter
-    def cura_inst(self, cura_inst: int):
-        if isinstance(cura_inst, int):
-            self.__cura_inst = cura_inst
