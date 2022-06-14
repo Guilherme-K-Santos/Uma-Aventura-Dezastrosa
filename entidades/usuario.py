@@ -1,10 +1,10 @@
 
 
 class Usuario:
-    def __init__(self, login: str, senha: str, lista_herois: list):
+    def __init__(self, login: str, senha: int):
         self.__login = login
         self.__senha = senha
-        self.__lista_herois = lista_herois
+        self.__lista_herois = []
 
     @property
     def login(self):
@@ -20,7 +20,7 @@ class Usuario:
         return self.__senha
 
     @senha.setter
-    def senha(self, senha: str):
+    def senha(self, senha: int):
         if isinstance(senha, int):
             self.__senha = senha
 

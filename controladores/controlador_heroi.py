@@ -1,14 +1,14 @@
 from telas.tela_heroi import TelaHeroi
-from controladores.controlador_sistema import ControladorSistema
-from controladores.controlador_mochila import ControladorMochila
+from entidades.heroi import Heroi
 
 
 class ControladorHeroi:
-    def __init__(self, controle_sistema: ControladorSistema, controle_mochila: ControladorMochila):
+    def __init__(self, controle_sistema):
         self.__herois = []
         self.__tela_heroi = TelaHeroi()
         self.__controle_sistema = controle_sistema
-        self.__controle_mochila = controle_mochila
+
+    # retirei o controle mochila do controlador heroi, vamos usar o controlador sistema para ligar ambos
 
     def deletar_heroi(self):
         pass
