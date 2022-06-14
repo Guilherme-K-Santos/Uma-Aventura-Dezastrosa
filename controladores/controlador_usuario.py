@@ -9,7 +9,18 @@ class ControladorUsuario:
         self.__usuarios = []
 
     def cadastrar(self):
-        pass
+        dados_usuario = self.__tela_usuario.mostra_tela_cadastro()
+
+        for usuario in self.__usuarios:
+            if dados_usuario["nome"] == usuario.login and \
+                dados_usuario["senha"] == usuario.senha:
+                self.__tela_usuario.mensagem("Usuário já existente! Faça o login para jogar")
+                return None
+                break
+        else:
+            novo_usuario = Usuario()
+            self.__usuarios.append(novo_usuario)
+            return novo_usuario
 
 #   comparei login e senha para logar o usuario, mas não consegui saber como linkar ele com os heróis dele,
 #   precisaria de um cadastro para isso. Também não consegui instanciar e ter certeza pq n tem nada cadastrado
@@ -22,7 +33,8 @@ class ControladorUsuario:
                     self.__controlador_sistema.abre_tela_logados()
                     return login, senha
                 else:
-                    print("Login Inválido!")
+                    self.__tela_usuario.mensagem("Login Inválido!")
+                    return None
 
     def retornar(self):
         self.__controlador_sistema.abre_tela_nao_logados()

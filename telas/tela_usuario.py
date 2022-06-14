@@ -1,6 +1,10 @@
 
 
 class TelaUsuario:
+    def mensagem(self, texto):
+        print(texto)
+        input()
+
     def tela_usuario_nao_logados(self):
         print("--------------------------------------")
         print("Menu de Usuários")
@@ -45,3 +49,9 @@ class TelaUsuario:
 #         opções para o usuário escolher (ele agora está LOGADO, então pode prosseguir
 #         para acessar ou criar heróis), essa tela pode ser colocada em tela sistema também,
 #         conversamos depois
+    def mostra_tela_cadastro(self):
+        print("--------------------------------------")
+        print("--------------CADASTRO----------------")
+        nome = input("Digite um nome para o usuário")
+        senha = input("Digite uma senha")
+        return {"nome":nome, "senha":senha}
