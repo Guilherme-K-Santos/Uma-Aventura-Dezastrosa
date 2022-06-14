@@ -6,13 +6,16 @@ class ControladorUsuario:
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
         self.__tela_usuario = TelaUsuario()
-        self.__usuarios = [Usuario()]
+        self.__usuarios = []
+
+    def cadastrar(self):
+        pass
 
     def logar(self):
         pass
 
     def sair(self):
-        pass
+        exit("Desligando o sistema.")
 
     def excluir(self):
         pass

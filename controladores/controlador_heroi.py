@@ -5,6 +5,7 @@ from controladores.controlador_mochila import ControladorMochila
 
 class ControladorHeroi:
     def __init__(self, controle_sistema: ControladorSistema, controle_mochila: ControladorMochila):
+        self.__herois = []
         self.__tela_heroi = TelaHeroi()
         self.__controle_sistema = controle_sistema
         self.__controle_mochila = controle_mochila
