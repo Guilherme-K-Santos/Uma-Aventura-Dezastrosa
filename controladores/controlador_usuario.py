@@ -9,17 +9,17 @@ class ControladorUsuario:
         self.__usuarios = []
 
     def cadastrar(self):
-        dados_usuario = self.__tela_usuario.mostra_tela_cadastro()
+        login, senha = self.__tela_usuario.mostra_tela_cadastro()
 
         for usuario in self.__usuarios:
-            if dados_usuario["nome"] == usuario.login and \
-                dados_usuario["senha"] == usuario.senha:
+            if login["nome"] == usuario.login and \
+                    senha["senha"] == usuario.senha:
                 self.__tela_usuario.mensagem("Usuário já existente! Faça o login para jogar")
                 return None
-                break
         else:
-            novo_usuario = Usuario()
+            novo_usuario = Usuario(login, senha)
             self.__usuarios.append(novo_usuario)
+            self.__tela_usuario.mensagem("Usuário Novo Criado! Faça o login para jogar")
             return novo_usuario
 
 #   comparei login e senha para logar o usuario, mas não consegui saber como linkar ele com os heróis dele,
@@ -30,11 +30,12 @@ class ControladorUsuario:
             login, senha = self.__tela_usuario.tela_login()
             for usuarios in self.__usuarios:
                 if login == usuarios.login and senha == usuarios.senha:
-                    self.__controlador_sistema.abre_tela_logados()
+                    self.__tela_usuario.tela_logados()
                     return login, senha
-                else:
-                    self.__tela_usuario.mensagem("Login Inválido!")
-                    return None
+            else:
+                self.__tela_usuario.mensagem("Login Inválido!")
+                self.__tela_usuario.tela_usuario_nao_logados()
+                return None
 
     def retornar(self):
         self.__controlador_sistema.abre_tela_nao_logados()

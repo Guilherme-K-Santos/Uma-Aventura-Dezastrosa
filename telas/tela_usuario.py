@@ -2,8 +2,7 @@
 
 class TelaUsuario:
     def mensagem(self, texto):
-        print(texto)
-        input()
+        return print(texto)
 
     def tela_usuario_nao_logados(self):
         print("--------------------------------------")
@@ -52,6 +51,6 @@ class TelaUsuario:
     def mostra_tela_cadastro(self):
         print("--------------------------------------")
         print("--------------CADASTRO----------------")
-        nome = input("Digite um nome para o usuário")
-        senha = input("Digite uma senha")
-        return {"nome":nome, "senha":senha}
+        login = input("Digite um nome para o usuário: ")
+        senha = int(input("Digite uma senha: "))
+        return {"login": login, "senha": senha}
