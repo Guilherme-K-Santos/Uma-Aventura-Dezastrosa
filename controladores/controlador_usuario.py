@@ -12,8 +12,7 @@ class ControladorUsuario:
         login, senha = self.__tela_usuario.mostra_tela_cadastro()
 
         for usuario in self.__usuarios:
-            if login["nome"] == usuario.login and \
-                    senha["senha"] == usuario.senha:
+            if login == usuario.login or senha == usuario.senha:
                 self.__tela_usuario.mensagem("Usuário já existente! Faça o login para jogar")
                 return None
         else:
@@ -27,6 +26,7 @@ class ControladorUsuario:
 #   ASKASKSAKSAK, mas tudo indica que ta funfando sim.
     def logar(self):
         while True:
+            print("passou aqui")
             login, senha = self.__tela_usuario.tela_login()
             for usuarios in self.__usuarios:
                 if login == usuarios.login and senha == usuarios.senha:
@@ -69,8 +69,8 @@ class ControladorUsuario:
     # novamente) está uma invocação da função logar, tipo: prove que é vc mesmo nessa conta, por medida de
     # segurança, dai eu puxo os dados, busco na lista de usuarios e excluo ele da lista.
     def excluir(self):
-        resposta_da_exclusao = self.__tela_usuario.tela_deletar_usuario()
-        if resposta_da_exclusao is 1:
+        opcao_escolhida_deletar = self.__tela_usuario.tela_deletar_usuario()
+        if opcao_escolhida_deletar is 1:
             login, senha = self.logar()
             for usuarios in self.__usuarios:
                 if login == usuarios.login and senha == usuarios.senha:
@@ -78,9 +78,9 @@ class ControladorUsuario:
 
     #   tela que aparece quando o usuário completa o login em controle usuario, na função logar()
     def abre_tela_logados(self):
-        lista_opcoes = {1: self.acessar_herois_criados, 2: self.criar_novo_heroi, 3: self.sair,
-                        4: self.excluir, 0: self.retornar()}
+        lista_opcoes_logados = {1: self.acessar_herois_criados, 2: self.criar_novo_heroi, 3: self.sair,
+                                4: self.excluir, 0: self.retornar}
         while True:
-            opcao_escolhida = self.__tela_usuario.tela_logados()
-            funcao_escolhida = lista_opcoes[opcao_escolhida]
+            opcao = self.__tela_usuario.tela_logados()
+            funcao_escolhida = lista_opcoes_logados[opcao]
             funcao_escolhida()

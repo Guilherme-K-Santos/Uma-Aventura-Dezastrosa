@@ -30,8 +30,8 @@ class TelaUsuario:
         print("1 - Sim")
         print("2 - Não")
 
-        opcao_escolhida = int(input("Opção Seleciona: "))
-        return opcao_escolhida
+        opcao_escolhida_deletar = int(input("Opção Seleciona: "))
+        return opcao_escolhida_deletar
 
     def tela_logados(self):
         print("--------------------------------------")
@@ -39,11 +39,13 @@ class TelaUsuario:
         print("Qual a aventura que embarcaremos?")
         print("1 - Acessar Heróis já Criados")
         print("2 - Criar Novo Herói")
+        print("3 - Sair da Conta")
+        print("4 - Excluir Conta")
         print("0 - Retornar")
         print("--------------------------------------")
 
-        opcao_escolhida = int(input("Escolha a opcao: "))
-        return opcao_escolhida
+        opcao = int(input("Escolha a opcao: "))
+        return opcao
 
 #         opções para o usuário escolher (ele agora está LOGADO, então pode prosseguir
 #         para acessar ou criar heróis), essa tela pode ser colocada em tela sistema também,
@@ -51,6 +53,7 @@ class TelaUsuario:
     def mostra_tela_cadastro(self):
         print("--------------------------------------")
         print("--------------CADASTRO----------------")
-        login = input("Digite um nome para o usuário: ")
-        senha = int(input("Digite uma senha: "))
-        return {"login": login, "senha": senha}
+        login = input("Login:")
+        senha = int(input("Senha:"))
+
+        return login, senha
