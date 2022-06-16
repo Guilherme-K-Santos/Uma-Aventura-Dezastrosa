@@ -1,12 +1,12 @@
 
 
 class TelaSistema:
-    def tela_nao_logados(self):
+    def abre_tela_inicial(self):
         print("--------------------------------------")
         print("Bem-Vindo ao Menu Principal, Jogador!")
         print("O que você deseja fazer para prosseguir?")
         print("1 - Login de Usuário")
-        print("2 - Instruções do Combate (?)")
+        print("2 - Cadastro de Usuário")
         print("3 - Dúvidas sobre itens ou monstros(?)")
         print("0 - Encerrar o jogo")
         print("--------------------------------------")

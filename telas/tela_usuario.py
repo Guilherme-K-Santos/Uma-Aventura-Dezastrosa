@@ -4,24 +4,33 @@ class TelaUsuario:
     def mensagem(self, texto):
         return print(texto)
 
-    def tela_usuario_nao_logados(self):
-        print("--------------------------------------")
-        print("Menu de Usuários")
-        print("1 - Cadastrar Novo Usuário")
-        print("2 - Logar Na Conta")
-        print("0 - Retornar ao Menu Principal")
-        print("--------------------------------------")
+    #def tela_usuario_nao_logados(self):
+    #    print("--------------------------------------")
+    #    print("Menu de Usuários")
+    #    print("1 - Cadastrar Novo Usuário")
+    #    print("2 - Logar Na Conta")
+    #    print("0 - Retornar ao Menu Principal")
+    #    print("--------------------------------------")
 
-        opcao_escolhida = int(input("Opção Seleciona: "))
-        return opcao_escolhida
+    #    opcao_escolhida = int(input("Opção Seleciona: "))
+    #    return opcao_escolhida
 
     def tela_login(self):
         print("--------------------------------------")
         print("Por favor, preencha com seus dados:")
         login = input("Login:")
-        senha = int(input("Senha:"))
+        senha = input("Senha:")
 
-        return login, senha
+        return {"login": login, "senha": senha}
+
+    def tela_cadastro(self):
+        print("--------------------------------------")
+        print("--------------CADASTRO----------------")
+        login = input("Login:")
+        senha = input("Senha:")
+
+        return {"login": login, "senha": senha}
+
 
     def tela_deletar_usuario(self):
         print("--------------------------------------")
@@ -50,10 +59,3 @@ class TelaUsuario:
 #         opções para o usuário escolher (ele agora está LOGADO, então pode prosseguir
 #         para acessar ou criar heróis), essa tela pode ser colocada em tela sistema também,
 #         conversamos depois
-    def mostra_tela_cadastro(self):
-        print("--------------------------------------")
-        print("--------------CADASTRO----------------")
-        login = input("Login:")
-        senha = int(input("Senha:"))
-
-        return login, senha

@@ -1,22 +1,25 @@
 from telas.tela_usuario import TelaUsuario
 from entidades.usuario import Usuario
+from controladores.controlador_heroi import ControladorHeroi
 
 
 class ControladorUsuario:
-    def __init__(self, controlador_sistema):
-        self.__controlador_sistema = controlador_sistema
+
+    def __init__(self):
+        self.__controlador_heroi = ControladorHeroi()
         self.__tela_usuario = TelaUsuario()
         self.__usuarios = []
 
     def cadastrar(self):
-        login, senha = self.__tela_usuario.mostra_tela_cadastro()
+        dados_novos = self.__tela_usuario.tela_cadastro()
 
         for usuario in self.__usuarios:
-            if login == usuario.login or senha == usuario.senha:
+            if (usuario.login == dados_novos["login"]) and \
+                    usuario.senha == dados_novos["senha"]:
                 self.__tela_usuario.mensagem("Usuário já existente! Faça o login para jogar")
                 return None
         else:
-            novo_usuario = Usuario(login, senha)
+            novo_usuario = Usuario(dados_novos["login"], dados_novos["senha"])
             self.__usuarios.append(novo_usuario)
             self.__tela_usuario.mensagem("Usuário Novo Criado! Faça o login para jogar")
             return novo_usuario
@@ -25,17 +28,17 @@ class ControladorUsuario:
 #   precisaria de um cadastro para isso. Também não consegui instanciar e ter certeza pq n tem nada cadastrado
 #   ASKASKSAKSAK, mas tudo indica que ta funfando sim.
     def logar(self):
-        while True:
-            print("passou aqui")
-            login, senha = self.__tela_usuario.tela_login()
-            for usuarios in self.__usuarios:
-                if login == usuarios.login and senha == usuarios.senha:
-                    self.__tela_usuario.tela_logados()
-                    return login, senha
-            else:
-                self.__tela_usuario.mensagem("Login Inválido!")
-                self.__tela_usuario.tela_usuario_nao_logados()
-                return None
+        print("passou aqui")
+        dados = self.__tela_usuario.tela_login()
+
+        for usuario in self.__usuarios:
+            if (usuario.login == dados["login"]) and \
+                    (usuario.senha == dados["senha"]):
+                self.__tela_usuario.mensagem("Logado com Sucesso!")
+                return usuario
+        else:
+            self.__tela_usuario.mensagem("Nome ou Senha invalidos!")
+            return None
 
     def retornar(self):
         self.__controlador_sistema.abre_tela_nao_logados()
@@ -54,12 +57,13 @@ class ControladorUsuario:
 #   essa nova parte que criei para visualização apenas de pessoas logadas pode ser movida para controle
 #   heroi ou controle sistema, conversaremos sobre isso:
     def acessar_herois_criados(self):
-        pass
+        return 
 
     def criar_novo_heroi(self):
         pass
 
     #   criei essa função, para o usuário poder deslogar sem ter que rebootar o sistema
+    # [luiza] não é a mesma coisa que a função retornar?
     def sair(self):
         pass
 
