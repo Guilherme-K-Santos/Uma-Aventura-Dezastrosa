@@ -3,23 +3,23 @@ from entidades.heroi import Heroi
 
 
 class ControladorHeroi:
-    def __init__(self):
-        self.__herois = []
-        self.__tela_heroi = TelaHeroi()
-      #  self.__controle_sistema = controle_sistema
 
-    # retirei o controle mochila do controlador heroi, vamos usar o controlador sistema para ligar ambos
+    def __init__(self):
+        self.__heroi = Heroi()
+        self.__tela_heroi = TelaHeroi()
+        self.__manter_tela = True
 
     def abrir_tela_opcoes(self):
-        opcao = self.__tela_heroi.tela_opcoes_heroi()
+        switcher = {0: self.retornar, 1: self.atacar, 2: self.descansar, 3: self.abrir_mochila, \
+                    4: self.escolher_titulo()}
 
-        if opcao == 1:
-            print("fazer o cadastro")
+        self.__manter_tela = True
+        while self.__manter_tela:
+            opcao_escolhida = self.__tela_heroi.tela_opcoes_heroi()
+            funcao_escolhida = switcher[opcao_escolhida]
+            funcao_escolhida()
 
-    def deletar_heroi(self):
-        pass
-
-    def abrir_tela_monstro(self):
+    def atacar(self):
         pass
 
     def abrir_mochila(self):
@@ -30,3 +30,6 @@ class ControladorHeroi:
 
     def escolher_titulo(self):
         pass
+
+    def retornar(self):
+        self.__manter_tela = False

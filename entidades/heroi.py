@@ -3,14 +3,14 @@ from entidades.mochila import Mochila
 
 
 class Heroi(Personagem):
-    def __init__(self, nome: str, hp: int, ataque: int, titulo: str, lista_titulos: [], mochila: Mochila):
-        super().__init__(nome, hp, ataque, titulo)
-        self.__nome = nome
-        self.__hp = hp
-        self.__ataque = ataque
-        self.__titulo = titulo
-        self.__lista_titulos = lista_titulos
-        self.__mochila = mochila
+    def __init__(self):
+        super().__init__()
+        self.__nome = None
+        self.__hp = 20
+        self.__ataque = 0
+        self.__titulo = ""
+        self.__lista_titulos = []
+        self.__mochila = Mochila()
 
     @property
     def mochila(self):

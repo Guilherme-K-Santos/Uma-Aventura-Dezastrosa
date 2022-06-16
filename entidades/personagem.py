@@ -3,11 +3,11 @@ from abc import ABC, abstractmethod
 
 class Personagem(ABC):
     @abstractmethod
-    def __init__(self, nome: str, hp: int, ataque: int, titulo: str):
-        self.__nome = nome
-        self.__hp = hp
-        self.__ataque = ataque
-        self.__titulo = titulo
+    def __init__(self):
+        self.__nome = None
+        self.__hp = None
+        self.__ataque = None
+        self.__titulo = None
 
     @property
     def nome(self):

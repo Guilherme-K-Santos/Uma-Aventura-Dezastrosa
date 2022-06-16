@@ -1,10 +1,12 @@
 
+from entidades.heroi import Heroi
 
 class Usuario:
     def __init__(self, login: str, senha: int):
+        self.__heroi_atual = Heroi()
         self.__login = login
         self.__senha = senha
-        self.__lista_herois = []
+        self.__lista_herois = [(Heroi)]
 
     @property
     def login(self):

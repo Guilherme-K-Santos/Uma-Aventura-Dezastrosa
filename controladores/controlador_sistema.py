@@ -39,8 +39,10 @@ class ControladorSistema:
         while True:
             opcao = self.__tela_sistema.abre_tela_inicial()
             if opcao == 1:
-                if self.__controlador_usuario.logar() is not None:
-                    self.__controlador_heroi.abrir_tela_opcoes()
+                usuario = self.__controlador_usuario.logar()
+                if usuario is not None:
+                    self.__controlador_usuario.opcoes_jogo()
+
             elif opcao == 2:
                 self.__controlador_usuario.cadastrar()
             elif opcao == 3:

@@ -1,14 +1,13 @@
 from telas.tela_usuario import TelaUsuario
 from entidades.usuario import Usuario
-from controladores.controlador_heroi import ControladorHeroi
 
 
 class ControladorUsuario:
 
     def __init__(self):
-        self.__controlador_heroi = ControladorHeroi()
         self.__tela_usuario = TelaUsuario()
         self.__usuarios = []
+        self.__manter_tela = True
 
     def cadastrar(self):
         dados_novos = self.__tela_usuario.tela_cadastro()
@@ -24,11 +23,7 @@ class ControladorUsuario:
             self.__tela_usuario.mensagem("Usuário Novo Criado! Faça o login para jogar")
             return novo_usuario
 
-#   comparei login e senha para logar o usuario, mas não consegui saber como linkar ele com os heróis dele,
-#   precisaria de um cadastro para isso. Também não consegui instanciar e ter certeza pq n tem nada cadastrado
-#   ASKASKSAKSAK, mas tudo indica que ta funfando sim.
     def logar(self):
-        print("passou aqui")
         dados = self.__tela_usuario.tela_login()
 
         for usuario in self.__usuarios:
@@ -40,32 +35,41 @@ class ControladorUsuario:
             self.__tela_usuario.mensagem("Nome ou Senha invalidos!")
             return None
 
+    def opcoes_jogo(self):
+        switcher = {0: self.retornar, 1: self.criar_novo_heroi, 2: self.acessar_herois_criados(), 3: self.excluir()}
+
+        self.__manter_tela = True
+        while self.__manter_tela:
+            opcao_escolhida = self.__tela_usuario.mostrar_opcoes_jogo()
+            funcao_escolhida = switcher[opcao_escolhida]
+            funcao_escolhida()
+
     def retornar(self):
-        self.__controlador_sistema.abre_tela_nao_logados()
+        self.__manter_tela = False
 
 #   eu decidi diferenciar as telas de usuarios logados e não logados.
 #   Não faz sentido tu poder excluir ou sair de uma conta que voce nem logou.
-    def abre_tela_usuarios_nao_logados(self):
-        lista_opcoes = {1: self.cadastrar, 2: self.logar, 0: self.retornar}
+ #   def abre_tela_usuarios_nao_logados(self):
+ #       lista_opcoes = {1: self.cadastrar, 2: self.logar, 0: self.retornar}
 
-        while True:
-            opcao_escolhida = self.__tela_usuario.tela_usuario_nao_logados()
-            funcao_escolhida = lista_opcoes[opcao_escolhida]
-            funcao_escolhida()
+ #       while True:
+ #           opcao_escolhida = self.__tela_usuario.tela_usuario_nao_logados()
+ #           funcao_escolhida = lista_opcoes[opcao_escolhida]
+ #           funcao_escolhida()
 
 # ---------------------------------------------------------------------------------------------------------
 #   essa nova parte que criei para visualização apenas de pessoas logadas pode ser movida para controle
 #   heroi ou controle sistema, conversaremos sobre isso:
     def acessar_herois_criados(self):
-        return 
+        pass
 
     def criar_novo_heroi(self):
         pass
 
     #   criei essa função, para o usuário poder deslogar sem ter que rebootar o sistema
     # [luiza] não é a mesma coisa que a função retornar?
-    def sair(self):
-        pass
+    #def sair(self):
+    #    pass
 
     # basicamente, o "return login, senha na função logar() serve para ser usado em outros casos que precisamos
     # saber sobre quem está logado! Foi uma sacada minha e pode facilitar mto a nossa vida
@@ -81,10 +85,10 @@ class ControladorUsuario:
                     self.__usuarios.remove(usuarios)
 
     #   tela que aparece quando o usuário completa o login em controle usuario, na função logar()
-    def abre_tela_logados(self):
-        lista_opcoes_logados = {1: self.acessar_herois_criados, 2: self.criar_novo_heroi, 3: self.sair,
-                                4: self.excluir, 0: self.retornar}
-        while True:
-            opcao = self.__tela_usuario.tela_logados()
-            funcao_escolhida = lista_opcoes_logados[opcao]
-            funcao_escolhida()
+    #def abre_tela_logados(self):
+    #    lista_opcoes_logados = {1: self.acessar_herois_criados, 2: self.criar_novo_heroi, 3: self.sair,
+    #                            4: self.excluir, 0: self.retornar}
+    #    while True:
+    #        opcao = self.__tela_usuario.tela_logados()
+    #        funcao_escolhida = lista_opcoes_logados[opcao]
+    #        funcao_escolhida()

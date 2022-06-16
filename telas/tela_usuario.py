@@ -42,14 +42,13 @@ class TelaUsuario:
         opcao_escolhida_deletar = int(input("Opção Seleciona: "))
         return opcao_escolhida_deletar
 
-    def tela_logados(self):
+    def mostrar_opcoes_jogo(self):
         print("--------------------------------------")
         print("Login efetuado com sucesso!")
         print("Qual a aventura que embarcaremos?")
         print("1 - Acessar Heróis já Criados")
         print("2 - Criar Novo Herói")
-        print("3 - Sair da Conta")
-        print("4 - Excluir Conta")
+        print("3 - Excluir Conta")
         print("0 - Retornar")
         print("--------------------------------------")
 
