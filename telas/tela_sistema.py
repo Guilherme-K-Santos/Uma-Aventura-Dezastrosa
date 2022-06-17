@@ -16,11 +16,12 @@ class TelaSistema:
         return opcao_escolhida
 
     def tela_logados(self, usuario):
-        print("---------------Ola!",usuario, "-----------------------")
+        print("---------------Ola!", usuario.login, "-----------------------")
         print("Login efetuado com sucesso!")
         print("Qual a aventura que embarcaremos?")
-        print("1 - Opções de herói")
-        print("2 - Opções de usuário")
+        print("1 - Acessar Hérois Criados")
+        print("2 - Criar Novo Herói")
+        print("3 - Opções da Conta")
         print("0 - Retornar")
         print("--------------------------------------")
 

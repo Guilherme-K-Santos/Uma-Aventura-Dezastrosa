@@ -1,5 +1,6 @@
-from telas.tela_usuario import TelaUsuario
+from entidades.heroi import Heroi
 from entidades.usuario import Usuario
+from telas.tela_usuario import TelaUsuario
 
 
 class ControladorUsuario:
@@ -37,7 +38,7 @@ class ControladorUsuario:
             return None
 
     def opcoes_usuario(self):
-        switcher = {0: self.retornar, 1: self.excluir, 2:self.alterar}
+        switcher = {0: self.retornar, 1: self.alterar, 2: self.excluir}
 
         self.__manter_tela = True
         while self.__manter_tela:
@@ -48,30 +49,32 @@ class ControladorUsuario:
     def retornar(self):
         self.__manter_tela = False
 
-    def excluir(self):
-        pass
-
     def alterar(self):
         pass
 
-    def pega_usuario_por_heroi(self,nome_heroi):
+    def pega_usuario_por_heroi(self, nome_heroi):
         for usuario in self.__usuarios:
             if nome_heroi in usuario.lista_herois:
                 return None
         else:
             return usuario
 
-  #  def confirmar_credenciais(self):
-  #      while True:
-  #          login, senha = self.__tela_usuario.tela_login()
-  #          for usuarios in self.__usuarios:
-  #              if login == usuarios.login and senha == usuarios.senha:
-  #                  self.__usuarios.remove(usuarios)
-  #                  self.__tela_usuario.mensagem("Exclusão Concluída com Êxito!")
-  #                  self.__tela_usuario.mensagem("-----------------------------")
-  #                  self.__tela_usuario.mensagem("Você Será Redirecionado para o Menu Principal")
-  #                  self.__controlador_sistema.abre_tela_nao_logados()
-  #          else:
-  #              self.__tela_usuario.mensagem("Credenciais Incorretas!")
-  #              self.__controlador_sistema.abre_tela_logados()
-  #              return None
+    def acessar_herois(self):
+        pass
+
+    def excluir(self):
+        while self.__manter_tela:
+            credenciais = self.__tela_usuario.tela_login()
+
+            for usuario in self.__usuarios:
+                if (usuario.login == credenciais["login"]) and \
+                        usuario.senha == credenciais["senha"]:
+                    self.__usuarios.remove(usuario)
+                    self.__tela_usuario.mensagem("Exclusão Concluída com Êxito!")
+                    self.__tela_usuario.mensagem("-----------------------------")
+                    self.__tela_usuario.mensagem("Você Será Redirecionado para o Menu Principal")
+                    self.retornar()
+                else:
+                    self.__tela_usuario.mensagem("Credenciais Incorretas!")
+                    self.retornar()
+                    return None

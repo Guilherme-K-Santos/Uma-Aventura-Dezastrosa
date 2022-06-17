@@ -3,12 +3,12 @@ from telas.tela_mochila import TelaMochila
 
 
 class ControladorMochila:
-    def __init__(self):
+    def __init__(self, controlador_sistema):
         self.__tela_mochila = TelaMochila()
         self.__mochila = Mochila()
         self.__itens = Mochila.itens
-    #    self.__controlador_sistema = controlador_sistema
-#alterei os parametros para o controlador sistema conseguir acessar o controlador mochila
+        self.__controlador_sistema = controlador_sistema
+
     def escolher_item(self):
         pass
 

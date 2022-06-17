@@ -20,7 +20,7 @@ class ControladorHeroi:
             funcao_escolhida = switcher[opcao_escolhida]
             funcao_escolhida()
 
-    def criar(self,usuario):
+    def criar_heroi(self,usuario):
         nome = self.__tela_heroi.pegar_nome_heroi()
         novo_heroi = Heroi(nome)
 

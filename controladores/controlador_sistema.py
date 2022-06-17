@@ -9,15 +9,19 @@ from telas.tela_sistema import TelaSistema
 class ControladorSistema:
     def __init__(self):
         self.__controlador_usuario = ControladorUsuario(self)
-        self.__controlador_item = ControladorItem()
-        self.__controlador_mochila = ControladorMochila()
-        self.__controlador_monstro = ControladorMonstro()
+        self.__controlador_item = ControladorItem(self)
+        self.__controlador_mochila = ControladorMochila(self)
+        self.__controlador_monstro = ControladorMonstro(self)
         self.__controlador_heroi = ControladorHeroi(self)
         self.__tela_sistema = TelaSistema()
 
     @property
     def controlador_usuario(self):
         return self.__controlador_usuario
+
+    @property
+    def controlador_heroi(self):
+        return self.__controlador_heroi
 
     @property
     def controlador_mochila(self):
@@ -39,9 +43,11 @@ class ControladorSistema:
                 if usuario is not None:
                     opcao2 = self.__tela_sistema.tela_logados(usuario)
                     if opcao2 == 1:
-                        self.cadastro_heroi(usuario)
+                        self.__controlador_usuario.acessar_herois()
                     elif opcao2 == 2:
-                        self.controlador_usuario.opcoes_usuario()
+                        self.__controlador_heroi.criar_heroi(usuario)
+                    elif opcao2 == 3:
+                        self.__controlador_usuario.opcoes_usuario()
                     elif opcao2 == 0:
                         self.iniciar()
             elif opcao == 2:
@@ -51,16 +57,13 @@ class ControladorSistema:
             else:
                 break
 
-
-
-
     def encerrar_sistema(self):
         exit()
 
     def cadastro_heroi(self, usuario):
         self.__controlador_heroi.criar(usuario)
 
-    def escolhe_heroi(self,usuario):
+    def escolhe_heroi(self, usuario):
         heroi = self.__controlador_heroi.selecionar(usuario)
         self.__controlador_heroi.abrir_tela_opcoes()
 

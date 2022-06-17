@@ -4,17 +4,6 @@ class TelaUsuario:
     def mensagem(self, texto):
         return print(texto)
 
-    #def tela_usuario_nao_logados(self):
-    #    print("--------------------------------------")
-    #    print("Menu de Usuários")
-    #    print("1 - Cadastrar Novo Usuário")
-    #    print("2 - Logar Na Conta")
-    #    print("0 - Retornar ao Menu Principal")
-    #    print("--------------------------------------")
-
-    #    opcao_escolhida = int(input("Opção Seleciona: "))
-    #    return opcao_escolhida
-
     def tela_login(self):
         print("--------------------------------------")
         print("Por favor, preencha com seus dados:")
@@ -31,6 +20,16 @@ class TelaUsuario:
 
         return {"login": login, "senha": senha}
 
+    def mostrar_opcoes_usuario(self):
+        print("--------------------------------------")
+        print("--------------Opções Do Usuário----------------")
+        print("1 - Alterar Dados da Conta")
+        print("2 - Excluir Conta")
+        print("0 - Retornar")
+        print("--------------------------------------")
+
+        opcao_escolhida = int(input("Escolha a opcao: "))
+        return opcao_escolhida
 
  #   def tela_deletar_usuario(self):
  #       print("--------------------------------------")
