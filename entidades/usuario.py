@@ -4,7 +4,7 @@ class Usuario:
     def __init__(self, login: str, senha: int):
         self.__login = login
         self.__senha = senha
-        self.__lista_herois = []
+        self.__lista_herois = [""]
 
     @property
     def login(self):
@@ -31,4 +31,3 @@ class Usuario:
     @lista_herois.setter
     def lista_herois(self, lista_herois: list):
         self.__lista_herois = lista_herois
-

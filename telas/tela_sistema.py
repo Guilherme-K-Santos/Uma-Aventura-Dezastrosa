@@ -1,6 +1,8 @@
 
 
 class TelaSistema:
+    def mensagem(self, texto):
+        return print(texto)
 
     def tela_inicial(self):
         print("--------------------------------------")

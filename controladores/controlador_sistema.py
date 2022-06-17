@@ -45,7 +45,7 @@ class ControladorSistema:
                     if opcao2 == 1:
                         self.__controlador_usuario.acessar_herois()
                     elif opcao2 == 2:
-                        self.__controlador_heroi.criar_heroi(usuario)
+                        self.cadastro_heroi()
                     elif opcao2 == 3:
                         self.__controlador_usuario.opcoes_usuario()
                     elif opcao2 == 0:
@@ -60,8 +60,21 @@ class ControladorSistema:
     def encerrar_sistema(self):
         exit()
 
-    def cadastro_heroi(self, usuario):
-        self.__controlador_heroi.criar(usuario)
+    def cadastro_heroi(self):
+        novo_heroi = self.__controlador_heroi.criar_heroi()
+        lista_usuarios = self.__controlador_usuario.pega_usuario_por_heroi()
+        # acima estão as duas exportações necessárias e abaixo está o seu código com algumas alterações
+        # (os prints eu estava usando pra
+        # acontanhar o cod)
+        for usuario in lista_usuarios:
+            print(usuario)
+            if novo_heroi.nome in usuario.lista_herois:
+                self.__tela_sistema.mensagem("Heroi já existente")
+                return None
+            else:
+                if novo_heroi not in usuario.lista_herois:
+                    usuario.lista_herois.append(novo_heroi)
+                    print(usuario.lista_herois)
 
     def escolhe_heroi(self, usuario):
         heroi = self.__controlador_heroi.selecionar(usuario)

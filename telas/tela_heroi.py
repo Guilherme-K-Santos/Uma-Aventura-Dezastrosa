@@ -12,12 +12,11 @@ class TelaHeroi:
         opcao_escolhida = int(input("escolha uma opção: "))
         return opcao_escolhida
 
-    def mensagem(self,texto):
+    def mensagem(self, texto):
         print(texto)
         input()
 
     def pegar_nome_heroi(self):
         nome = input("Nome do herói: ")
-
 
         return nome

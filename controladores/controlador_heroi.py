@@ -20,21 +20,14 @@ class ControladorHeroi:
             funcao_escolhida = switcher[opcao_escolhida]
             funcao_escolhida()
 
-    def criar_heroi(self,usuario):
-        nome = self.__tela_heroi.pegar_nome_heroi()
-        novo_heroi = Heroi(nome)
+    # aqui eu crio o heroi em si (controlador heroi, perfetio sentido) e exporto ele pro controlador sistema
+    def criar_heroi(self):
+        novo_heroi = Heroi(self.__tela_heroi.pegar_nome_heroi())
 
-        if novo_heroi not in usuario.lista_herois:
-            usuario.lista_herois.append(novo_heroi)
-            return novo_heroi
-        else:
-            self.__tela_heroi.mensagem("Heroi já existente")
-            return None
-
+        return novo_heroi
 
     def selecionar(self, usuario):
         pass
-
 
     def retornar(self):
         self.__manter_tela = False

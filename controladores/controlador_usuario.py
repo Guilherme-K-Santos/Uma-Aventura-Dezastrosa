@@ -1,4 +1,3 @@
-from entidades.heroi import Heroi
 from entidades.usuario import Usuario
 from telas.tela_usuario import TelaUsuario
 
@@ -52,12 +51,11 @@ class ControladorUsuario:
     def alterar(self):
         pass
 
-    def pega_usuario_por_heroi(self, nome_heroi):
-        for usuario in self.__usuarios:
-            if nome_heroi in usuario.lista_herois:
-                return None
-        else:
-            return usuario
+    # aqui eu pego a lista de todos os usuarios atualmente cadastrados e exporto pro controlador sistema
+    def pega_usuario_por_heroi(self):
+        lista_usuarios = self.__usuarios
+
+        return lista_usuarios
 
     def acessar_herois(self):
         pass
