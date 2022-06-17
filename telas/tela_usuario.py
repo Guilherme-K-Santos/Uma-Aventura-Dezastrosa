@@ -41,21 +41,3 @@ class TelaUsuario:
 
  #       opcao_escolhida_deletar = int(input("Opção Seleciona: "))
  #       return opcao_escolhida_deletar
-
-    def mostrar_opcoes_usuario(self):
-        print("--------------------------------------")
-        print("Login efetuado com sucesso!")
-        print("Qual a aventura que embarcaremos?")
-        print("1 - Acessar Heróis já Criados")
-        print("2 - Criar Novo Herói")
-        print("3 - Excluir Conta")
-        print("0 - Retornar")
-        print("--------------------------------------")
-
-        opcao = int(input("Escolha a opcao: "))
-        return opcao
-
-    def criar_heroi(self):
-        print("====CRIAR NOVO HEROI====")
-        nome = input("Dê um nome ao seu herói (deve ser diferente dos demais herois): ")
-        return nome

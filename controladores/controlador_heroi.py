@@ -10,21 +10,19 @@ class ControladorHeroi:
         self.__herois = []
         self.__controlador_sistema = controlador_sistema
 
-    def abrir_tela_opcoes(self,usuario):
-        
-        switcher = {1: self.criar,
-                    2: self.selecionar,
-                    0: self.retornar}
+    def abrir_tela_opcoes(self):
+
+        switcher = {0: self.retornar}
 
         self.__manter_tela = True
         while self.__manter_tela:
             opcao_escolhida = self.__tela_heroi.tela_opcoes_heroi()
             funcao_escolhida = switcher[opcao_escolhida]
-            funcao_escolhida(usuario)
+            funcao_escolhida()
 
     def criar(self,usuario):
         nome = self.__tela_heroi.pegar_nome_heroi()
-        novo_heroi = Heroi(nome, usuario)
+        novo_heroi = Heroi(nome)
 
         if novo_heroi not in usuario.lista_herois:
             usuario.lista_herois.append(novo_heroi)

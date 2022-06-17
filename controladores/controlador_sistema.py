@@ -39,7 +39,7 @@ class ControladorSistema:
                 if usuario is not None:
                     opcao2 = self.__tela_sistema.tela_logados(usuario)
                     if opcao2 == 1:
-                        self.opcoes_heroi(usuario)
+                        self.cadastro_heroi(usuario)
                     elif opcao2 == 2:
                         self.opcoes_usuario(usuario)
                     elif opcao2 == 0:
@@ -57,11 +57,12 @@ class ControladorSistema:
     def encerrar_sistema(self):
         exit()
 
-    def opcoes_heroi(self,usuario):
-        self.__controlador_heroi.abrir_tela_opcoes(usuario)
+    def cadastro_heroi(self, usuario):
+        self.__controlador_heroi.criar(usuario)
 
-    def opcoes_usuario(self,usuario):
-        pass
+    def escolhe_heroi(self,usuario):
+        heroi = self.__controlador_heroi.selecionar(usuario)
+        self.__controlador_heroi.abrir_tela_opcoes()
 
     def cadastrar_mochila(self):
         pass
