@@ -27,6 +27,7 @@ class ControladorUsuario:
             return novo_usuario
 
     def logar(self):
+<<<<<<< HEAD
         dados = self.__tela_usuario.tela_login()
 
         for usuario in self.__usuarios:
@@ -46,14 +47,31 @@ class ControladorUsuario:
             opcao_escolhida = self.__tela_usuario.mostrar_opcoes_jogo()
             funcao_escolhida = switcher[opcao_escolhida]
             funcao_escolhida(usuario)
+=======
+        while True:
+            login, senha = self.__tela_usuario.tela_login()
+            for usuarios in self.__usuarios:
+                if login == usuarios.login and senha == usuarios.senha:
+                    self.__controlador_sistema.abre_tela_logados()
+                    return login, senha
+            else:
+                self.__tela_usuario.mensagem("Login Inválido!")
+                self.__tela_usuario.tela_usuario_nao_logados()
+                return None
+>>>>>>> f0ead248d6ce27ee3025bb1f106234b2516bb396
 
     def retornar(self):
         self.__manter_tela = False
 
 #   eu decidi diferenciar as telas de usuarios logados e não logados.
 #   Não faz sentido tu poder excluir ou sair de uma conta que voce nem logou.
+<<<<<<< HEAD
  #   def abre_tela_usuarios_nao_logados(self):
  #       lista_opcoes = {1: self.cadastrar, 2: self.logar, 0: self.retornar}
+=======
+    def abre_tela_login_cadastro(self):
+        lista_opcoes = {1: self.cadastrar, 2: self.logar, 0: self.retornar}
+>>>>>>> f0ead248d6ce27ee3025bb1f106234b2516bb396
 
  #       while True:
  #           opcao_escolhida = self.__tela_usuario.tela_usuario_nao_logados()
@@ -61,6 +79,7 @@ class ControladorUsuario:
  #           funcao_escolhida()
 
 # ---------------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
 #   essa nova parte que criei para visualização apenas de pessoas logadas pode ser movida para controle
 #   heroi ou controle sistema, conversaremos sobre isso:
     def acessar_herois_criados(self,usuario):
@@ -93,13 +112,17 @@ class ControladorUsuario:
 
 
 
+=======
+>>>>>>> f0ead248d6ce27ee3025bb1f106234b2516bb396
 
     # basicamente, o "return login, senha na função logar() serve para ser usado em outros casos que precisamos
     # saber sobre quem está logado! Foi uma sacada minha e pode facilitar mto a nossa vida
     # Dentro dessa função excluir (que precisa ser feita após o logar, então não consegui testar direito,
     # novamente) está uma invocação da função logar, tipo: prove que é vc mesmo nessa conta, por medida de
     # segurança, dai eu puxo os dados, busco na lista de usuarios e excluo ele da lista.
+
     def excluir(self):
+<<<<<<< HEAD
         pass
 
     #   tela que aparece quando o usuário completa o login em controle usuario, na função logar()
@@ -110,3 +133,25 @@ class ControladorUsuario:
     #        opcao = self.__tela_usuario.tela_logados()
     #        funcao_escolhida = lista_opcoes_logados[opcao]
     #        funcao_escolhida()
+=======
+        opcao_escolhida_deletar = self.__tela_usuario.tela_deletar_usuario()
+        if opcao_escolhida_deletar is 1:
+            self.confirmar_credenciais()
+        else:
+            self.__controlador_sistema.abre_tela_logados()
+
+    def confirmar_credenciais(self):
+        while True:
+            login, senha = self.__tela_usuario.tela_login()
+            for usuarios in self.__usuarios:
+                if login == usuarios.login and senha == usuarios.senha:
+                    self.__usuarios.remove(usuarios)
+                    self.__tela_usuario.mensagem("Exclusão Concluída com Êxito!")
+                    self.__tela_usuario.mensagem("-----------------------------")
+                    self.__tela_usuario.mensagem("Você Será Redirecionado para o Menu Principal")
+                    self.__controlador_sistema.abre_tela_nao_logados()
+            else:
+                self.__tela_usuario.mensagem("Credenciais Incorretas!")
+                self.__controlador_sistema.abre_tela_logados()
+                return None
+>>>>>>> f0ead248d6ce27ee3025bb1f106234b2516bb396
