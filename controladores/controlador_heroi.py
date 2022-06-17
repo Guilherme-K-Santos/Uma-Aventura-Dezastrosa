@@ -5,10 +5,10 @@ from entidades.heroi import Heroi
 class ControladorHeroi:
 
     def __init__(self, controlador_sistema):
+        self.__controlador_sistema = controlador_sistema
         self.__tela_heroi = TelaHeroi()
         self.__manter_tela = True
         self.__herois = []
-        self.__controlador_sistema = controlador_sistema
 
     def abrir_tela_opcoes(self):
 

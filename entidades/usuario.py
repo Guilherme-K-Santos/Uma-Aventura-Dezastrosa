@@ -1,5 +1,4 @@
 
-from entidades.heroi import Heroi
 
 class Usuario:
     def __init__(self, login: str, senha: int):

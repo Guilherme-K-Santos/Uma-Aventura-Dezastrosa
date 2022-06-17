@@ -9,9 +9,9 @@ from telas.tela_sistema import TelaSistema
 class ControladorSistema:
     def __init__(self):
         self.__controlador_usuario = ControladorUsuario(self)
-        self.__controlador_item = ControladorItem(self)
-        self.__controlador_mochila = ControladorMochila(self)
-        self.__controlador_monstro = ControladorMonstro(self)
+        self.__controlador_item = ControladorItem()
+        self.__controlador_mochila = ControladorMochila()
+        self.__controlador_monstro = ControladorMonstro()
         self.__controlador_heroi = ControladorHeroi(self)
         self.__tela_sistema = TelaSistema()
 
@@ -41,7 +41,7 @@ class ControladorSistema:
                     if opcao2 == 1:
                         self.cadastro_heroi(usuario)
                     elif opcao2 == 2:
-                        self.opcoes_usuario(usuario)
+                        self.controlador_usuario.opcoes_usuario()
                     elif opcao2 == 0:
                         self.iniciar()
             elif opcao == 2:

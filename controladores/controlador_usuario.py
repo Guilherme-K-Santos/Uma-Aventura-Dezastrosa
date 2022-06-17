@@ -37,9 +37,7 @@ class ControladorUsuario:
             return None
 
     def opcoes_usuario(self):
-        switcher = {0: self.retornar,
-                    1: self.excluir,
-                    2:self.alterar}
+        switcher = {0: self.retornar, 1: self.excluir, 2:self.alterar}
 
         self.__manter_tela = True
         while self.__manter_tela:
