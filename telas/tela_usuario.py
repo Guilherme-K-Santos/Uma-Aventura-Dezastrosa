@@ -31,12 +31,12 @@ class TelaUsuario:
         opcao_escolhida = int(input("Escolha a opcao: "))
         return opcao_escolhida
 
- #   def tela_deletar_usuario(self):
- #       print("--------------------------------------")
- #       print("Tem certeza que deseja apagar a conta 'nome_do_heroi' com 'numeors_de_herois' "
- #             "heróis salvos ?")
- #       print("1 - Sim")
- #       print("2 - Não")
+    def tela_deletar_usuario(self):
+        print("--------------------------------------")
+        print("Tem certeza que deseja apagar a conta 'nome_do_heroi' com 'numeors_de_herois' "
+            "heróis salvos ?")
+        print("1 - Sim")
+        print("2 - Não")
 
- #       opcao_escolhida_deletar = int(input("Opção Seleciona: "))
- #       return opcao_escolhida_deletar
+        opcao_escolhida_deletar = int(input("Opção Seleciona: "))
+        return opcao_escolhida_deletar

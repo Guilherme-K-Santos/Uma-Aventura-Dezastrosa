@@ -69,12 +69,15 @@ class ControladorUsuario:
             for usuario in self.__usuarios:
                 if (usuario.login == credenciais["login"]) and \
                         usuario.senha == credenciais["senha"]:
-                    self.__usuarios.remove(usuario)
-                    self.__tela_usuario.mensagem("Exclusão Concluída com Êxito!")
-                    self.__tela_usuario.mensagem("-----------------------------")
-                    self.__tela_usuario.mensagem("Você Será Redirecionado para o Menu Principal")
-                    self.retornar()
-                else:
-                    self.__tela_usuario.mensagem("Credenciais Incorretas!")
-                    self.retornar()
-                    return None
+                    resposta = self.__tela_usuario.tela_deletar_usuario()
+
+                    if resposta == 1:
+                        self.__usuarios.remove(usuario)
+                        self.__tela_usuario.mensagem("Exclusão Concluída com Êxito!")
+                        self.__tela_usuario.mensagem("-----------------------------")
+                        self.__tela_usuario.mensagem("Você Será Redirecionado para o Menu Principal")
+                        self.retornar()
+                    else:
+                        self.__tela_usuario.mensagem("Credenciais Incorretas!")
+                        self.retornar()
+                        return None
