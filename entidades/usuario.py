@@ -3,7 +3,6 @@ from entidades.heroi import Heroi
 
 class Usuario:
     def __init__(self, login: str, senha: int):
-        self.__heroi_atual = Heroi(None)
         self.__login = login
         self.__senha = senha
         self.__lista_herois = []
@@ -33,12 +32,4 @@ class Usuario:
     @lista_herois.setter
     def lista_herois(self, lista_herois: list):
         self.__lista_herois = lista_herois
-
-    @property
-    def heroi_atual(self):
-        return self.__heroi_atual
-
-    @heroi_atual.setter
-    def heroi_atual(self, heroi_atual: Heroi):
-        self.__heroi_atual = heroi_atual
 

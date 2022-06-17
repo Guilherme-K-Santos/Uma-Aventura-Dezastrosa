@@ -40,16 +40,15 @@ class TelaUsuario:
         return {"login": login, "senha": senha}
 
 
-    def tela_deletar_usuario(self):
-        print("--------------------------------------")
-        print("Tem certeza que deseja apagar a conta 'nome_do_heroi' com 'numeors_de_herois' "
-              "heróis salvos ?")
-        print("1 - Sim")
-        print("2 - Não")
+ #   def tela_deletar_usuario(self):
+ #       print("--------------------------------------")
+ #       print("Tem certeza que deseja apagar a conta 'nome_do_heroi' com 'numeors_de_herois' "
+ #             "heróis salvos ?")
+ #       print("1 - Sim")
+ #       print("2 - Não")
 
-        opcao_escolhida_deletar = int(input("Opção Seleciona: "))
-        return opcao_escolhida_deletar
-<<<<<<< HEAD
+ #       opcao_escolhida_deletar = int(input("Opção Seleciona: "))
+ #       return opcao_escolhida_deletar
 
     def mostrar_opcoes_jogo(self):
         print("--------------------------------------")
@@ -73,5 +72,3 @@ class TelaUsuario:
 #         opções para o usuário escolher (ele agora está LOGADO, então pode prosseguir
 #         para acessar ou criar heróis), essa tela pode ser colocada em tela sistema também,
 #         conversamos depois
-=======
->>>>>>> f0ead248d6ce27ee3025bb1f106234b2516bb396
