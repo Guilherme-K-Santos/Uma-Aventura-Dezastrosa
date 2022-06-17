@@ -3,8 +3,8 @@ from abc import ABC, abstractmethod
 
 class Personagem(ABC):
     @abstractmethod
-    def __init__(self):
-        self.__nome = None
+    def __init__(self,nome):
+        self.__nome = nome
         self.__hp = None
         self.__ataque = None
         self.__titulo = None

@@ -12,7 +12,6 @@ class ControladorSistema:
         self.__controlador_item = ControladorItem()
         self.__controlador_mochila = ControladorMochila()
         self.__controlador_monstro = ControladorMonstro()
-        self.__controlador_heroi = ControladorHeroi()
         self.__tela_sistema = TelaSistema()
 
     @property
@@ -28,10 +27,6 @@ class ControladorSistema:
         return self.__controlador_monstro
 
     @property
-    def controlador_heroi(self):
-        return self.__controlador_heroi
-
-    @property
     def controlador_item(self):
         return self.__controlador_item
 
@@ -41,7 +36,7 @@ class ControladorSistema:
             if opcao == 1:
                 usuario = self.__controlador_usuario.logar()
                 if usuario is not None:
-                    self.__controlador_usuario.opcoes_jogo()
+                    self.__controlador_usuario.opcoes_jogo(usuario)
 
             elif opcao == 2:
                 self.__controlador_usuario.cadastrar()

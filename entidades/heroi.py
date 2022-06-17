@@ -3,9 +3,9 @@ from entidades.mochila import Mochila
 
 
 class Heroi(Personagem):
-    def __init__(self):
-        super().__init__()
-        self.__nome = None
+    def __init__(self, nome):
+        super().__init__(nome)
+        self.__nome = nome
         self.__hp = 20
         self.__ataque = 0
         self.__titulo = ""

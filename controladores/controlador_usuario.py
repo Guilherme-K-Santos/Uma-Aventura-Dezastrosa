@@ -1,5 +1,7 @@
 from telas.tela_usuario import TelaUsuario
 from entidades.usuario import Usuario
+from entidades.heroi import Heroi
+from controladores.controlador_heroi import ControladorHeroi
 
 
 class ControladorUsuario:
@@ -8,6 +10,7 @@ class ControladorUsuario:
         self.__tela_usuario = TelaUsuario()
         self.__usuarios = []
         self.__manter_tela = True
+        self.__controlador_heroi = ControladorHeroi
 
     def cadastrar(self):
         dados_novos = self.__tela_usuario.tela_cadastro()
@@ -35,14 +38,14 @@ class ControladorUsuario:
             self.__tela_usuario.mensagem("Nome ou Senha invalidos!")
             return None
 
-    def opcoes_jogo(self):
-        switcher = {0: self.retornar, 1: self.criar_novo_heroi, 2: self.acessar_herois_criados(), 3: self.excluir()}
+    def opcoes_jogo(self, usuario):
+        switcher = {0: self.retornar, 2: self.criar_novo_heroi, 1: self.acessar_herois_criados, 3: self.excluir}
 
         self.__manter_tela = True
         while self.__manter_tela:
             opcao_escolhida = self.__tela_usuario.mostrar_opcoes_jogo()
             funcao_escolhida = switcher[opcao_escolhida]
-            funcao_escolhida()
+            funcao_escolhida(usuario)
 
     def retornar(self):
         self.__manter_tela = False
@@ -60,16 +63,36 @@ class ControladorUsuario:
 # ---------------------------------------------------------------------------------------------------------
 #   essa nova parte que criei para visualização apenas de pessoas logadas pode ser movida para controle
 #   heroi ou controle sistema, conversaremos sobre isso:
-    def acessar_herois_criados(self):
-        pass
+    def acessar_herois_criados(self,usuario):
+        stacker = 0
+        for heroi in usuario.lista_herois:
+            print("Selecione", stacker, "para jogar com ", heroi.nome)
+            stacker += 1
+        escolha = int(input("Escolha o herói: "))
+        heroi_escolhido = usuario.lista_herois[escolha]
+        self.__controlador_heroi(heroi_escolhido).abrir_tela_opcoes()
 
-    def criar_novo_heroi(self):
-        pass
 
-    #   criei essa função, para o usuário poder deslogar sem ter que rebootar o sistema
-    # [luiza] não é a mesma coisa que a função retornar?
-    #def sair(self):
-    #    pass
+    def criar_novo_heroi(self, usuario):
+        nome_heroi = self.__tela_usuario.criar_heroi()
+        if usuario.lista_herois is not None:
+            for heroi in usuario.lista_herois:
+                if heroi.nome == nome_heroi:
+                    self.__tela_usuario.mensagem("Heroi já existente")
+                    return None
+            else:
+                heroi_novo = Heroi(nome_heroi)
+                usuario.lista_herois.append(heroi_novo)
+                self.__tela_usuario.mensagem("Heroi criado")
+                return heroi_novo
+        else:
+            heroi_novo = Heroi(nome_heroi)
+            usuario.lista_herois.append(heroi_novo)
+            self.__tela_usuario.mensagem("Heroi criado")
+            return heroi_novo
+
+
+
 
     # basicamente, o "return login, senha na função logar() serve para ser usado em outros casos que precisamos
     # saber sobre quem está logado! Foi uma sacada minha e pode facilitar mto a nossa vida
@@ -77,12 +100,7 @@ class ControladorUsuario:
     # novamente) está uma invocação da função logar, tipo: prove que é vc mesmo nessa conta, por medida de
     # segurança, dai eu puxo os dados, busco na lista de usuarios e excluo ele da lista.
     def excluir(self):
-        opcao_escolhida_deletar = self.__tela_usuario.tela_deletar_usuario()
-        if opcao_escolhida_deletar is 1:
-            login, senha = self.logar()
-            for usuarios in self.__usuarios:
-                if login == usuarios.login and senha == usuarios.senha:
-                    self.__usuarios.remove(usuarios)
+        pass
 
     #   tela que aparece quando o usuário completa o login em controle usuario, na função logar()
     #def abre_tela_logados(self):

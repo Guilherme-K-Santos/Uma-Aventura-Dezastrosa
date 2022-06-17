@@ -4,8 +4,8 @@ from entidades.heroi import Heroi
 
 class ControladorHeroi:
 
-    def __init__(self):
-        self.__heroi = Heroi()
+    def __init__(self, heroi):
+        self.__heroi = Heroi(heroi)
         self.__tela_heroi = TelaHeroi()
         self.__manter_tela = True
 

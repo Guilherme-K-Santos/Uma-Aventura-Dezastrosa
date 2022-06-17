@@ -55,6 +55,12 @@ class TelaUsuario:
         opcao = int(input("Escolha a opcao: "))
         return opcao
 
+    def criar_heroi(self):
+        print("====CRIAR NOVO HEROI====")
+        nome = input("Dê um nome ao seu herói (deve ser diferente dos demais herois): ")
+        return nome
+
+
 #         opções para o usuário escolher (ele agora está LOGADO, então pode prosseguir
 #         para acessar ou criar heróis), essa tela pode ser colocada em tela sistema também,
 #         conversamos depois
