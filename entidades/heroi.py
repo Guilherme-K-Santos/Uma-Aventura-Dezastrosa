@@ -1,9 +1,10 @@
 from entidades.personagem import Personagem
 from entidades.mochila import Mochila
+from entidades.usuario import Usuario
 
 
 class Heroi(Personagem):
-    def __init__(self, nome):
+    def __init__(self, nome: str, usuario: Usuario):
         super().__init__(nome)
         self.__nome = nome
         self.__hp = 20
@@ -11,6 +12,7 @@ class Heroi(Personagem):
         self.__titulo = ""
         self.__lista_titulos = []
         self.__mochila = Mochila()
+        self.__usuario = usuario
 
     @property
     def mochila(self):
@@ -29,3 +31,12 @@ class Heroi(Personagem):
     def lista_titulos(self, lista_titulos: []):
         if isinstance(lista_titulos, list):
             self.__lista_titulos = lista_titulos
+
+    @property
+    def usuario(self):
+        return self.__usuario
+
+    @usuario.setter
+    def usuario(self, usuario: Usuario):
+        if isinstance(usuario, Usuario):
+            self.__usuario = usuario

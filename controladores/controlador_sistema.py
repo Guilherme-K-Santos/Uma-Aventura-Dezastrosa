@@ -2,16 +2,17 @@ from controladores.controlador_heroi import ControladorHeroi
 from controladores.controlador_mochila import ControladorMochila
 from controladores.controlador_monstro import ControladorMonstro
 from controladores.controlador_item import ControladorItem
-from telas.tela_sistema import TelaSistema
 from controladores.controlador_usuario import ControladorUsuario
+from telas.tela_sistema import TelaSistema
 
 
 class ControladorSistema:
     def __init__(self):
-        self.__controlador_usuario = ControladorUsuario()
-        self.__controlador_item = ControladorItem()
-        self.__controlador_mochila = ControladorMochila()
-        self.__controlador_monstro = ControladorMonstro()
+        self.__controlador_usuario = ControladorUsuario(self)
+        self.__controlador_item = ControladorItem(self)
+        self.__controlador_mochila = ControladorMochila(self)
+        self.__controlador_monstro = ControladorMonstro(self)
+        self.__controlador_heroi = ControladorHeroi(self)
         self.__tela_sistema = TelaSistema()
 
     @property
@@ -36,8 +37,13 @@ class ControladorSistema:
             if opcao == 1:
                 usuario = self.__controlador_usuario.logar()
                 if usuario is not None:
-                    self.__controlador_usuario.opcoes_jogo(usuario)
-
+                    opcao2 = self.__tela_sistema.tela_logados(usuario)
+                    if opcao2 == 1:
+                        self.opcoes_heroi(usuario)
+                    elif opcao2 == 2:
+                        self.opcoes_usuario(usuario)
+                    elif opcao2 == 0:
+                        self.iniciar()
             elif opcao == 2:
                 self.__controlador_usuario.cadastrar()
             elif opcao == 3:
@@ -45,54 +51,23 @@ class ControladorSistema:
             else:
                 break
 
-    # controlador sistema vai ter uma função que vai levar a tela de usuario
-    #def usuarios_nao_logados(self):
-    #    self.__controlador_usuario.abre_tela_login_cadastro()
+
 
 
     def encerrar_sistema(self):
         exit()
 
-    # controlador sistema vai ter uma função que vai levar a tela de usuario #[luiza] vou testar fazer as coisas sem isso
-    #def usuarios_nao_logados(self):
-    #    self.__controlador_usuario.abre_tela_usuarios_nao_logados()
+    def opcoes_heroi(self,usuario):
+        self.__controlador_heroi.abrir_tela_opcoes(usuario)
 
-    # controlador sistema vai ter uma função que vai levar a tela de heroi
-    #def instrucoes_de_combate(self):
-    #    pass
+    def opcoes_usuario(self,usuario):
+        pass
 
-    # controlador sistema vai ter uma função que vai levar a tela de mochila
-    #def informacoes_de_monstros_itens(self):
-    #    pass
+    def cadastrar_mochila(self):
+        pass
 
-    # switcher linkado na tela_sistema
+    def cadastrar_monstro(self):
+        pass
 
-    #def abre_tela_nao_logados(self):
-    #    lista_opcoes = {1: self.usuarios_nao_logados, 2: self.instrucoes_de_combate,
-    #                    3: self.informacoes_de_monstros_itens, 0: self.encerrar_sistema}
-    #    while True:
-    #        opcao_escolhida = self.__tela_sistema.tela_nao_logados()
-    #        funcao_escolhida = lista_opcoes[opcao_escolhida]
-    #        funcao_escolhida()
-
- #   def abre_tela_nao_logados(self):
- #       lista_opcoes = {1: self.usuarios_nao_logados, 2: self.instrucoes_de_combate,
- #                       3: self.informacoes_de_monstros_itens, 0: self.encerrar_sistema}
- #       while True:
- #           opcao_escolhida = self.__tela_sistema.tela_inicial()
- #           funcao_escolhida = lista_opcoes[opcao_escolhida]
- #           funcao_escolhida()
-
-# -------------------------------------------------------------------------------------------------------------
-
-    #   tela que aparece quando o usuário completa o login em controle usuario, na função logar()
- #   def abre_tela_logados(self):
- #       lista_opcoes_logados = {1: self.acessar_herois_criados, 2: self.criar_novo_heroi, 3: self.sair,
- #                               4: self.__controlador_usuario.excluir, 0: self.retornar}
- #       while True:
- #           opcao = self.__tela_sistema.tela_logados()
- #           funcao_escolhida = lista_opcoes_logados[opcao]
- #           funcao_escolhida()
-
-#   essa nova parte que criei para visualização apenas de pessoas logadas pode ser movida para controle
-#   heroi ou controle sistema, conversaremos sobre isso:
+    def cadastrar_item(self):
+        pass
