@@ -4,17 +4,17 @@ class TelaUsuario:
     def mensagem(self, texto):
         return print(texto)
 
-    def tela_login(self):
+    def tela_cadastro(self):
         print("--------------------------------------")
-        print("Por favor, preencha com seus dados:")
+        print("--------------CADASTRO----------------")
         login = input("Login:")
         senha = input("Senha:")
 
         return {"login": login, "senha": senha}
 
-    def tela_cadastro(self):
+    def tela_login(self):
         print("--------------------------------------")
-        print("--------------CADASTRO----------------")
+        print("Por favor, preencha com seus dados:")
         login = input("Login:")
         senha = input("Senha:")
 
@@ -30,6 +30,32 @@ class TelaUsuario:
 
         opcao_escolhida = int(input("Escolha a opcao: "))
         return opcao_escolhida
+
+    def tela_alterar_usuario(self):
+        print("--------------------------------------")
+        print("O que você deseja alterar em sua conta?")
+        print("1 - Login")
+        print("2 - Senha")
+
+        resposta_alteracao = int(input("Opção Seleciona: "))
+        return resposta_alteracao
+
+    def tela_alterar_login(self):
+        print("--------------------------------------")
+        print("Qual será o seu novo login?")
+
+        login = input("Novo Login: ")
+
+        return {"Novo Login: ": login}
+
+    def tela_alterar_senha(self):
+        print("--------------------------------------")
+        print("Qual será o seu nova senha?")
+
+        senha = int(input("Nova Senha: "))
+
+        return {"Nova Senha: ": senha}
+
 
     def tela_deletar_usuario(self):
         print("--------------------------------------")

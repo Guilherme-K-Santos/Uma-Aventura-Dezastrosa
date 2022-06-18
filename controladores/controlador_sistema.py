@@ -64,8 +64,7 @@ class ControladorSistema:
         novo_heroi = self.__controlador_heroi.criar_heroi()
         lista_usuarios = self.__controlador_usuario.pega_usuario_por_heroi()
         # acima estão as duas exportações necessárias e abaixo está o seu código com algumas alterações
-        # (os prints eu estava usando pra
-        # acontanhar o cod)
+        # (os prints eu estava usando pra acompanhar o cod)
         for usuario in lista_usuarios:
             print(usuario)
             if novo_heroi.nome in usuario.lista_herois:

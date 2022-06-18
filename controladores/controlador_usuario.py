@@ -10,6 +10,8 @@ class ControladorUsuario:
         self.__usuarios = []
         self.__manter_tela = True
 
+# ------------------------------------------USUARIO---------------------------------------------------
+
     def cadastrar(self):
         dados_novos = self.__tela_usuario.tela_cadastro()
 
@@ -49,9 +51,40 @@ class ControladorUsuario:
         self.__manter_tela = False
 
     def alterar(self):
-        pass
+        resposta_alteracao = self.__tela_usuario.tela_alterar_usuario()
+        self.__tela_usuario.mensagem("Por favor, confirme que é você mesmo: ")
+        credenciais = self.__tela_usuario.tela_login()
 
-    # aqui eu pego a lista de todos os usuarios atualmente cadastrados e exporto pro controlador sistema
+        if resposta_alteracao == 1:
+            for usuario_login_novo in self.__usuarios:
+                if (usuario_login_novo.login == credenciais["login"]) and \
+                        usuario_login_novo.senha == credenciais["senha"]:
+                    nova_credencial = self.__tela_usuario.tela_alterar_login()
+                    getattr(usuario_login_novo, 'login', credenciais["login"])
+                    setattr(usuario_login_novo, 'login', nova_credencial)
+                    self.retornar()  # isso deve retornar até a tela logados
+                    return usuario_login_novo
+                else:
+                    self.__tela_usuario.mensagem("Credenciais Incorretas!")
+                    self.retornar()  # isso deve retornar até a tela logados
+                    return None
+        else:
+            for usuario_senha_nova in self.__usuarios:
+                if (usuario_senha_nova.login == credenciais["login"]) and \
+                        usuario_senha_nova.senha == credenciais["senha"]:
+                    nova_credencial = self.__tela_usuario.tela_alterar_senha()
+                    getattr(usuario_senha_nova, 'senha', credenciais["senha"])
+                    setattr(usuario_senha_nova, 'senha', nova_credencial)
+                    self.retornar()  # isso deve retornar até a tela logados
+                    return usuario_senha_nova
+                else:
+                    self.__tela_usuario.mensagem("Credenciais Incorretas!")
+                    self.retornar()  # isso deve retornar até a tela logados
+                    return None
+
+#   ------------------------------------USUÁRIO X HERÓI---------------------------------------------------
+#   aqui eu pego a lista de todos os usuarios atualmente cadastrados e exporto para o controlador sistema
+
     def pega_usuario_por_heroi(self):
         lista_usuarios = self.__usuarios
 
