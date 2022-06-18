@@ -1,8 +1,8 @@
-
-
 class TelaUsuario:
     def mensagem(self, texto):
         return print(texto)
+
+    #   -------------------------------------- OPÇÕES DO USUÁRIO --------------------------------------
 
     def tela_cadastro(self):
         print("--------------------------------------")
@@ -57,3 +57,17 @@ class TelaUsuario:
 
         opcao_escolhida_deletar = int(input("Opção Seleciona: "))
         return opcao_escolhida_deletar
+
+    #   -------------------------------------- OPÇÕES USUARIO X HEROI --------------------------------------
+
+    def abrir_selecao_herois(self):
+        print()
+        print("--------------------------------------")
+        print("Escreva abaixo o nome do herói que você deseja usar.")
+
+        heroi_escolhido = input("Herói Escolhido: ")
+        return heroi_escolhido
+
+    def abre_tela_jornada_especifica(self):
+        # ela vai abrir a tela salva da jornada do heroi x do usuario y
+        print("Está Funcionando")

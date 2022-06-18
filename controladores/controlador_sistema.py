@@ -43,7 +43,7 @@ class ControladorSistema:
                 if usuario is not None:
                     opcao2 = self.__tela_sistema.tela_logados(usuario)
                     if opcao2 == 1:
-                        self.__controlador_usuario.acessar_herois()
+                        self.__controlador_usuario.acessar_herois(usuario)
                     elif opcao2 == 2:
                         self.cadastro_heroi()
                     elif opcao2 == 3:
@@ -73,7 +73,8 @@ class ControladorSistema:
             else:
                 if novo_heroi not in usuario.lista_herois:
                     usuario.lista_herois.append(novo_heroi)
-                    print(usuario.lista_herois)
+                    usuario.lista_nomes_herois.append(novo_heroi.nome)
+                    print(usuario.lista_nomes_herois)
 
     def escolhe_heroi(self, usuario):
         heroi = self.__controlador_heroi.selecionar(usuario)

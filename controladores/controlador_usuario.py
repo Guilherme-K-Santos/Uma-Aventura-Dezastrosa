@@ -39,16 +39,13 @@ class ControladorUsuario:
             return None
 
     def opcoes_usuario(self):
-        switcher = {0: self.retornar, 1: self.alterar, 2: self.excluir}
+        switcher = {1: self.alterar, 2: self.excluir, 0: self.retornar}
 
         self.__manter_tela = True
         while self.__manter_tela:
             opcao_escolhida = self.__tela_usuario.mostrar_opcoes_usuario()
             funcao_escolhida = switcher[opcao_escolhida]
             funcao_escolhida()
-
-    def retornar(self):
-        self.__manter_tela = False
 
     def alterar(self):
         resposta_alteracao = self.__tela_usuario.tela_confirmar_alteraracao()
@@ -80,17 +77,6 @@ class ControladorUsuario:
                 self.__tela_usuario.mensagem("Credenciais Incorretas!")
                 self.retornar()  # isso deve retornar até a tela logados
 
-#   ------------------------------------USUÁRIO X HERÓI---------------------------------------------------
-#   aqui eu pego a lista de todos os usuarios atualmente cadastrados e exporto para o controlador sistema
-
-    def pega_usuario_por_heroi(self):
-        lista_usuarios = self.__usuarios
-
-        return lista_usuarios
-
-    def acessar_herois(self):
-        pass
-
     def excluir(self):
         while self.__manter_tela:
             credenciais = self.__tela_usuario.tela_login()
@@ -110,3 +96,33 @@ class ControladorUsuario:
                         self.__tela_usuario.mensagem("Credenciais Incorretas!")
                         self.retornar()
                         return None
+
+    def retornar(self):
+        self.__manter_tela = False
+
+#   ------------------------------------USUÁRIO X HERÓI---------------------------------------------------
+#   aqui eu pego a lista de todos os usuarios atualmente cadastrados e exporto para o controlador sistema
+
+    def pega_usuario_por_heroi(self):
+        lista_usuarios = self.__usuarios
+
+        return lista_usuarios
+
+#   ele abre uma tela de seleção que responde com o nome do heroi q o usuario quer jogar
+#   depois eu tentei fazer um sistema de contagem para printar para o usuario os herois q ele tem.
+#   Para isso, usei o contador_herois, é MUITO útil. Depois tem um for para selecionar o herói especifico e
+#   abrir a tela da jornada salva dele (precisamos fazer)
+
+    def acessar_herois(self, usuario):
+        self.__tela_usuario.mensagem("Olá Aventureiro! Em qual jornada você quer prosseguir?")
+        self.__tela_usuario.mensagem("")
+
+        contador_herois = 0
+        for k in usuario.lista_nomes_herois:
+            self.__tela_usuario.mensagem(usuario.lista_nomes_herois[contador_herois])
+            contador_herois += 1
+        heroi_escolhido = self.__tela_usuario.abrir_selecao_herois()
+
+        for herois in usuario.lista_herois:
+            if herois.nome == heroi_escolhido:
+                self.__tela_usuario.abre_tela_jornada_especifica()
