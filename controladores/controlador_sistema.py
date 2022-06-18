@@ -42,14 +42,15 @@ class ControladorSistema:
                 usuario = self.__controlador_usuario.logar()
                 if usuario is not None:
                     opcao2 = self.__tela_sistema.tela_logados(usuario)
-                    if opcao2 == 1:
-                        self.__controlador_usuario.acessar_herois(usuario)
-                    elif opcao2 == 2:
-                        self.cadastro_heroi()
-                    elif opcao2 == 3:
-                        self.__controlador_usuario.opcoes_usuario()
-                    elif opcao2 == 0:
-                        self.iniciar()
+                    while opcao2 != 0:
+                        if opcao2 == 1:
+                            self.__controlador_usuario.acessar_herois(usuario)
+                        elif opcao2 == 2:
+                            self.cadastro_heroi()
+                        elif opcao2 == 3:
+                            self.__controlador_usuario.opcoes_usuario()
+                        opcao2 = self.__tela_sistema.tela_logados(usuario)
+
             elif opcao == 2:
                 self.__controlador_usuario.cadastrar()
             elif opcao == 3:
