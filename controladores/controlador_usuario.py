@@ -51,7 +51,7 @@ class ControladorUsuario:
         self.__manter_tela = False
 
     def alterar(self):
-        resposta_alteracao = self.__tela_usuario.tela_alterar_usuario()
+        resposta_alteracao = self.__tela_usuario.tela_confirmar_alteraracao()
         self.__tela_usuario.mensagem("Por favor, confirme que é você mesmo: ")
         credenciais = self.__tela_usuario.tela_login()
 
@@ -59,28 +59,26 @@ class ControladorUsuario:
             for usuario_login_novo in self.__usuarios:
                 if (usuario_login_novo.login == credenciais["login"]) and \
                         usuario_login_novo.senha == credenciais["senha"]:
-                    nova_credencial = self.__tela_usuario.tela_alterar_login()
-                    getattr(usuario_login_novo, 'login', credenciais["login"])
-                    setattr(usuario_login_novo, 'login', nova_credencial)
+                    print(usuario_login_novo.login)
+                    nova_credencial = self.__tela_usuario.tela_alteraracao()
+                    usuario_login_novo.login = nova_credencial["login"]
+                    print(usuario_login_novo.login)
                     self.retornar()  # isso deve retornar até a tela logados
-                    return usuario_login_novo
-                else:
-                    self.__tela_usuario.mensagem("Credenciais Incorretas!")
-                    self.retornar()  # isso deve retornar até a tela logados
-                    return None
+                    break
+            else:
+                self.__tela_usuario.mensagem("Credenciais Incorretas!")
+                self.retornar()  # isso deve retornar até a tela logados
         else:
             for usuario_senha_nova in self.__usuarios:
                 if (usuario_senha_nova.login == credenciais["login"]) and \
                         usuario_senha_nova.senha == credenciais["senha"]:
-                    nova_credencial = self.__tela_usuario.tela_alterar_senha()
-                    getattr(usuario_senha_nova, 'senha', credenciais["senha"])
-                    setattr(usuario_senha_nova, 'senha', nova_credencial)
+                    nova_credencial = self.__tela_usuario.tela_alteraracao()
+                    usuario_senha_nova.senha = nova_credencial["senha"]
                     self.retornar()  # isso deve retornar até a tela logados
-                    return usuario_senha_nova
-                else:
-                    self.__tela_usuario.mensagem("Credenciais Incorretas!")
-                    self.retornar()  # isso deve retornar até a tela logados
-                    return None
+                    break
+            else:
+                self.__tela_usuario.mensagem("Credenciais Incorretas!")
+                self.retornar()  # isso deve retornar até a tela logados
 
 #   ------------------------------------USUÁRIO X HERÓI---------------------------------------------------
 #   aqui eu pego a lista de todos os usuarios atualmente cadastrados e exporto para o controlador sistema

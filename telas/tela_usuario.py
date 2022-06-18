@@ -31,7 +31,7 @@ class TelaUsuario:
         opcao_escolhida = int(input("Escolha a opcao: "))
         return opcao_escolhida
 
-    def tela_alterar_usuario(self):
+    def tela_confirmar_alteraracao(self):
         print("--------------------------------------")
         print("O que você deseja alterar em sua conta?")
         print("1 - Login")
@@ -40,27 +40,18 @@ class TelaUsuario:
         resposta_alteracao = int(input("Opção Seleciona: "))
         return resposta_alteracao
 
-    def tela_alterar_login(self):
+    def tela_alteraracao(self):
         print("--------------------------------------")
         print("Qual será o seu novo login?")
+        login = input("Login:")
+        senha = input("Senha:")
 
-        login = input("Novo Login: ")
-
-        return {"Novo Login: ": login}
-
-    def tela_alterar_senha(self):
-        print("--------------------------------------")
-        print("Qual será o seu nova senha?")
-
-        senha = int(input("Nova Senha: "))
-
-        return {"Nova Senha: ": senha}
-
+        return {"login": login, "senha": senha}
 
     def tela_deletar_usuario(self):
         print("--------------------------------------")
         print("Tem certeza que deseja apagar a conta 'nome_do_heroi' com 'numeors_de_herois' "
-            "heróis salvos ?")
+              "heróis salvos ?")
         print("1 - Sim")
         print("2 - Não")
 
