@@ -58,11 +58,10 @@ class ControladorUsuario:
                         usuario_login_novo.senha == credenciais["senha"]:
                     print(usuario_login_novo.login)
                     usuario_login_novo.login = self.__tela_usuario.tela_alteracao_login()
-                    #self.retornar()  # isso deve retornar até a tela logados
                     break
             else:
                 self.__tela_usuario.mensagem("Credenciais Incorretas!")
-                #self.retornar()  # isso deve retornar até a tela logados
+
         elif resposta_alteracao == 2:
             for usuario_senha_nova in self.__usuarios:
                 if (usuario_senha_nova.login == credenciais["login"]) and \
@@ -73,7 +72,6 @@ class ControladorUsuario:
                 self.__tela_usuario.mensagem("Credenciais Incorretas!")
 
     def excluir(self):
-        while self.__manter_tela:
             credenciais = self.__tela_usuario.tela_login()
 
             for usuario in self.__usuarios:
@@ -86,10 +84,9 @@ class ControladorUsuario:
                         self.__tela_usuario.mensagem("Exclusão Concluída com Êxito!")
                         self.__tela_usuario.mensagem("-----------------------------")
                         self.__tela_usuario.mensagem("Você Será Redirecionado para o Menu Principal")
-                        self.retornar()
+                        return self.__controlador_sistema.iniciar()
                     else:
                         self.__tela_usuario.mensagem("Credenciais Incorretas!")
-                        self.retornar()
                         return None
 
     def retornar(self):
