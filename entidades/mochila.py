@@ -1,8 +1,8 @@
-
+from entidades.item import Item
 
 class Mochila:
     def __init__(self):
-        self.__itens = []
+        self.__itens = [adaga_basica]
 
     @property
     def itens(self):
