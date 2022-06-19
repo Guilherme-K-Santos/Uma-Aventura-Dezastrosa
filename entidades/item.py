@@ -33,4 +33,10 @@ class Item:
         if isinstance(hp_extra, int):
             self.__hp_extra = hp_extra
 
-adaga_basica = Item("Adaga Básica",10,0)
+
+manopla_basica = Item("Manopla do Buggy", 10, 0)
+chuteira_pele = Item("Chuteira do Pelé", 20, 10)
+excalibur = Item("Excalibur", 40, 20)
+passagem_para_dubai = Item("Passagem para Dubai", 99999999999999999999999999999999999999999999999999, 99999999999999999)
+
+itens_monstros = [chuteira_pele, excalibur, passagem_para_dubai]

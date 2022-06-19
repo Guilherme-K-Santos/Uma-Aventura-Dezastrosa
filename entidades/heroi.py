@@ -4,8 +4,8 @@ from entidades.usuario import Usuario
 
 
 class Heroi(Personagem):
-    def __init__(self, nome: str, hp:int, ataque:int, titulo:str):
-        super().__init__(nome, hp, ataque,titulo)
+    def __init__(self, nome: str, hp: int, ataque: int, titulo: str):
+        super().__init__(nome, hp, ataque, titulo)
         self.__lista_titulos = []
         self.__mochila = Mochila()
 

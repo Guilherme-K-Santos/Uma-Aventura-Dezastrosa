@@ -1,9 +1,10 @@
 from entidades.item import Item
-from entidades.item import adaga_basica
+from entidades.item import manopla_basica
+
 
 class Mochila:
     def __init__(self):
-        self.__itens = [adaga_basica]
+        self.__itens = [manopla_basica]
 
     @property
     def itens(self):

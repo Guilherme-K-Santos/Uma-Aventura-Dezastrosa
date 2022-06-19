@@ -24,7 +24,8 @@ class ControladorHeroi:
     def criar_heroi(self):
         novo_heroi = Heroi(self.__tela_heroi.pegar_nome_heroi(), 50, 10, "")
         self.__tela_heroi.mensagem("Herói criado!")
-        # return novo_heroi #[luiza] acho que não precisa colocar para retornar
+
+        return novo_heroi   # [luiza] acho que não precisa colocar para retornar
 
     def selecionar(self, usuario):
         pass
