@@ -15,3 +15,5 @@ class Monstro(Personagem):
     def item_monstro(self, item_monstro: Item):
         if isinstance(item_monstro, Item):
             self.__item_monstro = item_monstro
+
+

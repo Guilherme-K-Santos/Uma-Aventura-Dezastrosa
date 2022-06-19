@@ -1,5 +1,7 @@
 
 
 class TelaMonstro:
-    def mostrar_monstros(self):
-        pass
+
+    def mensagem(self, texto):
+        print(texto)
+        input("")

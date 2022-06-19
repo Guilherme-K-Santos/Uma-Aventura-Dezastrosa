@@ -7,5 +7,9 @@ class ControladorMonstro:
         self.__monstros = []
         self.__controlador_sistema = controlador_sistema
 
+    def listar(self):
+        for monstro in self.__monstros:
+            self.__tela_monstro.mensagem(monstro.nome)
+
     def atacar(self):
         pass

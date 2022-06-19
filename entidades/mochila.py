@@ -1,4 +1,5 @@
 from entidades.item import Item
+from entidades.item import adaga_basica
 
 class Mochila:
     def __init__(self):

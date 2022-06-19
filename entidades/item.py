@@ -33,4 +33,4 @@ class Item:
         if isinstance(hp_extra, int):
             self.__hp_extra = hp_extra
 
-    adaga_basica = Item("Adaga Básica",10,10)
+adaga_basica = Item("Adaga Básica",10,0)
