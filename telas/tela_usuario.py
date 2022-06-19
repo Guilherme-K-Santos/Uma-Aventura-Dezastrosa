@@ -40,13 +40,19 @@ class TelaUsuario:
         resposta_alteracao = int(input("Opção Seleciona: "))
         return resposta_alteracao
 
-    def tela_alteraracao(self):
+    def tela_alteracao_login(self):
         print("--------------------------------------")
         print("Qual será o seu novo login?")
         login = input("Login:")
+
+        return login
+
+    def tela_alteracao_senha(self):
+        print("--------------------------------------")
+        print("Qual será sua nova senha?")
         senha = input("Senha:")
 
-        return {"login": login, "senha": senha}
+        return senha
 
     def tela_deletar_usuario(self):
         print("--------------------------------------")
