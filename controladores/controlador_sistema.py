@@ -54,6 +54,8 @@ class ControladorSistema:
             elif opcao == 2:
                 self.__controlador_usuario.cadastrar()
             elif opcao == 3:
+                self.__tela_sistema.informacoes_jogo()
+            elif opcao == 0:
                 self.encerrar_sistema()
             else:
                 break
@@ -67,7 +69,7 @@ class ControladorSistema:
         # acima estão as duas exportações necessárias e abaixo está o seu código com algumas alterações
         # (os prints eu estava usando pra acompanhar o cod)
         for usuario in lista_usuarios:
-            if novo_heroi.nome in usuario.lista_herois:
+            if novo_heroi.nome in usuario.lista_nomes_herois:
                 self.__tela_sistema.mensagem("Heroi já existente")
                 return None
             else:
