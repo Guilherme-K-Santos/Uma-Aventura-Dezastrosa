@@ -44,7 +44,33 @@ class ControladorSistema:
                     opcao2 = self.__tela_sistema.tela_logados(usuario)
                     while opcao2 != 0:
                         if opcao2 == 1:
-                            self.__controlador_usuario.acessar_herois(usuario)
+                            heroi = self.__controlador_usuario.acessar_herois(usuario)
+                            if heroi is not None:
+                                opcao3 = self.__tela_sistema.abrir_tela_opcoes_jogo(heroi)
+                                while opcao3 != 0 or heroi.hp > 0:
+                                    if opcao3 == 1:
+                                        monstro = self.__controlador_monstro.pega_monstro()
+                                        print(heroi.hp)
+                                        print(monstro.hp)
+                                        if heroi.hp >= monstro.hp and heroi.ataque >= monstro.ataque:
+                                            heroi.mochila.itens.append(monstro.item_monstro)
+                                            heroi.hp = heroi.hp - monstro.ataque
+                                            self.__tela_sistema.mensagem("Parabéns! Você matou o monstro!")
+                                            self.__tela_sistema.mensagem("Um novo item apareceu em sua mochila")
+                                            self.__tela_sistema.mensagem("Equipe-o para o próximo combate")
+                                            self.__tela_sistema.mensagem("Lembre-se de descansar de sua última batalha")
+                                        else:
+                                            heroi.hp = 0
+                                            self.__controlador_usuario.remove_heroi(heroi)
+                                            self.__tela_sistema.mensagem("GAME OVER")
+                                            self.__tela_sistema.mensagem("Seu herói morreu, crie outro herói")
+                                    elif opcao3 == 2:
+                                        pass
+                                    elif opcao3 == 3:
+                                        pass
+                                    elif opcao3 == 4:
+                                        pass
+                                    opcao3 = self.__tela_sistema.abrir_tela_opcoes_jogo(heroi)
                         elif opcao2 == 2:
                             self.cadastro_heroi()
                         elif opcao2 == 3:

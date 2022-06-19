@@ -44,3 +44,13 @@ class TelaSistema:
         print("na sua jornada épica, tomara que ela não seja dezastrosa!")
         input()
         print("Bom jogo!")
+
+    def abrir_tela_opcoes_jogo(self,heroi):
+        print("----------- Você está jogando com ", heroi.nome, " -----------")
+        print("1 - Atacar monstro")
+        print("2 - Abrir mochila")
+        print("3 - Descansar")
+        print("4 - Ver status do herói")
+        print("0 - Retornar")
+        opcao = int(input("Digite uma opção: "))
+        return opcao

@@ -115,6 +115,7 @@ class ControladorUsuario:
             contador_herois += 1
         heroi_escolhido = self.__tela_usuario.abrir_selecao_herois()
 
-        for herois in usuario.lista_herois:
-            if herois.nome == heroi_escolhido:
-                self.__tela_usuario.abre_tela_jornada_especifica()
+        for heroi in usuario.lista_herois:
+            if heroi.nome == heroi_escolhido:
+                #self.__tela_usuario.abre_tela_jornada_especifica()
+                return heroi
