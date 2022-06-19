@@ -16,17 +16,13 @@ class ControladorMonstro:
             self.__tela_monstro.mensagem(monstro.nome)
 
     def pega_monstro(self):
-        nome = None
-        while nome is None:
-            self.listar()
-            nome = self.__tela_monstro.escolher_monstro()
-            for monstro in self.__monstros:
-                if monstro.nome == nome:
-                    break
-                    return monstro
-            else:
-                self.__tela_monstro.mensagem("Monstro não existente")
-                return None
+        self.listar()
+        nome = self.__tela_monstro.escolher_monstro()
+        for monstro in self.__monstros:
+            if monstro.nome == nome:
+                return monstro
+                break
+        else:
+             self.__tela_monstro.mensagem("Monstro não existente")
+             return self.pega_monstro()
 
-    def atacar(self):
-        pass

@@ -11,7 +11,6 @@ class ControladorHeroi:
         self.__herois = []
 
     def abrir_tela_opcoes(self):
-
         switcher = {0: self.retornar}
 
         self.__manter_tela = True
@@ -24,8 +23,9 @@ class ControladorHeroi:
     def criar_heroi(self):
         novo_heroi = Heroi(self.__tela_heroi.pegar_nome_heroi(), 50, 10, "")
         self.__tela_heroi.mensagem("Herói criado!")
-
+        self.__herois.append(novo_heroi)
         return novo_heroi
+
 
     def selecionar(self, usuario):
         pass

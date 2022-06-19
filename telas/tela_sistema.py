@@ -45,7 +45,7 @@ class TelaSistema:
         input()
         print("Bom jogo!")
 
-    def abrir_tela_opcoes_jogo(self,heroi):
+    def tela_opcoes_jogo(self,heroi):
         print("----------- Você está jogando com ", heroi.nome, " -----------")
         print("1 - Atacar monstro")
         print("2 - Abrir mochila")

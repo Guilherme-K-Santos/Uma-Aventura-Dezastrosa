@@ -106,16 +106,24 @@ class ControladorUsuario:
 #   abrir a tela da jornada salva dele (precisamos fazer)
 
     def acessar_herois(self, usuario):
-        self.__tela_usuario.mensagem("Olá Aventureiro! Em qual jornada você quer prosseguir?")
-        self.__tela_usuario.mensagem("")
 
-        contador_herois = 0
-        for k in usuario.lista_nomes_herois:
-            self.__tela_usuario.mensagem(usuario.lista_nomes_herois[contador_herois])
-            contador_herois += 1
-        heroi_escolhido = self.__tela_usuario.abrir_selecao_herois()
+        if len(usuario.lista_nomes_herois)>=1 and len(usuario.lista_herois) >=1:
+            self.__tela_usuario.mensagem("Olá Aventureiro! Em qual jornada você quer prosseguir?")
+            self.__tela_usuario.mensagem("")
+            contador_herois = 0
+            for k in usuario.lista_nomes_herois:
+                self.__tela_usuario.mensagem(usuario.lista_nomes_herois[contador_herois])
+                contador_herois += 1
+            heroi_escolhido = self.__tela_usuario.abrir_selecao_herois()
 
-        for heroi in usuario.lista_herois:
-            if heroi.nome == heroi_escolhido:
-                #self.__tela_usuario.abre_tela_jornada_especifica()
-                return heroi
+            for heroi in usuario.lista_herois:
+                if heroi.nome == heroi_escolhido:
+                    return heroi
+        else:
+            self.__tela_usuario.mensagem("Nenhum herói disponível, crie algum")
+            return None
+
+    def remove_heroi(self,heroi,usuario):
+        usuario.lista_herois.remove(heroi)
+        usuario.lista_nomes_herois.remove(heroi.nome)
+        return self.__controlador_sistema.tela_sistema.tela_logados(usuario)

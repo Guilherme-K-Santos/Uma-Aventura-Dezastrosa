@@ -35,48 +35,17 @@ class ControladorSistema:
     def controlador_item(self):
         return self.__controlador_item
 
+    @property
+    def tela_sistema(self):
+        return self.__tela_sistema
+
     def iniciar(self):
         while True:
             opcao = self.__tela_sistema.tela_inicial()
             if opcao == 1:
                 usuario = self.__controlador_usuario.logar()
                 if usuario is not None:
-                    opcao2 = self.__tela_sistema.tela_logados(usuario)
-                    while opcao2 != 0:
-                        if opcao2 == 1:
-                            heroi = self.__controlador_usuario.acessar_herois(usuario)
-                            if heroi is not None:
-                                opcao3 = self.__tela_sistema.abrir_tela_opcoes_jogo(heroi)
-                                while opcao3 != 0 or heroi.hp > 0:
-                                    if opcao3 == 1:
-                                        monstro = self.__controlador_monstro.pega_monstro()
-                                        print(heroi.hp)
-                                        print(monstro.hp)
-                                        if heroi.hp >= monstro.hp and heroi.ataque >= monstro.ataque:
-                                            heroi.mochila.itens.append(monstro.item_monstro)
-                                            heroi.hp = heroi.hp - monstro.ataque
-                                            self.__tela_sistema.mensagem("Parabéns! Você matou o monstro!")
-                                            self.__tela_sistema.mensagem("Um novo item apareceu em sua mochila")
-                                            self.__tela_sistema.mensagem("Equipe-o para o próximo combate")
-                                            self.__tela_sistema.mensagem("Lembre-se de descansar de sua última batalha")
-                                        else:
-                                            heroi.hp = 0
-                                            self.__controlador_usuario.remove_heroi(heroi)
-                                            self.__tela_sistema.mensagem("GAME OVER")
-                                            self.__tela_sistema.mensagem("Seu herói morreu, crie outro herói")
-                                    elif opcao3 == 2:
-                                        pass
-                                    elif opcao3 == 3:
-                                        pass
-                                    elif opcao3 == 4:
-                                        pass
-                                    opcao3 = self.__tela_sistema.abrir_tela_opcoes_jogo(heroi)
-                        elif opcao2 == 2:
-                            self.cadastro_heroi()
-                        elif opcao2 == 3:
-                            self.__controlador_usuario.opcoes_usuario()
-                        opcao2 = self.__tela_sistema.tela_logados(usuario)
-
+                    self.abrir_tela_logados(usuario)
             elif opcao == 2:
                 self.__controlador_usuario.cadastrar()
             elif opcao == 3:
@@ -116,3 +85,49 @@ class ControladorSistema:
 
     def cadastrar_item(self):
         pass
+
+    def combate(self,heroi,usuario):
+        monstro = self.__controlador_monstro.pega_monstro()
+        if heroi.hp >= monstro.hp and heroi.ataque >= monstro.ataque:
+            heroi.mochila.itens.append(monstro.item_monstro)
+            heroi.hp = heroi.hp - monstro.ataque
+            self.__tela_sistema.mensagem("Parabéns! Você matou o monstro!")
+            self.__tela_sistema.mensagem("Um novo item apareceu em sua mochila")
+            self.__tela_sistema.mensagem("Equipe-o para o próximo combate")
+            self.__tela_sistema.mensagem("Lembre-se de descansar de sua última batalha")
+            return self.abrir_tela_opcoes_jogo(heroi,usuario)
+        else:
+            self.__tela_sistema.mensagem("GAME OVER")
+            self.__tela_sistema.mensagem("Seu herói morreu, crie outro herói")
+            self.__tela_sistema.mensagem("Você não foi prudente >:(")
+            self.__controlador_usuario.remove_heroi(heroi, usuario)
+            return self.abrir_tela_logados(usuario)
+
+    def abrir_tela_logados(self, usuario):
+        opcao2 = self.__tela_sistema.tela_logados(usuario)
+        if opcao2 == 1:
+            heroi = self.__controlador_usuario.acessar_herois(usuario)
+            if heroi is not None:
+                self.abrir_tela_opcoes_jogo(heroi,usuario)
+            else:
+                self.abrir_tela_logados(usuario)
+        elif opcao2 == 2:
+            self.cadastro_heroi()
+            self.abrir_tela_logados(usuario)
+        elif opcao2 == 3:
+            self.__controlador_usuario.opcoes_usuario()
+            self.abrir_tela_logados(usuario)
+
+
+    def abrir_tela_opcoes_jogo(self,heroi,usuario):
+        opcao3 = self.__tela_sistema.tela_opcoes_jogo(heroi)
+        while opcao3 != 0:
+            if opcao3 == 1:
+                self.combate(heroi,usuario)
+            elif opcao3 == 2:
+                pass
+            elif opcao3 == 3:
+                pass
+            elif opcao3 == 4:
+                pass
+            opcao3 = self.__tela_sistema.tela_opcoes_jogo(heroi)
