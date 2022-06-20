@@ -59,26 +59,31 @@ class ControladorSistema:
 
     def combate(self, heroi, usuario):
         monstro = self.__controlador_monstro.pega_monstro()
-        if heroi.ataque >= monstro.hp and heroi.hp_total > monstro.ataque:
-            heroi.mochila.itens.append(monstro.item_monstro)
-            heroi.lista_titulos.append(monstro.titulo)
+        if monstro is not None:
+            if heroi.ataque >= monstro.hp and heroi.hp_total > monstro.ataque:
+                heroi.mochila.itens.append(monstro.item_monstro)
+                heroi.lista_titulos.append(monstro.titulo)
 
-            heroi.hp_total = heroi.hp_total - monstro.ataque
-            self.__controlador_monstro.remove(monstro)
+                heroi.hp_total = heroi.hp_total - monstro.ataque
+                self.__controlador_monstro.remove(monstro)
 
-            self.__tela_sistema.mensagem("Parabéns! Você matou o monstro!")
-            self.__tela_sistema.mensagem("Um novo item apareceu em sua mochila")
-            self.__tela_sistema.mensagem("Equipe-o para o próximo combate")
-            self.__tela_sistema.mensagem("Lembre-se de descansar de sua última batalha")
+                self.__tela_sistema.mensagem("Parabéns! Você matou o monstro!")
+                self.__tela_sistema.mensagem("Um novo item apareceu em sua mochila")
+                self.__tela_sistema.mensagem("Equipe-o para o próximo combate")
+                self.__tela_sistema.mensagem("Lembre-se de descansar de sua última batalha")
 
-            return self.abrir_tela_opcoes_jogo(heroi, usuario)
+                return self.abrir_tela_opcoes_jogo(heroi, usuario)
+            else:
+                self.__tela_sistema.mensagem("GAME OVER")
+                self.__tela_sistema.mensagem("Seu herói morreu, crie outro herói")
+                self.__tela_sistema.mensagem("Foi uma aventura dezastrosa! >:(")
+                self.__controlador_usuario.remove_heroi(heroi, usuario)
+
+                return self.abrir_tela_logados(usuario)
         else:
-            self.__tela_sistema.mensagem("GAME OVER")
-            self.__tela_sistema.mensagem("Seu herói morreu, crie outro herói")
-            self.__tela_sistema.mensagem("Foi uma aventura dezastrosa! >:(")
-            self.__controlador_usuario.remove_heroi(heroi, usuario)
-
-            return self.abrir_tela_logados(usuario)
+            self.__tela_sistema.mensagem("O mundo foi salvo! Todos os monstros foram derrotados :D")
+            self.__tela_sistema.mensagem("Obrigada grande herói!")
+            self.abrir_tela_opcoes_jogo(heroi,usuario)
 
     def abrir_tela_logados(self, usuario):
         opcao2 = self.__tela_sistema.tela_logados(usuario)
