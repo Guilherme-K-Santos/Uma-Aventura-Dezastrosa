@@ -37,6 +37,6 @@ class Item:
 manopla_basica = Item("Manopla do Buggy", 10, 0)
 chuteira_pele = Item("Chuteira do Pelé", 20, 10)
 excalibur = Item("Excalibur", 40, 31)
-passagem_para_dubai = Item("Passagem para Dubai", 99999999999999999999999999999999999999999999999999, 99999999999999999)
+passagem_para_dubai = Item("Passagem para Dubai", 9999999999, 9999)
 
 itens_monstros = [chuteira_pele, excalibur, passagem_para_dubai]

@@ -17,7 +17,7 @@ class Heroi(Personagem):
         return self.__hp_total
 
     @hp_total.setter
-    def hp_total(self,hp_total:int):
+    def hp_total(self, hp_total: int):
         if isinstance(hp_total, int):
             self.__hp_total = hp_total
 
@@ -26,7 +26,7 @@ class Heroi(Personagem):
         return self.__hp_extra
 
     @hp_extra.setter
-    def hp_extra(self,hp_extra:int):
+    def hp_extra(self, hp_extra: int):
         if isinstance(hp_extra, int):
             self.__hp_extra = hp_extra
 
