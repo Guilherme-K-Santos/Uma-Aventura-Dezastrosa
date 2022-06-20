@@ -158,17 +158,20 @@ class ControladorSistema:
 
             elif op == 3:
                 self.__tela_sistema.mensagem("=====================")
-                heroi.item.equipado = None
-                heroi.hp_extra = 0
-                heroi.ataque = 0
-                self.__tela_sistema.mensagem("O item foi desequipado")
-                print("Vida atual: ", heroi.hp_total)
-                print("Ataque atual: ", heroi.ataque)
+                if heroi.item_equipado is not None:
+                    heroi.item_equipado = None
+                    heroi.hp_extra = 0
+                    heroi.ataque = 0
+                    self.__tela_sistema.mensagem("O item foi desequipado")
+                    print("Vida atual: ", heroi.hp_total)
+                    print("Ataque atual: ", heroi.ataque)
+                else:
+                    self.__tela_sistema.mensagem("Nenhum item equipado")
                 input("Aperte ENTER para retornar")
 
             elif op == 0:
                 return self.abrir_tela_opcoes_jogo(heroi, usuario)
-                
+
         else:
             self.__tela_sistema.mensagem("Mochila vazia")
             input("Aperte ENTER para retornar")
