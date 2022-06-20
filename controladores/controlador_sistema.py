@@ -39,10 +39,7 @@ class ControladorSistema:
             elif opcao == 3:
                 self.__tela_sistema.informacoes_jogo()
             elif opcao == 0:
-                self.encerrar_sistema()
-
-    def encerrar_sistema(self):
-        exit()
+                exit()
 
     def cadastro_heroi(self):
         novo_heroi = self.__controlador_heroi.criar_heroi()
@@ -78,12 +75,15 @@ class ControladorSistema:
                 self.__tela_sistema.mensagem("Seu herói morreu, crie outro herói")
                 self.__tela_sistema.mensagem("Foi uma aventura dezastrosa! >:(")
                 self.__controlador_usuario.remove_heroi(heroi, usuario)
+                input("Aperte ENTER para retornar")
 
                 return self.abrir_tela_logados(usuario)
         else:
             self.__tela_sistema.mensagem("O mundo foi salvo! Todos os monstros foram derrotados :D")
             self.__tela_sistema.mensagem("Obrigada grande herói!")
-            self.abrir_tela_opcoes_jogo(heroi,usuario)
+            input("Aperte ENTER para retornar")
+
+            self.abrir_tela_opcoes_jogo(heroi, usuario)
 
     def abrir_tela_logados(self, usuario):
         opcao2 = self.__tela_sistema.tela_logados(usuario)
@@ -106,7 +106,7 @@ class ControladorSistema:
             if opcao3 == 1:
                 self.combate(heroi, usuario)
             elif opcao3 == 2:
-                self.abre_mochila(heroi)
+                self.abre_mochila(heroi, usuario)
             elif opcao3 == 3:
                 self.descansar(heroi)
             elif opcao3 == 4:
@@ -115,35 +115,61 @@ class ControladorSistema:
                 self.mudar_titulo(heroi)
             opcao3 = self.__tela_sistema.tela_opcoes_jogo(heroi)
 
-    def pega_mochila(self, heroi):
-        mochila_do_heroi = heroi.mochila
-        return mochila_do_heroi
-
-    def abre_mochila(self, heroi):
+    def abre_mochila(self, heroi, usuario):
         self.__tela_sistema.mensagem("-----MOCHILA----")
-        indice = 0
-        for item in heroi.mochila.itens:
-            print(indice, "-", item.nome_item)
-            indice += 1
+        if len(heroi.mochila.itens) > 0:
+            indice = 0
+            for item in heroi.mochila.itens:
+                print(indice, "-", item.nome_item)
+                indice += 1
 
-        validacao = self.regularizacao(indice)
+            validacao = self.regularizacao(indice)
 
-        indice_item = self.__tela_sistema.escolhe_itens(validacao)
-        item_escolhido = heroi.mochila.itens[indice_item]
+            indice_item = self.__tela_sistema.escolhe_itens(validacao)
+            item_escolhido = heroi.mochila.itens[indice_item]
 
-        print("Você escolheu: ", item_escolhido.nome_item)
+            print("Você escolheu: ", item_escolhido.nome_item)
 
-        op = self.__tela_sistema.opcoes_itens()
-        if op == 1:
-            heroi.hp_extra = item_escolhido.hp_extra
-            heroi.ataque = item_escolhido.att_extra
+            op = self.__tela_sistema.opcoes_itens()
+            if op == 1:
+                self.__tela_sistema.mensagem(" ================================== ")
+                if heroi.item_equipado != item_escolhido:
+                    heroi.item_equipado = item_escolhido
+                    heroi.hp_extra = item_escolhido.hp_extra
+                    heroi.ataque = item_escolhido.att_extra
+                    self.__tela_sistema.mensagem(" === Item equipado com sucesso! === ")
+                    print("Ataque atual: ", heroi.ataque)
+                    print("HP atual: ", heroi.hp_total)
+                    input("Aperte ENTER para retornar")
+                else:
+                    self.__tela_sistema.mensagem("=======================")
+                    self.__tela_sistema.mensagem("== Item já equipado! ==")
+                    input("Aperte ENTER para retornar")
 
-            print("Ataque atual: ", heroi.ataque)
-            print("HP atual: ", heroi.hp_total)
-        elif op == 2:
-            heroi.mochila.itens.remove(item_escolhido)
+            elif op == 2:
+                self.__tela_sistema.mensagem("=====================")
+                if heroi.item_equipado == item_escolhido:
+                    heroi.hp_extra = 0
+                    heroi.ataque = 0
+                    self.__tela_sistema.mensagem("O item foi desequipado")
+                heroi.mochila.itens.remove(item_escolhido)
+                print(item_escolhido.nome_item, "foi removido da mochila")
+                input("Aperte ENTER para retornar")
 
-            print(item_escolhido.nome_item, "removido da mochila")
+            elif op == 3:
+                self.__tela_sistema.mensagem("=====================")
+                heroi.item.equipado = None
+                heroi.hp_extra = 0
+                heroi.ataque = 0
+                self.__tela_sistema.mensagem("O item foi desequipado")
+                print("Vida atual: ", heroi.hp_total)
+                print("Ataque atual: ", heroi.ataque)
+                input("Aperte ENTER para retornar")
+
+        else:
+            self.__tela_sistema.mensagem("Mochila vazia")
+            input("Aperte ENTER para retornar")
+            return self.abrir_tela_opcoes_jogo(heroi, usuario)
 
     def regularizacao(self, indice):
         validacao = []

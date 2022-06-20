@@ -2,6 +2,7 @@ from entidades.personagem import Personagem
 from entidades.mochila import Mochila
 from entidades.usuario import Usuario
 from entidades.mochila import Mochila
+from entidades.item import Item
 
 
 class Heroi(Personagem):
@@ -11,6 +12,16 @@ class Heroi(Personagem):
         self.__mochila = Mochila()
         self.__hp_extra = 0
         self.__hp_total = hp + self.__hp_extra
+        self.__item_equipado = None
+
+    @property
+    def item_equipado(self):
+        return self.__item_equipado
+
+    @item_equipado.setter
+    def item_equipado(self, item_equipado: Item):
+        if isinstance(item_equipado, Item):
+            self.__item_equipado = item_equipado
 
     @property
     def hp_total(self):
