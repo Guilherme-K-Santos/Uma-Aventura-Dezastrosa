@@ -46,11 +46,31 @@ class TelaSistema:
         print("Bom jogo!")
 
     def tela_opcoes_jogo(self,heroi):
-        print("----------- Você está jogando com ", heroi.nome, " -----------")
+        print("----------- Você está jogando com ", heroi.nome, heroi.titulo, " -----------")
         print("1 - Atacar monstro")
         print("2 - Abrir mochila")
         print("3 - Descansar")
         print("4 - Ver status do herói")
+        print("5 - Selecionar título para o herói")
         print("0 - Retornar")
         opcao = int(input("Digite uma opção: "))
         return opcao
+
+    def escolhe_itens(self):
+        print("Escolha um item para equipar ou deletar")
+        item = int(input("Digite o número do item: "))
+        return item
+
+    def opcoes_itens(self):
+        print(" 1 - Equipar")
+        print(" 2 - Deletar")
+        print(" 0 - Retornar")
+        opcao = int(input("Digite uma opção: "))
+        return opcao
+
+    def status_heroi(self,heroi):
+        print("------ STATUS DE ", heroi, " ------")
+        print("Vida: ", heroi.hp)
+        print("Ataque: ", heroi.ataque)
+        print("Título atual: ", heroi.titulo)
+        print("Títulos: ", heroi.lista_titulos)

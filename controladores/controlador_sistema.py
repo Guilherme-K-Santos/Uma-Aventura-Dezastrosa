@@ -77,25 +77,17 @@ class ControladorSistema:
         heroi = self.__controlador_heroi.selecionar(usuario)
         self.__controlador_heroi.abrir_tela_opcoes()
 
-    def cadastrar_mochila(self):
-        pass
-
-    def cadastrar_monstro(self):
-        pass
-
-    def cadastrar_item(self):
-        pass
-
     def combate(self,heroi,usuario):
         monstro = self.__controlador_monstro.pega_monstro()
-        if heroi.hp >= monstro.hp and heroi.ataque >= monstro.ataque:
+        if heroi.ataque >= monstro.hp:
             heroi.mochila.itens.append(monstro.item_monstro)
-            heroi.hp = heroi.hp - monstro.ataque
+            heroi.lista_titulos.append(monstro.titulo)
+            heroi.hp = heroi.hp + heroi.hp_extra - monstro.ataque
             self.__tela_sistema.mensagem("Parabéns! Você matou o monstro!")
             self.__tela_sistema.mensagem("Um novo item apareceu em sua mochila")
             self.__tela_sistema.mensagem("Equipe-o para o próximo combate")
             self.__tela_sistema.mensagem("Lembre-se de descansar de sua última batalha")
-            return self.abrir_tela_opcoes_jogo(heroi,usuario)
+            return self.abrir_tela_opcoes_jogo(heroi, usuario)
         else:
             self.__tela_sistema.mensagem("GAME OVER")
             self.__tela_sistema.mensagem("Seu herói morreu, crie outro herói")
@@ -125,9 +117,39 @@ class ControladorSistema:
             if opcao3 == 1:
                 self.combate(heroi,usuario)
             elif opcao3 == 2:
-                pass
+                self.abre_mochila(heroi)
             elif opcao3 == 3:
-                pass
+                self.descansar(heroi)
             elif opcao3 == 4:
                 pass
             opcao3 = self.__tela_sistema.tela_opcoes_jogo(heroi)
+
+    def pega_mochila(self,heroi):
+        mochila_do_heroi = heroi.mochila
+        return mochila_do_heroi
+
+    def abre_mochila(self,heroi):
+        self.__tela_sistema.mensagem("-----MOCHILA----")
+        indice = 0
+        for item in heroi.mochila.itens:
+            print(indice, "-", item.nome_item)
+            indice += 1
+        indice_item = self.__tela_sistema.escolhe_itens()
+        item_escolhido = heroi.mochila.itens[indice_item]
+        print("Você escolheu: ", item_escolhido.nome_item)
+        op = self.__tela_sistema.opcoes_itens()
+        if op == 1:
+            heroi.hp_extra = item_escolhido.hp_extra
+            heroi.ataque = item_escolhido.att_extra
+            print(heroi.ataque)
+            print(heroi.hp_extra)
+        elif op == 2:
+            heroi.mochila.itens.remove(item_escolhido)
+            print(item_escolhido, "removido da mochila")
+
+    def descansar(self,heroi):
+        heroi.hp = 50 + heroi.hp_extra
+        return heroi.hp
+
+    def ver_status(self,heroi):
+        self.__tela_sistema.status_heroi(heroi)
