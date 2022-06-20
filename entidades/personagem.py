@@ -44,6 +44,3 @@ class Personagem(ABC):
     def titulo(self, titulo: str):
         if isinstance(titulo, str):
             self.__titulo = titulo
-
-    def atacar(self, ataque: int, hp: int):
-        pass
