@@ -20,3 +20,5 @@ class Monstro(Personagem):
 vampiro = Monstro("Morbius", 10, 20, "It's morbin time", itens_monstros[0])
 mihawk = Monstro("Mihawk", 20, 40, "O Melhor Espadachim", itens_monstros[1])
 demon_lord = Monstro("Lorde Demônio", 40, 70, "O Imperador do Mundo", itens_monstros[2])
+
+lista_monstros = [vampiro, mihawk, demon_lord]

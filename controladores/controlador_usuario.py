@@ -107,7 +107,7 @@ class ControladorUsuario:
 
     def acessar_herois(self, usuario):
 
-        if len(usuario.lista_nomes_herois)>=1 and len(usuario.lista_herois) >=1:
+        if len(usuario.lista_nomes_herois) >= 1 and len(usuario.lista_herois) >= 1:
             self.__tela_usuario.mensagem("Olá Aventureiro! Em qual jornada você quer prosseguir?")
             self.__tela_usuario.mensagem("")
             contador_herois = 0
@@ -119,11 +119,13 @@ class ControladorUsuario:
             for heroi in usuario.lista_herois:
                 if heroi.nome == heroi_escolhido:
                     return heroi
+                else:
+                    self.__tela_usuario.mensagem("Nome de herói inválido, escolha um nome válido!")
         else:
             self.__tela_usuario.mensagem("Nenhum herói disponível, crie algum")
             return None
 
-    def remove_heroi(self,heroi,usuario):
+    def remove_heroi(self, heroi, usuario):
         usuario.lista_herois.remove(heroi)
         usuario.lista_nomes_herois.remove(heroi.nome)
         return self.__controlador_sistema.tela_sistema.tela_logados(usuario)

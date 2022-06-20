@@ -52,8 +52,6 @@ class ControladorSistema:
                 self.__tela_sistema.informacoes_jogo()
             elif opcao == 0:
                 self.encerrar_sistema()
-            else:
-                break
 
     def encerrar_sistema(self):
         exit()
@@ -61,8 +59,7 @@ class ControladorSistema:
     def cadastro_heroi(self):
         novo_heroi = self.__controlador_heroi.criar_heroi()
         lista_usuarios = self.__controlador_usuario.pega_usuario_por_heroi()
-        # acima estão as duas exportações necessárias e abaixo está o seu código com algumas alterações
-        # (os prints eu estava usando pra acompanhar o cod)
+
         for usuario in lista_usuarios:
             if novo_heroi.nome in usuario.lista_nomes_herois:
                 self.__tela_sistema.mensagem("Heroi já existente")
@@ -71,29 +68,28 @@ class ControladorSistema:
                 if novo_heroi not in usuario.lista_herois:
                     usuario.lista_herois.append(novo_heroi)
                     usuario.lista_nomes_herois.append(novo_heroi.nome)
-                    print(usuario.lista_nomes_herois)
 
-    def escolhe_heroi(self, usuario):
-        heroi = self.__controlador_heroi.selecionar(usuario)
-        self.__controlador_heroi.abrir_tela_opcoes()
-
-    def combate(self,heroi,usuario):
+    def combate(self, heroi, usuario):
         monstro = self.__controlador_monstro.pega_monstro()
         if heroi.ataque >= monstro.hp and heroi.hp_total > monstro.ataque:
             heroi.mochila.itens.append(monstro.item_monstro)
             heroi.lista_titulos.append(monstro.titulo)
+
             heroi.hp_total = heroi.hp_total - monstro.ataque
             self.__controlador_monstro.remove(monstro)
+
             self.__tela_sistema.mensagem("Parabéns! Você matou o monstro!")
             self.__tela_sistema.mensagem("Um novo item apareceu em sua mochila")
             self.__tela_sistema.mensagem("Equipe-o para o próximo combate")
             self.__tela_sistema.mensagem("Lembre-se de descansar de sua última batalha")
+
             return self.abrir_tela_opcoes_jogo(heroi, usuario)
         else:
             self.__tela_sistema.mensagem("GAME OVER")
             self.__tela_sistema.mensagem("Seu herói morreu, crie outro herói")
-            self.__tela_sistema.mensagem("Você não foi prudente >:(")
+            self.__tela_sistema.mensagem("Foi uma aventura dezastrosa! >:(")
             self.__controlador_usuario.remove_heroi(heroi, usuario)
+
             return self.abrir_tela_logados(usuario)
 
     def abrir_tela_logados(self, usuario):
@@ -101,7 +97,7 @@ class ControladorSistema:
         if opcao2 == 1:
             heroi = self.__controlador_usuario.acessar_herois(usuario)
             if heroi is not None:
-                self.abrir_tela_opcoes_jogo(heroi,usuario)
+                self.abrir_tela_opcoes_jogo(heroi, usuario)
             else:
                 self.abrir_tela_logados(usuario)
         elif opcao2 == 2:
@@ -111,54 +107,75 @@ class ControladorSistema:
             self.__controlador_usuario.opcoes_usuario()
             self.abrir_tela_logados(usuario)
 
-
-    def abrir_tela_opcoes_jogo(self,heroi,usuario):
+    def abrir_tela_opcoes_jogo(self, heroi, usuario):
         opcao3 = self.__tela_sistema.tela_opcoes_jogo(heroi)
         while opcao3 != 0:
             if opcao3 == 1:
-                self.combate(heroi,usuario)
+                self.combate(heroi, usuario)
             elif opcao3 == 2:
                 self.abre_mochila(heroi)
             elif opcao3 == 3:
                 self.descansar(heroi)
             elif opcao3 == 4:
                 self.ver_status(heroi)
+            elif opcao3 == 5:
+                self.mudar_titulo(heroi)
             opcao3 = self.__tela_sistema.tela_opcoes_jogo(heroi)
 
-    def pega_mochila(self,heroi):
+    def pega_mochila(self, heroi):
         mochila_do_heroi = heroi.mochila
         return mochila_do_heroi
 
-    def abre_mochila(self,heroi):
+    def abre_mochila(self, heroi):
         self.__tela_sistema.mensagem("-----MOCHILA----")
         indice = 0
         for item in heroi.mochila.itens:
             print(indice, "-", item.nome_item)
             indice += 1
-        indice_item = self.__tela_sistema.escolhe_itens()
+
+        validacao = self.regularizacao(indice)
+
+        indice_item = self.__tela_sistema.escolhe_itens(validacao)
         item_escolhido = heroi.mochila.itens[indice_item]
+
         print("Você escolheu: ", item_escolhido.nome_item)
+
         op = self.__tela_sistema.opcoes_itens()
         if op == 1:
             heroi.hp_extra = item_escolhido.hp_extra
             heroi.ataque = item_escolhido.att_extra
+
             print("Ataque atual: ", heroi.ataque)
             print("HP atual: ", heroi.hp_total)
         elif op == 2:
             heroi.mochila.itens.remove(item_escolhido)
+
             print(item_escolhido, "removido da mochila")
 
-    def descansar(self,heroi):
+    def regularizacao(self, indice):
+        validacao = []
+        contador = 0
+        for _ in range(indice):
+            validacao.append(contador)
+            contador += 1
+        return validacao
+
+    def descansar(self, heroi):
         heroi.hp_total = heroi.hp + heroi.hp_extra
         return heroi.hp_total
 
-    def ver_status(self,heroi):
+    def ver_status(self, heroi):
         self.__tela_sistema.status_heroi(heroi)
 
-    def mudar_titulo(self,heroi):
+    def mudar_titulo(self, heroi):
         indice = 0
         for titulo in heroi.lista_titulos:
             print("Selecione ", indice, "para equipar: ", titulo)
             indice += 1
-        indice_escolhido = self.__tela_sistema.escolhe_titulo(heroi)
+
+        validacao = self.regularizacao(indice)
+
+        indice_escolhido = self.__tela_sistema.escolhe_titulo(validacao)
         heroi.titulo = heroi.lista_titulos[indice_escolhido]
+
+        self.__tela_sistema.mensagem(heroi.titulo)

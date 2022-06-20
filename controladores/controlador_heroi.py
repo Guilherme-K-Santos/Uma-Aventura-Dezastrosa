@@ -10,25 +10,12 @@ class ControladorHeroi:
         self.__manter_tela = True
         self.__herois = []
 
-    def abrir_tela_opcoes(self):
-        switcher = {0: self.retornar}
-
-        self.__manter_tela = True
-        while self.__manter_tela:
-            opcao_escolhida = self.__tela_heroi.tela_opcoes_heroi()
-            funcao_escolhida = switcher[opcao_escolhida]
-            funcao_escolhida()
-
     # aqui eu crio o heroi em si (controlador heroi, perfetio sentido) e exporto ele pro controlador sistema
     def criar_heroi(self):
         novo_heroi = Heroi(self.__tela_heroi.pegar_nome_heroi(), 50, 10, "o(a) Noob")
         self.__tela_heroi.mensagem("Herói criado!")
         self.__herois.append(novo_heroi)
         return novo_heroi
-
-
-    def selecionar(self, usuario):
-        pass
 
     def retornar(self):
         self.__manter_tela = False

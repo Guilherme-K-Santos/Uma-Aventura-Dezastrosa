@@ -14,7 +14,7 @@ class TelaSistema:
         print("0 - Encerrar o jogo")
         print("--------------------------------------")
 
-        opcao_escolhida = int(input("Escolha a opcao: "))
+        opcao_escolhida = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 3, 0])
         return opcao_escolhida
 
     def tela_logados(self, usuario):
@@ -27,7 +27,7 @@ class TelaSistema:
         print("0 - Retornar")
         print("--------------------------------------")
 
-        opcao_escolhida = int(input("Escolha a opcao: "))
+        opcao_escolhida = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 3, 0])
         return opcao_escolhida
 
 #         opções para o usuário escolher (ele agora está LOGADO, então pode prosseguir
@@ -45,7 +45,7 @@ class TelaSistema:
         input()
         print("Bom jogo!")
 
-    def tela_opcoes_jogo(self,heroi):
+    def tela_opcoes_jogo(self, heroi):
         print("----------- Você está jogando com ", heroi.nome, heroi.titulo, " -----------")
         print("1 - Atacar monstro")
         print("2 - Abrir mochila")
@@ -53,28 +53,51 @@ class TelaSistema:
         print("4 - Ver status do herói")
         print("5 - Selecionar título para o herói")
         print("0 - Retornar")
-        opcao = int(input("Digite uma opção: "))
+        opcao = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 3, 4, 5, 0])
         return opcao
 
-    def escolhe_itens(self):
+    def escolhe_itens(self, validacao):
         print("Escolha um item para equipar ou deletar")
-        item = int(input("Digite o número do item: "))
+        item = self.excecoes_escolha("Escolha uma Opção ", validacao)
         return item
 
     def opcoes_itens(self):
         print(" 1 - Equipar")
         print(" 2 - Deletar")
         print(" 0 - Retornar")
-        opcao = int(input("Digite uma opção: "))
+        opcao = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 0])
         return opcao
 
-    def status_heroi(self,heroi):
+    def status_heroi(self, heroi):
         print("------ STATUS DE ", heroi.nome, " ------")
         print("Vida: ", heroi.hp_total)
         print("Ataque: ", heroi.ataque)
         print("Título atual: ", heroi.titulo)
         print("Títulos: ", heroi.lista_titulos)
 
-    def escolhe_titulo(self,heroi):
-        titulo_escolhido = int(input("Escolha seu titulo: "))
+    def escolhe_titulo(self, validacao):
+        titulo_escolhido = self.excecoes_escolha("Escolha uma Opção ", validacao)
         return titulo_escolhido
+
+    def excecoes_escrita_numerica(self, mensagem: ""):
+        while True:
+            valor = input(mensagem)
+            numeros_validos = int
+            try:
+                valor_comparativo = int(valor)
+                if type(valor_comparativo) == type(numeros_validos):
+                    raise ValueError
+                return valor_comparativo
+            except ValueError:
+                print("Por favor, coloque um valor númerico!")
+
+    def excecoes_escolha(self, mensagem: "", numeros_validos: [] = None):
+        while True:
+            resposta_usuario = input(mensagem)
+            try:
+                numero = int(resposta_usuario)
+                if numero not in numeros_validos:
+                    raise ValueError
+                return numero
+            except ValueError:
+                print("Por favor, digite uma das opções:")

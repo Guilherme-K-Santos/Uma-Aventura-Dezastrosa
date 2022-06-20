@@ -8,7 +8,7 @@ class TelaUsuario:
         print("--------------------------------------")
         print("--------------CADASTRO----------------")
         login = input("Login:")
-        senha = input("Senha:")
+        senha = self.excecoes_escrita_numerica("Senha:")
 
         return {"login": login, "senha": senha}
 
@@ -16,7 +16,7 @@ class TelaUsuario:
         print("--------------------------------------")
         print("Por favor, preencha com seus dados:")
         login = input("Login:")
-        senha = input("Senha:")
+        senha = self.excecoes_escrita_numerica("Senha:")
 
         return {"login": login, "senha": senha}
 
@@ -28,7 +28,7 @@ class TelaUsuario:
         print("0 - Retornar")
         print("--------------------------------------")
 
-        opcao_escolhida = int(input("Escolha a opcao: "))
+        opcao_escolhida = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 0])
         return opcao_escolhida
 
     def tela_confirmar_alteraracao(self):
@@ -37,7 +37,7 @@ class TelaUsuario:
         print("1 - Login")
         print("2 - Senha")
 
-        resposta_alteracao = int(input("Opção Seleciona: "))
+        resposta_alteracao = self.excecoes_escolha("Escolha uma Opção ", [1, 2])
         return resposta_alteracao
 
     def tela_alteracao_login(self):
@@ -50,7 +50,7 @@ class TelaUsuario:
     def tela_alteracao_senha(self):
         print("--------------------------------------")
         print("Qual será sua nova senha?")
-        senha = input("Senha:")
+        senha = self.excecoes_escrita_numerica("Senha:")
 
         return senha
 
@@ -61,7 +61,7 @@ class TelaUsuario:
         print("1 - Sim")
         print("2 - Não")
 
-        opcao_escolhida_deletar = int(input("Opção Seleciona: "))
+        opcao_escolhida_deletar = self.excecoes_escolha("Escolha uma Opção ", [1, 2])
         return opcao_escolhida_deletar
 
     #   -------------------------------------- OPÇÕES USUARIO X HEROI --------------------------------------
@@ -74,6 +74,25 @@ class TelaUsuario:
         heroi_escolhido = input("Herói Escolhido: ")
         return heroi_escolhido
 
-    def abre_tela_jornada_especifica(self):
-        # ela vai abrir a tela salva da jornada do heroi x do usuario y
-        print("Está Funcionando")
+    def excecoes_escrita_numerica(self, mensagem: ""):
+        while True:
+            valor = input(mensagem)
+            numeros_validos = int
+            try:
+                valor_comparativo = int(valor)
+                if type(valor_comparativo) == type(numeros_validos):
+                    raise ValueError
+                return valor_comparativo
+            except ValueError:
+                print("Por favor, coloque um valor númerico!")
+
+    def excecoes_escolha(self, mensagem: "", numeros_validos: [] = None):
+        while True:
+            resposta_usuario = input(mensagem)
+            try:
+                numero = int(resposta_usuario)
+                if numero not in numeros_validos:
+                    raise ValueError
+                return numero
+            except ValueError:
+                print("Por favor, digite uma das opções:")
