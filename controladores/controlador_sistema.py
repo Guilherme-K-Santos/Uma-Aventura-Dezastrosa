@@ -79,10 +79,11 @@ class ControladorSistema:
 
     def combate(self,heroi,usuario):
         monstro = self.__controlador_monstro.pega_monstro()
-        if heroi.ataque >= monstro.hp:
+        if heroi.ataque >= monstro.hp and heroi.hp_total > monstro.ataque:
             heroi.mochila.itens.append(monstro.item_monstro)
             heroi.lista_titulos.append(monstro.titulo)
-            heroi.hp = heroi.hp + heroi.hp_extra - monstro.ataque
+            heroi.hp_total = heroi.hp_total - monstro.ataque
+            self.__controlador_monstro.remove(monstro)
             self.__tela_sistema.mensagem("Parabéns! Você matou o monstro!")
             self.__tela_sistema.mensagem("Um novo item apareceu em sua mochila")
             self.__tela_sistema.mensagem("Equipe-o para o próximo combate")
@@ -121,7 +122,7 @@ class ControladorSistema:
             elif opcao3 == 3:
                 self.descansar(heroi)
             elif opcao3 == 4:
-                pass
+                self.ver_status(heroi)
             opcao3 = self.__tela_sistema.tela_opcoes_jogo(heroi)
 
     def pega_mochila(self,heroi):
@@ -141,15 +142,23 @@ class ControladorSistema:
         if op == 1:
             heroi.hp_extra = item_escolhido.hp_extra
             heroi.ataque = item_escolhido.att_extra
-            print(heroi.ataque)
-            print(heroi.hp_extra)
+            print("Ataque atual: ", heroi.ataque)
+            print("HP atual: ", heroi.hp_total)
         elif op == 2:
             heroi.mochila.itens.remove(item_escolhido)
             print(item_escolhido, "removido da mochila")
 
     def descansar(self,heroi):
-        heroi.hp = 50 + heroi.hp_extra
-        return heroi.hp
+        heroi.hp_total = heroi.hp + heroi.hp_extra
+        return heroi.hp_total
 
     def ver_status(self,heroi):
         self.__tela_sistema.status_heroi(heroi)
+
+    def mudar_titulo(self,heroi):
+        indice = 0
+        for titulo in heroi.lista_titulos:
+            print("Selecione ", indice, "para equipar: ", titulo)
+            indice += 1
+        indice_escolhido = self.__tela_sistema.escolhe_titulo(heroi)
+        heroi.titulo = heroi.lista_titulos[indice_escolhido]

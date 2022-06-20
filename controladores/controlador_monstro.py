@@ -26,3 +26,6 @@ class ControladorMonstro:
              self.__tela_monstro.mensagem("Monstro não existente")
              return self.pega_monstro()
 
+    def remove(self, monstro):
+        self.__monstros.remove(monstro)
+

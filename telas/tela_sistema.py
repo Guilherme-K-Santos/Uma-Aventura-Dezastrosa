@@ -69,8 +69,12 @@ class TelaSistema:
         return opcao
 
     def status_heroi(self,heroi):
-        print("------ STATUS DE ", heroi, " ------")
-        print("Vida: ", heroi.hp)
+        print("------ STATUS DE ", heroi.nome, " ------")
+        print("Vida: ", heroi.hp_total)
         print("Ataque: ", heroi.ataque)
         print("Título atual: ", heroi.titulo)
         print("Títulos: ", heroi.lista_titulos)
+
+    def escolhe_titulo(self,heroi):
+        titulo_escolhido = int(input("Escolha seu titulo: "))
+        return titulo_escolhido

@@ -10,6 +10,16 @@ class Heroi(Personagem):
         self.__lista_titulos = ["o(a) Noob"]
         self.__mochila = Mochila()
         self.__hp_extra = 0
+        self.__hp_total = hp + self.__hp_extra
+
+    @property
+    def hp_total(self):
+        return self.__hp_total
+
+    @hp_total.setter
+    def hp_total(self,hp_total:int):
+        if isinstance(hp_total, int):
+            self.__hp_total = hp_total
 
     @property
     def hp_extra(self):
