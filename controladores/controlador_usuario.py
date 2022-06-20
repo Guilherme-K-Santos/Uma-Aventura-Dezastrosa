@@ -72,22 +72,22 @@ class ControladorUsuario:
                 self.__tela_usuario.mensagem("Credenciais Incorretas!")
 
     def excluir(self):
-            credenciais = self.__tela_usuario.tela_login()
+        credenciais = self.__tela_usuario.tela_login()
 
-            for usuario in self.__usuarios:
-                if (usuario.login == credenciais["login"]) and \
-                        usuario.senha == credenciais["senha"]:
-                    resposta = self.__tela_usuario.tela_deletar_usuario()
+        for usuario in self.__usuarios:
+            if (usuario.login == credenciais["login"]) and \
+                    usuario.senha == credenciais["senha"]:
+                resposta = self.__tela_usuario.tela_deletar_usuario(usuario.login)
 
-                    if resposta == 1:
-                        self.__usuarios.remove(usuario)
-                        self.__tela_usuario.mensagem("Exclusão Concluída com Êxito!")
-                        self.__tela_usuario.mensagem("-----------------------------")
-                        self.__tela_usuario.mensagem("Você Será Redirecionado para o Menu Principal")
-                        return self.__controlador_sistema.iniciar()
-                    else:
-                        self.__tela_usuario.mensagem("Credenciais Incorretas!")
-                        return None
+                if resposta == 1:
+                    self.__usuarios.remove(usuario)
+                    self.__tela_usuario.mensagem("Exclusão Concluída com Êxito!")
+                    self.__tela_usuario.mensagem("-----------------------------")
+                    self.__tela_usuario.mensagem("Você Será Redirecionado para o Menu Principal")
+                    return self.__controlador_sistema.iniciar()
+                else:
+                    self.__tela_usuario.mensagem("Credenciais Incorretas!")
+                    return None
 
     def retornar(self):
         self.__manter_tela = False

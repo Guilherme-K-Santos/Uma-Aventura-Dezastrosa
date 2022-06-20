@@ -54,10 +54,9 @@ class TelaUsuario:
 
         return senha
 
-    def tela_deletar_usuario(self):
+    def tela_deletar_usuario(self, usuario):
         print("--------------------------------------")
-        print("Tem certeza que deseja apagar a conta 'nome_do_heroi' com 'numeors_de_herois' "
-              "heróis salvos ?")
+        print("Tem certeza que deseja apagar a conta?")
         print("1 - Sim")
         print("2 - Não")
 
