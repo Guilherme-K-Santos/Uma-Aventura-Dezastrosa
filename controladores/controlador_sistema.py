@@ -166,6 +166,9 @@ class ControladorSistema:
                 print("Ataque atual: ", heroi.ataque)
                 input("Aperte ENTER para retornar")
 
+            elif op == 0:
+                return self.abrir_tela_opcoes_jogo(heroi, usuario)
+                
         else:
             self.__tela_sistema.mensagem("Mochila vazia")
             input("Aperte ENTER para retornar")

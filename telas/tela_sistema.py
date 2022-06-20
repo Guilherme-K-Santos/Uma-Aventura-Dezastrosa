@@ -64,8 +64,9 @@ class TelaSistema:
     def opcoes_itens(self):
         print(" 1 - Equipar")
         print(" 2 - Deletar")
+        print(" 3 - Desequipar")
         print(" 0 - Retornar")
-        opcao = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 0])
+        opcao = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 3, 0])
         return opcao
 
     def status_heroi(self, heroi):
