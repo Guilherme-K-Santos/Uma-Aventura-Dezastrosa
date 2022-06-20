@@ -17,8 +17,8 @@ class Monstro(Personagem):
             self.__item_monstro = item_monstro
 
 
-vampiro = Monstro("Morbius", 10, 20, "It's morbin time", itens_monstros[0])
-mihawk = Monstro("Mihawk", 20, 40, "O Melhor Espadachim", itens_monstros[1])
-demon_lord = Monstro("Lorde Demônio", 40, 70, "O Imperador do Mundo", itens_monstros[2])
+vampiro = Monstro("Morbius", 10, 20, "O(a) Vampiro(a)", itens_monstros[0])
+mihawk = Monstro("Mihawk", 20, 40, "O(a) Melhor Espadachim", itens_monstros[1])
+demon_lord = Monstro("Lorde Demônio", 40, 70, "O(a) Imperador do Mundo", itens_monstros[2])
 
 lista_monstros = [vampiro, mihawk, demon_lord]

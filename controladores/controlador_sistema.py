@@ -150,7 +150,7 @@ class ControladorSistema:
         elif op == 2:
             heroi.mochila.itens.remove(item_escolhido)
 
-            print(item_escolhido, "removido da mochila")
+            print(item_escolhido.nome_item, "removido da mochila")
 
     def regularizacao(self, indice):
         validacao = []
@@ -162,6 +162,9 @@ class ControladorSistema:
 
     def descansar(self, heroi):
         heroi.hp_total = heroi.hp + heroi.hp_extra
+
+        self.__tela_sistema.mensagem("Sua vida foi totalmente regenerada!")
+
         return heroi.hp_total
 
     def ver_status(self, heroi):
