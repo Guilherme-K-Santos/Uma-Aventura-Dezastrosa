@@ -76,11 +76,8 @@ class TelaUsuario:
     def excecoes_escrita_numerica(self, mensagem: ""):
         while True:
             valor = input(mensagem)
-            numeros_validos = int
             try:
                 valor_comparativo = int(valor)
-                if type(valor_comparativo) == type(numeros_validos):
-                    raise ValueError
                 return valor_comparativo
             except ValueError:
                 print("Por favor, coloque um valor númerico!")

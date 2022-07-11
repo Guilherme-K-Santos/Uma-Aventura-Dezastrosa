@@ -56,7 +56,6 @@ class ControladorUsuario:
             for usuario_login_novo in self.__usuarios:
                 if (usuario_login_novo.login == credenciais["login"]) and \
                         usuario_login_novo.senha == credenciais["senha"]:
-                    print(usuario_login_novo.login)
                     usuario_login_novo.login = self.__tela_usuario.tela_alteracao_login()
                     break
             else:
