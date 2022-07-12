@@ -56,19 +56,6 @@ class TelaSistema:
         opcao = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 3, 4, 5, 0])
         return opcao
 
-    def escolhe_itens(self, validacao):
-        print("Escolha um item para equipar ou deletar")
-        item = self.excecoes_escolha("Escolha uma Opção ", validacao)
-        return item
-
-    def opcoes_itens(self):
-        print(" 1 - Equipar")
-        print(" 2 - Deletar")
-        print(" 3 - Desequipar")
-        print(" 0 - Retornar")
-        opcao = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 3, 0])
-        return opcao
-
     def status_heroi(self, heroi):
         print("------ STATUS DE ", heroi.nome, " ------")
         print("Vida: ", heroi.hp_total)
