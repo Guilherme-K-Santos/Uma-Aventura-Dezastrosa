@@ -72,36 +72,36 @@ class ControladorHeroi:
                         self.__tela_heroi.mensagem("Ataque atual: {} ".format(heroi.ataque))
                         self.__tela_heroi.mensagem("HP atual: {} ".format(heroi.hp_total))
                     else:
-                        self.__tela_heroi.mensagem("=======================")
-                        self.__tela_heroi.mensagem("== Item já equipado! ==")
+                        self.__tela_heroi.mensagem(" ================================== ")
+                        self.__tela_heroi.mensagem(" ======== Item já equipado! ======= ")
 
                 elif op == 2:
-                    self.__tela_heroi.mensagem("=====================")
+                    self.__tela_heroi.mensagem(" =================================== ")
                     if heroi.item_equipado == item_escolhido:
                         heroi.hp_extra = 0
                         heroi.ataque = 0
-                        self.__tela_heroi.mensagem("O item foi desequipado")
+                        self.__tela_heroi.mensagem(" ===== O item foi desequipado ====== ")
                     heroi.mochila.itens.remove(item_escolhido)
                     self.__tela_heroi.mensagem("{} foi removido da mochila".format(item_escolhido.nome_item))
 
                 elif op == 3:
-                    self.__tela_heroi.mensagem("=====================")
+                    self.__tela_heroi.mensagem(" =================================== ")
                     if heroi.item_equipado is not None:
                         heroi.item_equipado = None
                         heroi.hp_extra = 0
                         heroi.ataque = 0
-                        self.__tela_heroi.mensagem("O item foi desequipado")
+                        self.__tela_heroi.mensagem(" ===== O item foi desequipado ====== ")
                         print("Vida atual: ", heroi.hp_total)
                         print("Ataque atual: ", heroi.ataque)
                     else:
-                        self.__tela_heroi.mensagem("Nenhum item equipado")
+                        self.__tela_heroi.mensagem(" ====== Nenhum item equipado ======= ")
 
                 elif op == 0:
                     return self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
             else:
                 return self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
         else:
-            self.__tela_heroi.mensagem("Mochila vazia")
+            self.__tela_heroi.mensagem(" ========= Mochila vazia ========= ")
             return self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
 
     def regularizacao(self, indice):
