@@ -91,8 +91,8 @@ class ControladorHeroi:
                         heroi.hp_extra = 0
                         heroi.ataque = 0
                         self.__tela_heroi.mensagem(" ===== O item foi desequipado ====== ")
-                        print("Vida atual: ", heroi.hp_total)
-                        print("Ataque atual: ", heroi.ataque)
+                        self.__tela_heroi.mensagem("Ataque atual: {} ".format(heroi.ataque))
+                        self.__tela_heroi.mensagem("HP atual: {} ".format(heroi.hp_total))
                     else:
                         self.__tela_heroi.mensagem(" ====== Nenhum item equipado ======= ")
 
