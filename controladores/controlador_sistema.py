@@ -55,12 +55,13 @@ class ControladorSistema:
                     usuario.lista_nomes_herois.append(novo_heroi.nome)
 
     def abrir_tela_logados(self, usuario):
-        opcao2 = self.__tela_sistema.tela_logados(usuario)
+        opcao2 = self.__tela_sistema.tela_logados()
         if opcao2 == 1:
             heroi = self.__controlador_usuario.acessar_herois(usuario)
             if heroi is not None:
                 self.abrir_tela_opcoes_jogo(heroi, usuario)
             else:
+                self.__tela_sistema.mostra_mensagem('Nenhum herói criado! Tente criar um!')
                 self.abrir_tela_logados(usuario)
         elif opcao2 == 2:
             self.cadastro_heroi()

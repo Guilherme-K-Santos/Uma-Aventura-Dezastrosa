@@ -1,34 +1,82 @@
+import PySimpleGUI as interface_sistema
 
 
 class TelaSistema:
+    def __init__(self):
+        self.__window = None
+        self.componentes_tela()
+        self.componentes_logados()
+
+    def componentes_tela(self):
+        interface_sistema.ChangeLookAndFeel('DarkBlue9')
+        layout = [
+            [interface_sistema.Text('Bem vindo ao Jogo!', font=("Helvica", 25))],
+            [interface_sistema.Text('Escolha sua opção', font=("Helvica", 15))],
+            [interface_sistema.Radio('Login de Usuário', "RD1", key='1')],
+            [interface_sistema.Radio('Cadastro de Usuário', "RD1", key='2')],
+            [interface_sistema.Radio('Sobre o jogo', "RD1", key='3')],
+            [interface_sistema.Radio('Encerrar o jogo', "RD1", key='0')],
+            [interface_sistema.Button('Confirmar'), interface_sistema.Cancel('Cancelar')]
+        ]
+        self.__window = interface_sistema.Window('Sistema de livros').Layout(layout)
+
+    def componentes_logados(self):
+        interface_sistema.ChangeLookAndFeel('DarkBlue9')
+        layout = [
+            [interface_sistema.Text('Você está logado criador!', font=("Helvica", 25))],
+            [interface_sistema.Text('Qual será a Aventura?', font=("Helvica", 15))],
+            [interface_sistema.Radio('Acessar Hérois Criados', "RD1", key='1')],
+            [interface_sistema.Radio('Criar Novo Herói', "RD1", key='2')],
+            [interface_sistema.Radio('Opções da Conta', "RD1", key='3')],
+            [interface_sistema.Radio('Retornar', "RD1", key='0')],
+            [interface_sistema.Button('Confirmar'), interface_sistema.Cancel('Cancelar')]
+        ]
+        self.__window = interface_sistema.Window('Sistema de livros').Layout(layout)
+
+    def close(self):
+        self.__window.Close()
+
+    def mostra_mensagem(self, msg):
+        interface_sistema.popup("", msg)
+
     def mensagem(self, texto):
         return print(texto)
 
     def tela_inicial(self):
-        print("--------------------------------------")
-        print("Bem-Vindo ao Menu Principal, Jogador!")
-        print("O que você deseja fazer para prosseguir?")
-        print("1 - Login de Usuário")
-        print("2 - Cadastro de Usuário")
-        print("3 - Sobre o jogo")
-        print("0 - Encerrar o jogo")
-        print("--------------------------------------")
+        self.componentes_tela()
+        button, values = self.__window.Read()
+        opcao = 0
+        if values['1']:
+            opcao = 1
+        if values['2']:
+            opcao = 2
+        if values['3']:
+            opcao = 3
 
-        opcao_escolhida = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 3, 0])
-        return opcao_escolhida
+        if values['0'] or button in (None, 'Cancelar'):
+            opcao = 0
 
-    def tela_logados(self, usuario):
-        print("---------------Ola!", usuario.login, "-----------------------")
-        print("Login efetuado com sucesso!")
-        print("Qual a aventura que embarcaremos?")
-        print("1 - Acessar Hérois Criados")
-        print("2 - Criar Novo Herói")
-        print("3 - Opções da Conta")
-        print("0 - Retornar")
-        print("--------------------------------------")
+        self.close()
 
-        opcao_escolhida = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 3, 0])
-        return opcao_escolhida
+        return opcao
+
+    def tela_logados(self):
+        self.componentes_logados()
+        button, values = self.__window.Read()
+        opcao = 0
+        if values['1']:
+            opcao = 1
+        if values['2']:
+            opcao = 2
+        if values['3']:
+            opcao = 3
+
+        if values['0'] or button in (None, 'Cancelar'):
+            opcao = 0
+
+        self.close()
+
+        return opcao
 
 #         opções para o usuário escolher (ele agora está LOGADO, então pode prosseguir
 #         para acessar ou criar heróis), essa tela pode ser colocada em tela sistema também,
@@ -54,6 +102,19 @@ class TelaSistema:
         print("5 - Selecionar título para o herói")
         print("0 - Retornar")
         opcao = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 3, 4, 5, 0])
+        return opcao
+
+    def escolhe_itens(self, validacao):
+        print("Escolha um item para equipar ou deletar")
+        item = self.excecoes_escolha("Escolha uma Opção ", validacao)
+        return item
+
+    def opcoes_itens(self):
+        print(" 1 - Equipar")
+        print(" 2 - Deletar")
+        print(" 3 - Desequipar")
+        print(" 0 - Retornar")
+        opcao = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 3, 0])
         return opcao
 
     def status_heroi(self, heroi):
