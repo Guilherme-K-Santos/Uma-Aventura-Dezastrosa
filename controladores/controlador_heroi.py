@@ -1,5 +1,6 @@
 from telas.tela_heroi import TelaHeroi
 from entidades.heroi import Heroi
+from persistencia.heroiDAO import HeroiDAO
 
 
 class ControladorHeroi:
@@ -8,12 +9,12 @@ class ControladorHeroi:
         self.__controlador_sistema = controlador_sistema
         self.__tela_heroi = TelaHeroi()
         self.__manter_tela = True
-        self.__herois = []
+        self.__heroi_dao = HeroiDAO()
 
     def criar_heroi(self):
         novo_heroi = Heroi(self.__tela_heroi.pegar_nome_heroi(), 50, 10, "o(a) Noob")
         self.__tela_heroi.mensagem("Herói criado!")
-        self.__herois.append(novo_heroi)
+        self.__heroi_dao.add(novo_heroi)
         return novo_heroi
 
     def combate(self, heroi, usuario):
