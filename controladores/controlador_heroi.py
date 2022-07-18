@@ -39,11 +39,20 @@ class ControladorHeroi:
                 self.__controlador_sistema.controlador_usuario.remove_heroi(heroi, usuario)
 
                 return self.__controlador_sistema.abrir_tela_logados(usuario)
-        else:
+        elif monstro == "na":
             self.__tela_heroi.mensagem("O mundo foi salvo! Todos os monstros foram derrotados :D")
             self.__tela_heroi.mensagem("Obrigada grande herói!")
 
             self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
+        else:
+            return None
+
+    def descansar(self, heroi):
+        heroi.hp_total = heroi.hp + heroi.hp_extra
+
+        self.__tela_heroi.mensagem("Sua vida foi totalmente regenerada!")
+
+        return heroi.hp_total
 
     def abre_mochila(self, heroi, usuario):
         self.__tela_heroi.mensagem("---- Mochila ----")
@@ -103,6 +112,22 @@ class ControladorHeroi:
         else:
             self.__tela_heroi.mensagem(" ========= Mochila vazia ========= ")
             return self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
+
+    def ver_status(self, heroi):
+        self.__tela_heroi.status_heroi(heroi)
+
+    def mudar_titulo(self, heroi):
+        indice = 0
+        for titulo in heroi.lista_titulos:
+            print("Selecione ", indice, "para equipar: ", titulo)
+            indice += 1
+
+        validacao = self.regularizacao(indice)
+
+        indice_escolhido = self.__tela_heroi.escolhe_titulo(validacao)
+        heroi.titulo = heroi.lista_titulos[indice_escolhido]
+
+        self.__tela_heroi.mensagem("Título {} equipado com sucesso".format(heroi.titulo))
 
     def regularizacao(self, indice):
         validacao = []

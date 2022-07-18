@@ -6,5 +6,5 @@ class TelaMonstro:
         print(texto)
 
     def escolher_monstro(self):
-        monstro = input("Escolha o monstro (digite exatamente o nome dele): ")
-        return monstro
+        ind = int(input("Escolha o monstro para o herói atacar: "))
+        return ind

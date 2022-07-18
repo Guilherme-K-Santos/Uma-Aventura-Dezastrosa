@@ -104,11 +104,6 @@ class TelaSistema:
         opcao = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 3, 4, 5, 0])
         return opcao
 
-    def escolhe_itens(self, validacao):
-        print("Escolha um item para equipar ou deletar")
-        item = self.excecoes_escolha("Escolha uma Opção ", validacao)
-        return item
-
     def opcoes_itens(self):
         print(" 1 - Equipar")
         print(" 2 - Deletar")
@@ -116,17 +111,6 @@ class TelaSistema:
         print(" 0 - Retornar")
         opcao = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 3, 0])
         return opcao
-
-    def status_heroi(self, heroi):
-        print("------ STATUS DE ", heroi.nome, " ------")
-        print("Vida: ", heroi.hp_total)
-        print("Ataque: ", heroi.ataque)
-        print("Título atual: ", heroi.titulo)
-        print("Títulos: ", heroi.lista_titulos)
-
-    def escolhe_titulo(self, validacao):
-        titulo_escolhido = self.excecoes_escolha("Escolha uma Opção ", validacao)
-        return titulo_escolhido
 
     def excecoes_escrita_numerica(self, mensagem: ""):
         while True:

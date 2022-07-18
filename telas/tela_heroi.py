@@ -24,6 +24,17 @@ class TelaHeroi:
         item = self.excecoes_escolha("Escolha uma Opção ", validacao)
         return item
 
+    def status_heroi(self, heroi):
+        print("------ STATUS DE ", heroi.nome, " ------")
+        print("Vida: ", heroi.hp_total)
+        print("Ataque: ", heroi.ataque)
+        print("Título atual: ", heroi.titulo)
+        print("Títulos: ", heroi.lista_titulos)
+
+    def escolhe_titulo(self, validacao):
+        titulo_escolhido = self.excecoes_escolha("Escolha uma Opção ", validacao)
+        return titulo_escolhido
+
     def excecoes_escolha(self, mensagem: "", numeros_validos: [] = None):
         while True:
             resposta_usuario = input(mensagem)

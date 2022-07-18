@@ -78,11 +78,11 @@ class ControladorSistema:
             elif opcao3 == 2:
                 self.__controlador_heroi.abre_mochila(heroi, usuario)
             elif opcao3 == 3:
-                self.descansar(heroi)
+                self.__controlador_heroi.descansar(heroi)
             elif opcao3 == 4:
-                self.ver_status(heroi)
+                self.__controlador_heroi.ver_status(heroi)
             elif opcao3 == 5:
-                self.mudar_titulo(heroi)
+                self.__controlador_heroi.mudar_titulo(heroi)
             opcao3 = self.__tela_sistema.tela_opcoes_jogo(heroi)
 
     def regularizacao(self, indice):
@@ -92,26 +92,3 @@ class ControladorSistema:
             validacao.append(contador)
             contador += 1
         return validacao
-
-    def descansar(self, heroi):
-        heroi.hp_total = heroi.hp + heroi.hp_extra
-
-        self.__tela_sistema.mensagem("Sua vida foi totalmente regenerada!")
-
-        return heroi.hp_total
-
-    def ver_status(self, heroi):
-        self.__tela_sistema.status_heroi(heroi)
-
-    def mudar_titulo(self, heroi):
-        indice = 0
-        for titulo in heroi.lista_titulos:
-            print("Selecione ", indice, "para equipar: ", titulo)
-            indice += 1
-
-        validacao = self.regularizacao(indice)
-
-        indice_escolhido = self.__tela_sistema.escolhe_titulo(validacao)
-        heroi.titulo = heroi.lista_titulos[indice_escolhido]
-
-        self.__tela_sistema.mensagem(heroi.titulo)
