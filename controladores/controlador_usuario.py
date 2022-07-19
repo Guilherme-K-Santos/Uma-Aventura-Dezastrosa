@@ -1,5 +1,6 @@
 from entidades.usuario import Usuario
 from telas.tela_usuario import TelaUsuario
+from persistencia.usuarioDAO import UsuarioDAO
 
 
 class ControladorUsuario:
@@ -7,7 +8,7 @@ class ControladorUsuario:
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
         self.__tela_usuario = TelaUsuario()
-        self.__usuarios = []
+        self.__usuario_dao = UsuarioDAO()
         self.__manter_tela = True
 
 # ------------------------------------------USUARIO---------------------------------------------------
@@ -15,28 +16,28 @@ class ControladorUsuario:
     def cadastrar(self):
         dados_novos = self.__tela_usuario.tela_cadastro()
 
-        for usuario in self.__usuarios:
-            if (usuario.login == dados_novos["login"]) and \
-                    usuario.senha == dados_novos["senha"]:
-                self.__tela_usuario.mensagem("Usuário já existente! Faça o login para jogar")
-                return None
+        if self.__usuario_dao.get(dados_novos["login"]):
+            self.__tela_usuario.mensagem("Usuário já existente! Faça o login para jogar")
+            return None
         else:
             novo_usuario = Usuario(dados_novos["login"], dados_novos["senha"])
-            self.__usuarios.append(novo_usuario)
+            self.__usuario_dao.add(novo_usuario)
             self.__tela_usuario.mensagem("Usuário Novo Criado! Faça o login para jogar")
             return novo_usuario
 
     def logar(self):
         dados = self.__tela_usuario.tela_login()
 
-        for usuario in self.__usuarios:
-            if (usuario.login == dados["login"]) and \
-                    (usuario.senha == dados["senha"]):
+        if self.__usuario_dao.get(dados["login"]) is not None:
+            usuario_pego = self.__usuario_dao.get(dados["login"])
+            if usuario_pego.senha == dados["senha"]:
                 self.__tela_usuario.mensagem("Logado com Sucesso!")
-                return usuario
+                return usuario_pego
+            else:
+                self.__tela_usuario.mensagem("Senha invalida!")
+                return None
         else:
-            self.__tela_usuario.mensagem("Nome ou Senha invalidos!")
-            return None
+            self.__tela_usuario.mensagem("Usuário não existente")
 
     def opcoes_usuario(self):
         switcher = {1: self.alterar, 2: self.excluir, 0: self.retornar}
@@ -53,40 +54,36 @@ class ControladorUsuario:
         credenciais = self.__tela_usuario.tela_login()
 
         if resposta_alteracao == 1:
-            for usuario_login_novo in self.__usuarios:
-                if (usuario_login_novo.login == credenciais["login"]) and \
-                        usuario_login_novo.senha == credenciais["senha"]:
-                    usuario_login_novo.login = self.__tela_usuario.tela_alteracao_login()
-                    break
+            usuario_pego = self.__usuario_dao.get(credenciais["login"])
+            if (usuario_pego is not None) and usuario_pego.senha == credenciais["senha"]:
+                    usuario_pego.login = self.__tela_usuario.tela_alteracao_login()
             else:
                 self.__tela_usuario.mensagem("Credenciais Incorretas!")
 
         elif resposta_alteracao == 2:
-            for usuario_senha_nova in self.__usuarios:
-                if (usuario_senha_nova.login == credenciais["login"]) and \
-                        usuario_senha_nova.senha == credenciais["senha"]:
-                    usuario_senha_nova.senha = self.__tela_usuario.tela_alteracao_senha()
-                    break
+            usuario_pego = self.__usuario_dao.get(credenciais["login"])
+            if (usuario_pego is not None) and usuario_pego.senha == credenciais["senha"]:
+                    usuario_pego.senha = self.__tela_usuario.tela_alteracao_senha()
             else:
                 self.__tela_usuario.mensagem("Credenciais Incorretas!")
 
     def excluir(self):
         credenciais = self.__tela_usuario.tela_login()
+        usuario_pego = self.__usuario_dao.get(credenciais["login"])
 
-        for usuario in self.__usuarios:
-            if (usuario.login == credenciais["login"]) and \
-                    usuario.senha == credenciais["senha"]:
-                resposta = self.__tela_usuario.tela_deletar_usuario(usuario.login)
-
-                if resposta == 1:
-                    self.__usuarios.remove(usuario)
-                    self.__tela_usuario.mensagem("Exclusão Concluída com Êxito!")
-                    self.__tela_usuario.mensagem("-----------------------------")
-                    self.__tela_usuario.mensagem("Você Será Redirecionado para o Menu Principal")
-                    return self.__controlador_sistema.iniciar()
-                else:
-                    self.__tela_usuario.mensagem("Credenciais Incorretas!")
-                    return None
+        if usuario_pego is not None and usuario_pego.senha == credenciais["senha"]:
+            resposta = self.__tela_usuario.tela_deletar_usuario()
+            if resposta == 1:
+                self.__usuario_dao.remove(usuario.login)
+                self.__tela_usuario.mensagem("Exclusão Concluída com Êxito!")
+                self.__tela_usuario.mensagem("-----------------------------")
+                self.__tela_usuario.mensagem("Você Será Redirecionado para o Menu Principal")
+                return self.__controlador_sistema.iniciar()
+            elif resposta == 2:
+                return None
+        else:
+            self.__tela_usuario.mensagem("Credenciais Incorretas!")
+            return None
 
     def retornar(self):
         self.__manter_tela = False
@@ -95,7 +92,7 @@ class ControladorUsuario:
 #   aqui eu pego a lista de todos os usuarios atualmente cadastrados e exporto para o controlador sistema
 
     def pega_usuario_por_heroi(self):
-        lista_usuarios = self.__usuarios
+        lista_usuarios = self.__usuario_dao.get_all()
 
         return lista_usuarios
 

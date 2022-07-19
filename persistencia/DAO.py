@@ -36,4 +36,8 @@ class AbstractDAO(ABC):
             return None
 
     def get_all(self):
-        return self.__cache.values()
+        return list(self.__cache.values())
+
+    def update_key(self, old_key, new_key, new_obj):
+        self.remove(old_key)
+        self.add(new_key, new_obj)

@@ -1,8 +1,8 @@
-from persistencia import DAO
+from persistencia.DAO import AbstractDAO
 from entidades.heroi import Heroi
 
 
-class HeroiDAO(DAO):
+class HeroiDAO(AbstractDAO):
     def __init__(self):
         super().__init__("herois.pkl")
 

@@ -40,6 +40,8 @@ class TelaUsuario:
         resposta_alteracao = self.excecoes_escolha("Escolha uma Opção ", [1, 2])
         return resposta_alteracao
 
+    #unificar alteraçao login e senha na tela grafica e fazer com que o usuario altere manualmente
+    # a senha e o login ja existentes
     def tela_alteracao_login(self):
         print("--------------------------------------")
         print("Qual será o seu novo login?")
@@ -54,7 +56,7 @@ class TelaUsuario:
 
         return senha
 
-    def tela_deletar_usuario(self, usuario):
+    def tela_deletar_usuario(self):
         print("--------------------------------------")
         print("Tem certeza que deseja apagar a conta?")
         print("1 - Sim")
