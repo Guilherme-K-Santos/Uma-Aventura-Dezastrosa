@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63edbb94-942e-4120-9034-fd75cb90fcc9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Uma-Aventura-Dezastrosa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Uma-Aventura-Dezastrosa.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controladores/controlador_heroi.py" beforeDir="false" afterPath="$PROJECT_DIR$/controladores/controlador_heroi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controladores/controlador_sistema.py" beforeDir="false" afterPath="$PROJECT_DIR$/controladores/controlador_sistema.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/telas/tela_heroi.py" beforeDir="false" afterPath="$PROJECT_DIR$/telas/tela_heroi.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,16 +67,5 @@
       <updated>1655773086589</updated>
     </task>
     <servers />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>2</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
