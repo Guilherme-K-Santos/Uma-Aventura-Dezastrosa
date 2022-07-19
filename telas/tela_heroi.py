@@ -17,11 +17,33 @@ class TelaHeroi:
         return nome
 
     def opcoes_itens(self):
-        print(" 1 - Equipar")
-        print(" 2 - Deletar")
-        print(" 3 - Desequipar")
-        print(" 0 - Retornar")
-        opcao = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 3, 0])
+        interface_heroi.ChangeLookAndFeel('DarkBlue9')
+        layout = [
+            [interface_heroi.Text('Você está logado criador!', font=("Helvica", 25))],
+            [interface_heroi.Text('Qual será a Aventura?', font=("Helvica", 15))],
+            [interface_heroi.Radio('Equipar', "RD1", key='1')],
+            [interface_heroi.Radio('Deletar', "RD1", key='2')],
+            [interface_heroi.Radio('Desequipar', "RD1", key='3')],
+            [interface_heroi.Radio('Retornar', "RD1", key='0')],
+            [interface_heroi.Button('Confirmar'), interface_heroi.Cancel('Cancelar')]
+        ]
+        self.__window = interface_heroi.Window('Item').Layout(layout)
+
+    def abrir_opcoes_itens(self):
+        self.opcoes_itens()
+        button, values = self.__window.Read()
+        opcao = 0
+        if values['1']:
+            opcao = 1
+        if values['2']:
+            opcao = 2
+        if values['3']:
+            opcao = 3
+        if values['0'] or button in (None, 'Cancelar'):
+            opcao = 0
+
+        self.close()
+
         return opcao
 
     def escolhe_itens(self, validacao):
