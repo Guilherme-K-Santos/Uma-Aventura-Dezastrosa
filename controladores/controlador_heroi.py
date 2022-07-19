@@ -71,7 +71,7 @@ class ControladorHeroi:
 
                 self.__tela_heroi.mensagem("Você escolheu: {} ".format(item_escolhido.nome_item))
 
-                op = self.__tela_heroi.opcoes_itens()
+                op = self.__tela_heroi.abrir_opcoes_itens()
                 if op == 1:
                     self.__tela_heroi.mensagem(" ================================== ")
                     if heroi.item_equipado != item_escolhido:

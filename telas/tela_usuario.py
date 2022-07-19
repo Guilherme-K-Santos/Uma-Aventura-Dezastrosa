@@ -1,16 +1,42 @@
+import PySimpleGUI as interface_usuario
+
+
 class TelaUsuario:
+    def __init__(self):
+        self.__window = None
+
+    def close(self):
+        self.__window.Close()
+
+    def mostrar_mensagem(self, msg):
+        interface_usuario.popup("", msg)
+
     def mensagem(self, texto):
         return print(texto)
 
     #   -------------------------------------- OPÇÕES DO USUÁRIO --------------------------------------
 
     def tela_cadastro(self):
-        print("--------------------------------------")
-        print("--------------CADASTRO----------------")
-        login = input("Login:")
-        senha = self.excecoes_escrita_numerica("Senha:")
+        interface_usuario.ChangeLookAndFeel('DarkBlue9')
+        layout = [
+            [interface_usuario.Text('------------- Cadastro -------------')],
+            [interface_usuario.Text('Login', size=(15, 1)), interface_usuario.InputText('', key='login')],
+            [interface_usuario.Text('Senha', size=(15, 1)), interface_usuario.InputText('',
+                                                                                        key='senha')],
+            [interface_usuario.Button('Confirmar'), interface_usuario.Cancel('Cancelar')]
+        ]
 
-        return {"login": login, "senha": senha}
+        self.__window = interface_usuario.Window('Cadastro').Layout(layout)
+        botao, values = self.__window.Read()
+
+        login = values['login']
+        senha = self.excecoes_escrita_numerica(values['senha'])
+
+        if botao is (None, 'Cancelar'):
+            self.close()
+        else:
+            self.close()
+            return {"login": login, "senha": senha}
 
     def tela_login(self):
         print("--------------------------------------")
@@ -40,7 +66,7 @@ class TelaUsuario:
         resposta_alteracao = self.excecoes_escolha("Escolha uma Opção ", [1, 2])
         return resposta_alteracao
 
-    #unificar alteraçao login e senha na tela grafica e fazer com que o usuario altere manualmente
+    # unificar alteraçao login e senha na tela grafica e fazer com que o usuario altere manualmente
     # a senha e o login ja existentes
     def tela_alteracao_login(self):
         print("--------------------------------------")
@@ -76,13 +102,17 @@ class TelaUsuario:
         return heroi_escolhido
 
     def excecoes_escrita_numerica(self, mensagem: ""):
+        contador = 0
         while True:
-            valor = input(mensagem)
+            if contador > 0:
+                self.close()
+                self.tela_cadastro()
             try:
-                valor_comparativo = int(valor)
+                contador += 1
+                valor_comparativo = int(mensagem)
                 return valor_comparativo
             except ValueError:
-                print("Por favor, coloque um valor númerico!")
+                self.mostrar_mensagem("Por favor, coloque um valor númerico!")
 
     def excecoes_escolha(self, mensagem: "", numeros_validos: [] = None):
         while True:
