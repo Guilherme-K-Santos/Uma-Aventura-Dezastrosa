@@ -4,8 +4,6 @@ import PySimpleGUI as interface_sistema
 class TelaSistema:
     def __init__(self):
         self.__window = None
-        self.componentes_tela()
-        self.componentes_logados()
 
     def componentes_tela(self):
         interface_sistema.ChangeLookAndFeel('DarkBlue9')
@@ -18,7 +16,7 @@ class TelaSistema:
             [interface_sistema.Radio('Encerrar o jogo', "RD1", key='0')],
             [interface_sistema.Button('Confirmar'), interface_sistema.Cancel('Cancelar')]
         ]
-        self.__window = interface_sistema.Window('Sistema de livros').Layout(layout)
+        self.__window = interface_sistema.Window('Uma Aventura Dezastroza').Layout(layout)
 
     def componentes_logados(self):
         interface_sistema.ChangeLookAndFeel('DarkBlue9')
@@ -31,7 +29,7 @@ class TelaSistema:
             [interface_sistema.Radio('Retornar', "RD1", key='0')],
             [interface_sistema.Button('Confirmar'), interface_sistema.Cancel('Cancelar')]
         ]
-        self.__window = interface_sistema.Window('Sistema de livros').Layout(layout)
+        self.__window = interface_sistema.Window('Menu Usuário').Layout(layout)
 
     def close(self):
         self.__window.Close()
