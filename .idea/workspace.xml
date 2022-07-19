@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="63edbb94-942e-4120-9034-fd75cb90fcc9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/persistencia/usuarioDAO.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controladores/controlador_usuario.py" beforeDir="false" afterPath="$PROJECT_DIR$/controladores/controlador_usuario.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/persistencia/DAO.py" beforeDir="false" afterPath="$PROJECT_DIR$/persistencia/DAO.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/persistencia/heroiDAO.py" beforeDir="false" afterPath="$PROJECT_DIR$/persistencia/heroiDAO.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/telas/tela_usuario.py" beforeDir="false" afterPath="$PROJECT_DIR$/telas/tela_usuario.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controladores/controlador_sistema.py" beforeDir="false" afterPath="$PROJECT_DIR$/controladores/controlador_sistema.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/telas/tela_sistema.py" beforeDir="false" afterPath="$PROJECT_DIR$/telas/tela_sistema.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,16 +89,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>2</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
