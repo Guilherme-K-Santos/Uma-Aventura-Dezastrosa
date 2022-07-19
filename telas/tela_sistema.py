@@ -18,7 +18,7 @@ class TelaSistema:
             [interface_sistema.Radio('Encerrar o jogo', "RD1", key='0')],
             [interface_sistema.Button('Confirmar'), interface_sistema.Cancel('Cancelar')]
         ]
-        self.__window = interface_sistema.Window('Sistema de livros').Layout(layout)
+        self.__window = interface_sistema.Window('Uma Aventura Dezastroza').Layout(layout)
 
     def componentes_logados(self):
         interface_sistema.ChangeLookAndFeel('DarkBlue9')
@@ -31,7 +31,7 @@ class TelaSistema:
             [interface_sistema.Radio('Retornar', "RD1", key='0')],
             [interface_sistema.Button('Confirmar'), interface_sistema.Cancel('Cancelar')]
         ]
-        self.__window = interface_sistema.Window('Sistema de livros').Layout(layout)
+        self.__window = interface_sistema.Window('Menu Do Usuário').Layout(layout)
 
     def close(self):
         self.__window.Close()
@@ -83,15 +83,23 @@ class TelaSistema:
 #         conversamos depois
 
     def informacoes_jogo(self):
-        print("---------------Ola Jogador!---------------")
-        print("Aqui será explicado um pouco sobre o nosso RPG!")
-        input()
-        print("Para começo, você deve criar a sua conta e logar!")
-        input()
-        print("Após isso, crie um herói com o nome que você quiser e embarque")
-        print("na sua jornada épica, tomara que ela não seja dezastrosa!")
-        input()
-        print("Bom jogo!")
+        interface_sistema.ChangeLookAndFeel('DarkBlue9')
+        layout = [
+            [interface_sistema.Text('--------------- Bem-vindo Jogador! ---------------', font=("Helvica", 20))],
+            [interface_sistema.Text('Aqui será explicado um pouco sobre o nosso RPG!', font=("Helvica", 12))],
+            [interface_sistema.Text('Para começo, você deve criar a sua conta e logar!')],
+            [interface_sistema.Text('Após isso, crie um herói com o nome que você quiser e embarque')],
+            [interface_sistema.Text('na sua jornada épica, tomara que ela não seja dezastrosa!')],
+            [interface_sistema.Button('Retornar')]
+        ]
+        self.__window = interface_sistema.Window('Informações do Jogo').Layout(layout)
+
+    def abrir_tela_informações(self):
+        self.informacoes_jogo()
+        botao = self.__window.Read()
+
+        if botao is not None:
+            self.close()
 
     def tela_opcoes_jogo(self, heroi):
         print("----------- Você está jogando com ", heroi.nome, heroi.titulo, " -----------")

@@ -37,7 +37,7 @@ class ControladorSistema:
             elif opcao == 2:
                 self.__controlador_usuario.cadastrar()
             elif opcao == 3:
-                self.__tela_sistema.informacoes_jogo()
+                self.__tela_sistema.abrir_tela_informações()
             elif opcao == 0:
                 exit()
 
