@@ -36,8 +36,8 @@ class TelaUsuario:
             self.close()
         else:
             login = values['login']
-            senha = self.excecoes_escrita_numerica(values['senha'])
             self.close()
+            senha = self.excecoes_escrita_numerica(values['senha'])
             return {"login": login, "senha": senha}
 
     def tela_login(self):
@@ -47,6 +47,18 @@ class TelaUsuario:
         senha = self.excecoes_escrita_numerica("Senha:")
 
         return {"login": login, "senha": senha}
+
+    def senha_certa(self):
+        interface_usuario.ChangeLookAndFeel('DarkBlue9')
+
+        layout = [
+            [interface_usuario.Text('Esperando uma senha válida (números inteiros):')],
+            [interface_usuario.Text('Senha:', size=(15, 1)), interface_usuario.InputText(
+                '', key='')],
+            [interface_usuario.Button("Confirmar")]
+        ]
+
+        self.__window = interface_usuario.Window('Correção de senha').Layout(layout)
 
     def mostrar_opcoes_usuario(self):
         print("--------------------------------------")
@@ -104,11 +116,21 @@ class TelaUsuario:
         return heroi_escolhido
 
     def excecoes_escrita_numerica(self, mensagem: ""):
+        try:
+            valor_comparativo = int(mensagem)
+            return valor_comparativo
+        except ValueError:
+            self.mostrar_mensagem("Por favor, coloque um valor númerico!")
+
         while True:
+            self.senha_certa()
+            botao, correcao = self.__window.Read()
             try:
-                valor_comparativo = int(mensagem)
+                valor_comparativo = int(correcao[''])
+                self.close()
                 return valor_comparativo
             except ValueError:
+                self.close()
                 self.mostrar_mensagem("Por favor, coloque um valor númerico!")
 
     def excecoes_escolha(self, mensagem: "", numeros_validos: [] = None):

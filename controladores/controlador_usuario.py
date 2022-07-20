@@ -25,6 +25,8 @@ class ControladorUsuario:
             novo_usuario = Usuario(dados_novos["login"], dados_novos["senha"])
             self.__usuario_dao.add(novo_usuario)
             self.__tela_usuario.mostrar_mensagem("Usuário Novo Criado! Faça o login para jogar")
+            print(dados_novos["login"])
+            print(dados_novos["senha"])
             return novo_usuario
 
     def logar(self):
