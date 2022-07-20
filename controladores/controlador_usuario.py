@@ -25,23 +25,21 @@ class ControladorUsuario:
             novo_usuario = Usuario(dados_novos["login"], dados_novos["senha"])
             self.__usuario_dao.add(novo_usuario)
             self.__tela_usuario.mostrar_mensagem("Usuário Novo Criado! Faça o login para jogar")
-            print(dados_novos["login"])
-            print(dados_novos["senha"])
             return novo_usuario
 
     def logar(self):
-        dados = self.__tela_usuario.tela_login()
+        dados = self.__tela_usuario.abrir_login()
 
         if self.__usuario_dao.get(dados["login"]) is not None:
             usuario_pego = self.__usuario_dao.get(dados["login"])
             if usuario_pego.senha == dados["senha"]:
-                self.__tela_usuario.mensagem("Logado com Sucesso!")
+                self.__tela_usuario.mostrar_mensagem("Logado com Sucesso!")
                 return usuario_pego
             else:
-                self.__tela_usuario.mensagem("Senha invalida!")
+                self.__tela_usuario.mostrar_mensagem("Senha invalida!")
                 return None
         else:
-            self.__tela_usuario.mensagem("Usuário não existente")
+            self.__tela_usuario.mostrar_mensagem("Usuário não existente")
 
     def opcoes_usuario(self):
         switcher = {1: self.alterar, 2: self.excluir, 0: self.retornar}
@@ -78,7 +76,7 @@ class ControladorUsuario:
         if usuario_pego is not None and usuario_pego.senha == credenciais["senha"]:
             resposta = self.__tela_usuario.tela_deletar_usuario()
             if resposta == 1:
-                self.__usuario_dao.remove(usuario.login)
+                self.__usuario_dao.remove(usuario_pego.login)
                 self.__tela_usuario.mensagem("Exclusão Concluída com Êxito!")
                 self.__tela_usuario.mensagem("-----------------------------")
                 self.__tela_usuario.mensagem("Você Será Redirecionado para o Menu Principal")

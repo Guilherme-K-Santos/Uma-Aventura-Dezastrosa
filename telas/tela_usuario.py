@@ -19,7 +19,7 @@ class TelaUsuario:
     def tela_cadastro(self):
         interface_usuario.ChangeLookAndFeel('DarkBlue9')
         layout = [
-            [interface_usuario.Text('Cadastro')],
+            [interface_usuario.Text('Cadastre-se para logar')],
             [interface_usuario.Text('Login', size=(15, 1)), interface_usuario.InputText('', key='login')],
             [interface_usuario.Text('Senha', size=(15, 1)), interface_usuario.InputText('',
                                                                                         key='senha')],
@@ -41,12 +41,28 @@ class TelaUsuario:
             return {"login": login, "senha": senha}
 
     def tela_login(self):
-        print("--------------------------------------")
-        print("Por favor, preencha com seus dados:")
-        login = input("Login:")
-        senha = self.excecoes_escrita_numerica("Senha:")
+        interface_usuario.ChangeLookAndFeel('DarkBlue9')
+        layout = [
+            [interface_usuario.Text('Logue para jogar')],
+            [interface_usuario.Text('Login', size=(15, 1)), interface_usuario.InputText('', key='login')],
+            [interface_usuario.Text('Senha', size=(15, 1)), interface_usuario.InputText('',
+                                                                                        key='senha')],
+            [interface_usuario.Button('Confirmar'), interface_usuario.Cancel('Cancelar')]
+        ]
 
-        return {"login": login, "senha": senha}
+        self.__window = interface_usuario.Window('Login').Layout(layout)
+
+    def abrir_login(self):
+        self.tela_login()
+        botao, values = self.__window.Read()
+
+        if botao in (None, 'Cancelar'):
+            self.close()
+        else:
+            login = values['login']
+            self.close()
+            senha = self.excecoes_escrita_numerica(values['senha'])
+            return {"login": login, "senha": senha}
 
     def senha_certa(self):
         interface_usuario.ChangeLookAndFeel('DarkBlue9')
