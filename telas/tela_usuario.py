@@ -9,7 +9,7 @@ class TelaUsuario:
         self.__window.Close()
 
     def mostrar_mensagem(self, msg):
-        interface_usuario.popup("", msg)
+        interface_usuario.popup(msg)
 
     def mensagem(self, texto):
         return print(texto)
@@ -19,7 +19,7 @@ class TelaUsuario:
     def tela_cadastro(self):
         interface_usuario.ChangeLookAndFeel('DarkBlue9')
         layout = [
-            [interface_usuario.Text('------------- Cadastro -------------')],
+            [interface_usuario.Text('Cadastro')],
             [interface_usuario.Text('Login', size=(15, 1)), interface_usuario.InputText('', key='login')],
             [interface_usuario.Text('Senha', size=(15, 1)), interface_usuario.InputText('',
                                                                                         key='senha')],
@@ -27,14 +27,16 @@ class TelaUsuario:
         ]
 
         self.__window = interface_usuario.Window('Cadastro').Layout(layout)
+
+    def abrir_cadastro(self):
+        self.tela_cadastro()
         botao, values = self.__window.Read()
 
-        login = values['login']
-        senha = self.excecoes_escrita_numerica(values['senha'])
-
-        if botao is (None, 'Cancelar'):
+        if botao in (None, 'Cancelar'):
             self.close()
         else:
+            login = values['login']
+            senha = self.excecoes_escrita_numerica(values['senha'])
             self.close()
             return {"login": login, "senha": senha}
 
@@ -102,13 +104,8 @@ class TelaUsuario:
         return heroi_escolhido
 
     def excecoes_escrita_numerica(self, mensagem: ""):
-        contador = 0
         while True:
-            if contador > 0:
-                self.close()
-                self.tela_cadastro()
             try:
-                contador += 1
                 valor_comparativo = int(mensagem)
                 return valor_comparativo
             except ValueError:

@@ -14,15 +14,17 @@ class ControladorUsuario:
 # ------------------------------------------USUARIO---------------------------------------------------
 
     def cadastrar(self):
-        dados_novos = self.__tela_usuario.tela_cadastro()
+        dados_novos = self.__tela_usuario.abrir_cadastro()
 
-        if self.__usuario_dao.get(dados_novos["login"]):
-            self.__tela_usuario.mensagem("Usuário já existente! Faça o login para jogar")
+        if dados_novos is None:
+            self.retornar()
+        elif self.__usuario_dao.get(dados_novos["login"]):
+            self.__tela_usuario.mostrar_mensagem("Usuário já existente! Faça o login para jogar")
             return None
         else:
             novo_usuario = Usuario(dados_novos["login"], dados_novos["senha"])
             self.__usuario_dao.add(novo_usuario)
-            self.__tela_usuario.mensagem("Usuário Novo Criado! Faça o login para jogar")
+            self.__tela_usuario.mostrar_mensagem("Usuário Novo Criado! Faça o login para jogar")
             return novo_usuario
 
     def logar(self):
@@ -56,14 +58,14 @@ class ControladorUsuario:
         if resposta_alteracao == 1:
             usuario_pego = self.__usuario_dao.get(credenciais["login"])
             if (usuario_pego is not None) and usuario_pego.senha == credenciais["senha"]:
-                    usuario_pego.login = self.__tela_usuario.tela_alteracao_login()
+                usuario_pego.login = self.__tela_usuario.tela_alteracao_login()
             else:
                 self.__tela_usuario.mensagem("Credenciais Incorretas!")
 
         elif resposta_alteracao == 2:
             usuario_pego = self.__usuario_dao.get(credenciais["login"])
             if (usuario_pego is not None) and usuario_pego.senha == credenciais["senha"]:
-                    usuario_pego.senha = self.__tela_usuario.tela_alteracao_senha()
+                usuario_pego.senha = self.__tela_usuario.tela_alteracao_senha()
             else:
                 self.__tela_usuario.mensagem("Credenciais Incorretas!")
 
@@ -107,7 +109,7 @@ class ControladorUsuario:
             self.__tela_usuario.mensagem("Olá Aventureiro! Em qual jornada você quer prosseguir?")
             self.__tela_usuario.mensagem("")
             contador_herois = 0
-            for k in usuario.lista_nomes_herois:
+            for _ in usuario.lista_nomes_herois:
                 self.__tela_usuario.mensagem(usuario.lista_nomes_herois[contador_herois])
                 contador_herois += 1
             heroi_escolhido = self.__tela_usuario.abrir_selecao_herois()
