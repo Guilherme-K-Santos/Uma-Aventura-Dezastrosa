@@ -10,10 +10,10 @@ class TelaSistema:
         layout = [
             [interface_sistema.Text('Bem vindo ao Jogo!', font=("Helvica", 25))],
             [interface_sistema.Text('Escolha sua opção', font=("Helvica", 15))],
-            [interface_sistema.Radio('Login de Usuário', "RD1", key='1')],
-            [interface_sistema.Radio('Cadastro de Usuário', "RD1", key='2')],
-            [interface_sistema.Radio('Sobre o jogo', "RD1", key='3')],
-            [interface_sistema.Radio('Encerrar o jogo', "RD1", key='0')],
+            [interface_sistema.Radio('Login de Usuário', "componentes_tela", key='1')],
+            [interface_sistema.Radio('Cadastro de Usuário', "componentes_tela", key='2')],
+            [interface_sistema.Radio('Sobre o jogo', "componentes_tela", key='3')],
+            [interface_sistema.Radio('Encerrar o jogo', "componentes_tela", key='0')],
             [interface_sistema.Button('Confirmar'), interface_sistema.Cancel('Cancelar')]
         ]
         self.__window = interface_sistema.Window('Uma Aventura Dezastroza').Layout(layout)
@@ -23,10 +23,10 @@ class TelaSistema:
         layout = [
             [interface_sistema.Text('Você está logado criador!', font=("Helvica", 25))],
             [interface_sistema.Text('Qual será a Aventura?', font=("Helvica", 15))],
-            [interface_sistema.Radio('Acessar Hérois Criados', "RD1", key='1')],
-            [interface_sistema.Radio('Criar Novo Herói', "RD1", key='2')],
-            [interface_sistema.Radio('Opções da Conta', "RD1", key='3')],
-            [interface_sistema.Radio('Retornar', "RD1", key='0')],
+            [interface_sistema.Radio('Acessar Hérois Criados', "componentes_logados", key='1')],
+            [interface_sistema.Radio('Criar Novo Herói', "componentes_logados", key='2')],
+            [interface_sistema.Radio('Opções da Conta', "componentes_logados", key='3')],
+            [interface_sistema.Radio('Retornar', "componentes_logados", key='0')],
             [interface_sistema.Button('Confirmar'), interface_sistema.Cancel('Cancelar')]
         ]
         self.__window = interface_sistema.Window('Menu Usuário').Layout(layout)

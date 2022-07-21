@@ -43,7 +43,6 @@ class TelaUsuario:
     def tela_login(self):
         interface_usuario.ChangeLookAndFeel('DarkBlue9')
         layout = [
-            [interface_usuario.Text('Logue para jogar')],
             [interface_usuario.Text('Login', size=(15, 1)), interface_usuario.InputText('', key='login')],
             [interface_usuario.Text('Senha', size=(15, 1)), interface_usuario.InputText('',
                                                                                         key='senha')],
@@ -76,16 +75,33 @@ class TelaUsuario:
 
         self.__window = interface_usuario.Window('Correção de senha').Layout(layout)
 
-    def mostrar_opcoes_usuario(self):
-        print("--------------------------------------")
-        print("--------------Opções Do Usuário----------------")
-        print("1 - Alterar Dados da Conta")
-        print("2 - Excluir Conta")
-        print("0 - Retornar")
-        print("--------------------------------------")
+    def opcoes_usuario(self):
+        interface_usuario.ChangeLookAndFeel('DarkBlue9')
 
-        opcao_escolhida = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 0])
-        return opcao_escolhida
+        layout = [
+            [interface_usuario.Radio('Alterar Dados da Conta', "opcoes_usuario", key='1')],
+            [interface_usuario.Radio('Excluir Conta', "opcoes_usuario", key='2')],
+            [interface_usuario.Radio('Retornar', "opcoes_usuario", key='0')],
+            [interface_usuario.Button('Confirmar'), [interface_usuario.Cancel('Cancelar')]]
+        ]
+
+        self.__window = interface_usuario.Window("Opções do Usuário").Layout(layout)
+
+    def mostrar_opcoes_usuario(self):
+        self.opcoes_usuario()
+        botao, valores = self.__window.Read()
+
+        opcao = 0
+        if valores['1']:
+            opcao = 1
+        elif valores['2']:
+            opcao = 2
+        elif valores['0'] or botao in (None, 'Cancelar'):
+            opcao = 0
+
+        self.close()
+
+        return opcao
 
     def tela_confirmar_alteraracao(self):
         print("--------------------------------------")
@@ -113,13 +129,30 @@ class TelaUsuario:
         return senha
 
     def tela_deletar_usuario(self):
-        print("--------------------------------------")
-        print("Tem certeza que deseja apagar a conta?")
-        print("1 - Sim")
-        print("2 - Não")
+        interface_usuario.ChangeLookAndFeel('DarkBlue9')
 
-        opcao_escolhida_deletar = self.excecoes_escolha("Escolha uma Opção ", [1, 2])
-        return opcao_escolhida_deletar
+        layout = [
+            [interface_usuario.Text('Tem certeza que deseja excluir sua conta com TODOS os seus heróis?')],
+            [interface_usuario.Radio('Sim', 'tela_deletar_usuario', key='1'),
+             interface_usuario.Radio('Não', 'tela_deletar_usuario', key='2')],
+            [interface_usuario.Button('Confirmar')]
+        ]
+
+        self.__window = interface_usuario.Window('Exclusão de Conta').Layout(layout)
+
+    def abrir_tela_deletar_usuario(self):
+        self.tela_deletar_usuario()
+        botao, valores = self.__window.Read()
+
+        resposta = 2
+        if valores['1']:
+            resposta = 1
+            self.close()
+        elif valores['2']:
+            resposta = 2
+            self.close()
+
+        return resposta
 
     #   -------------------------------------- OPÇÕES USUARIO X HEROI --------------------------------------
 

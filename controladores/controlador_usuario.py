@@ -30,7 +30,9 @@ class ControladorUsuario:
     def logar(self):
         dados = self.__tela_usuario.abrir_login()
 
-        if self.__usuario_dao.get(dados["login"]) is not None:
+        if dados is None:
+            self.retornar()
+        elif self.__usuario_dao.get(dados["login"]) is not None:
             usuario_pego = self.__usuario_dao.get(dados["login"])
             if usuario_pego.senha == dados["senha"]:
                 self.__tela_usuario.mostrar_mensagem("Logado com Sucesso!")
@@ -70,22 +72,24 @@ class ControladorUsuario:
                 self.__tela_usuario.mensagem("Credenciais Incorretas!")
 
     def excluir(self):
-        credenciais = self.__tela_usuario.tela_login()
-        usuario_pego = self.__usuario_dao.get(credenciais["login"])
+        credenciais = self.__tela_usuario.abrir_login()
 
-        if usuario_pego is not None and usuario_pego.senha == credenciais["senha"]:
-            resposta = self.__tela_usuario.tela_deletar_usuario()
-            if resposta == 1:
-                self.__usuario_dao.remove(usuario_pego.login)
-                self.__tela_usuario.mensagem("Exclusão Concluída com Êxito!")
-                self.__tela_usuario.mensagem("-----------------------------")
-                self.__tela_usuario.mensagem("Você Será Redirecionado para o Menu Principal")
-                return self.__controlador_sistema.iniciar()
-            elif resposta == 2:
-                return None
+        if credenciais is None:
+            self.retornar()
         else:
-            self.__tela_usuario.mensagem("Credenciais Incorretas!")
-            return None
+            usuario_pego = self.__usuario_dao.get(credenciais["login"])
+
+            if usuario_pego is not None and usuario_pego.senha == credenciais["senha"]:
+                resposta = self.__tela_usuario.abrir_tela_deletar_usuario()
+                if resposta == 1:
+                    self.__usuario_dao.remove(usuario_pego.login)
+                    self.__tela_usuario.mostrar_mensagem("Exclusão Concluída com Êxito!")
+                    return self.__controlador_sistema.iniciar()
+                elif resposta == 2:
+                    return None
+            else:
+                self.__tela_usuario.mostrar_mensagem("Credenciais Incorretas!")
+                return None
 
     def retornar(self):
         self.__manter_tela = False
