@@ -19,15 +19,14 @@ class TelaHeroi:
     def opcoes_itens(self):
         interface_heroi.ChangeLookAndFeel('DarkBlue9')
         layout = [
-            [interface_heroi.Text('Você está logado criador!', font=("Helvica", 25))],
-            [interface_heroi.Text('Qual será a Aventura?', font=("Helvica", 15))],
+            [interface_heroi.Text('Qual item você deseja, mestre?', font=("Helvica", 15))],
             [interface_heroi.Radio('Equipar', "RD1", key='1')],
             [interface_heroi.Radio('Deletar', "RD1", key='2')],
             [interface_heroi.Radio('Desequipar', "RD1", key='3')],
             [interface_heroi.Radio('Retornar', "RD1", key='0')],
             [interface_heroi.Button('Confirmar'), interface_heroi.Cancel('Cancelar')]
         ]
-        self.__window = interface_heroi.Window('Item').Layout(layout)
+        self.__window = interface_heroi.Window('Mochila').Layout(layout)
 
     def abrir_opcoes_itens(self):
         self.opcoes_itens()

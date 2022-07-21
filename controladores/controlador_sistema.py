@@ -71,7 +71,7 @@ class ControladorSistema:
             self.abrir_tela_logados(usuario)
 
     def abrir_tela_opcoes_jogo(self, heroi, usuario):
-        opcao3 = self.__tela_sistema.tela_opcoes_jogo(heroi)
+        opcao3 = self.__tela_sistema.abrir_tela_opcoes_jogo(heroi)
         while opcao3 != 0:
             if opcao3 == 1:
                 self.__controlador_heroi.combate(heroi, usuario)
@@ -83,7 +83,7 @@ class ControladorSistema:
                 self.__controlador_heroi.ver_status(heroi)
             elif opcao3 == 5:
                 self.__controlador_heroi.mudar_titulo(heroi)
-            opcao3 = self.__tela_sistema.tela_opcoes_jogo(heroi)
+            opcao3 = self.__tela_sistema.abrir_tela_opcoes_jogo(heroi)
 
     def regularizacao(self, indice):
         validacao = []

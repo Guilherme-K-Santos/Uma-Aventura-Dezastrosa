@@ -5,6 +5,15 @@ class TelaSistema:
     def __init__(self):
         self.__window = None
 
+    def close(self):
+        self.__window.Close()
+
+    def mostra_mensagem(self, msg):
+        interface_sistema.popup(msg)
+
+    def mensagem(self, texto):
+        return print(texto)
+
     def componentes_tela(self):
         interface_sistema.ChangeLookAndFeel('DarkBlue9')
         layout = [
@@ -30,15 +39,6 @@ class TelaSistema:
             [interface_sistema.Button('Confirmar'), interface_sistema.Cancel('Cancelar')]
         ]
         self.__window = interface_sistema.Window('Menu Usuário').Layout(layout)
-
-    def close(self):
-        self.__window.Close()
-
-    def mostra_mensagem(self, msg):
-        interface_sistema.popup("", msg)
-
-    def mensagem(self, texto):
-        return print(texto)
 
     def tela_inicial(self):
         self.componentes_tela()
@@ -100,14 +100,42 @@ class TelaSistema:
             self.close()
 
     def tela_opcoes_jogo(self, heroi):
-        print("----------- Você está jogando com ", heroi.nome, heroi.titulo, " -----------")
-        print("1 - Atacar monstro")
-        print("2 - Abrir mochila")
-        print("3 - Descansar")
-        print("4 - Ver status do herói")
-        print("5 - Selecionar título para o herói")
-        print("0 - Retornar")
-        opcao = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 3, 4, 5, 0])
+        interface_sistema.ChangeLookAndFeel('DarkBlue9')
+
+        layout = [
+            [interface_sistema.Text('Você está jogando com ' + heroi.nome + ' ' + heroi.titulo)],
+            [interface_sistema.Radio('Atacar Monstro', 'tela_opcoes_jogo', key='1')],
+            [interface_sistema.Radio('Abrir mochila', 'tela_opcoes_jogo', key='2')],
+            [interface_sistema.Radio('Descansar', 'tela_opcoes_jogo', key='3')],
+            [interface_sistema.Radio('Ver status do herói', 'tela_opcoes_jogo', key='4')],
+            [interface_sistema.Radio('Selecionar título para o herói', 'tela_opcoes_jogo', key='5')],
+            [interface_sistema.Radio('Retornar', 'tela_opcoes_jogo', key='0')],
+            [interface_sistema.Button('Confirmar')]
+        ]
+
+        self.__window = interface_sistema.Window('Menu Jogo').Layout(layout)
+
+    def abrir_tela_opcoes_jogo(self, heroi):
+        self.tela_opcoes_jogo(heroi)
+
+        botao, valores = self.__window.Read()
+
+        opcao = 0
+        if valores['1']:
+            opcao = 1
+        if valores['2']:
+            opcao = 2
+        if valores['3']:
+            opcao = 3
+        if valores['4']:
+            opcao = 4
+        if valores['5']:
+            opcao = 5
+        if valores['0']:
+            opcao = 0
+
+        self.close()
+
         return opcao
 
     def opcoes_itens(self):
