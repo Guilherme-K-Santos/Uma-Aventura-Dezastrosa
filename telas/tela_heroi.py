@@ -75,13 +75,6 @@ class TelaHeroi:
         if botao is not None:
             self.close()
 
-    def antigo_status(self):
-        print("------ STATUS DE ", heroi.nome, " ------")
-        print("Vida: ", heroi.hp_total)
-        print("Ataque: ", heroi.ataque)
-        print("Título atual: ", heroi.titulo)
-        print("Títulos: ", heroi.lista_titulos)
-
     def escolhe_titulo(self, validacao):
         titulo_escolhido = self.excecoes_escolha("Escolha uma Opção ", validacao)
         return titulo_escolhido
