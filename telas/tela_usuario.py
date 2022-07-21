@@ -181,14 +181,3 @@ class TelaUsuario:
             except ValueError:
                 self.close()
                 self.mostrar_mensagem("Por favor, coloque um valor númerico!")
-
-    def excecoes_escolha(self, mensagem: "", numeros_validos: [] = None):
-        while True:
-            resposta_usuario = input(mensagem)
-            try:
-                numero = int(resposta_usuario)
-                if numero not in numeros_validos:
-                    raise ValueError
-                return numero
-            except ValueError:
-                print("Por favor, digite uma das opções:")

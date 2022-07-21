@@ -52,27 +52,32 @@ class TelaHeroi:
         return item
 
     def status_heroi(self, heroi):
+        interface_heroi.ChangeLookAndFeel('DarkBlue9')
+
+        layout = [
+            [interface_heroi.Text(heroi.nome, font=("Helvica", 25))],
+            [interface_heroi.Text('Vida: ')],
+            [interface_heroi.Text('Ataque: ')],
+            [interface_heroi.Text('Título atual: ' + heroi.titulo)],
+            [interface_heroi.Text('Títulos disponíveis: ')],
+            [interface_heroi.Button('Ok')],
+        ]
+
+        self.__window = interface_heroi.Window('Status do Herói').Layout(layout)
+
+    def abrir_status_heroi(self, heroi):
+        self.status_heroi(heroi)
+        botao = self.__window.Read()
+
+        if botao is not None:
+            self.close()
+
+    def antigo_status(self):
         print("------ STATUS DE ", heroi.nome, " ------")
         print("Vida: ", heroi.hp_total)
         print("Ataque: ", heroi.ataque)
         print("Título atual: ", heroi.titulo)
         print("Títulos: ", heroi.lista_titulos)
-
-        #interface_heroi.ChangeLookAndFeel('DarkBlue9')
-        #background = [
-        #    [interface_heroi.Text("------ STATUS DE ", font=("Helvica", 25))],
-        #    [interface_heroi.Text('Vida: ')],
-        #    [interface_heroi.Text("Ataque: ")],
-        #    [interface_heroi.Text("Título atual: ")],
-        #    [interface_heroi.Text("Títulos: ")],
-        #    [interface_heroi.Button('Fechar')]
-        #]
-
-        #self.__window = interface_heroi.Window('Status').Layout(background)
-
-        #botao = self.__window.Read()
-        #if botao is not None:
-        #    self.close()
 
     def escolhe_titulo(self, validacao):
         titulo_escolhido = self.excecoes_escolha("Escolha uma Opção ", validacao)

@@ -115,7 +115,7 @@ class ControladorHeroi:
             return self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
 
     def ver_status(self, heroi):
-        self.__tela_heroi.status_heroi(heroi)
+        self.__tela_heroi.abrir_status_heroi(heroi)
 
     def mudar_titulo(self, heroi):
         indice = 0

@@ -137,31 +137,3 @@ class TelaSistema:
         self.close()
 
         return opcao
-
-    def opcoes_itens(self):
-        print(" 1 - Equipar")
-        print(" 2 - Deletar")
-        print(" 3 - Desequipar")
-        print(" 0 - Retornar")
-        opcao = self.excecoes_escolha("Escolha uma Opção ", [1, 2, 3, 0])
-        return opcao
-
-    def excecoes_escrita_numerica(self, mensagem: ""):
-        while True:
-            valor = input(mensagem)
-            try:
-                valor_comparativo = int(valor)
-                return valor_comparativo
-            except ValueError:
-                print("Por favor, coloque um valor númerico!")
-
-    def excecoes_escolha(self, mensagem: "", numeros_validos: [] = None):
-        while True:
-            resposta_usuario = input(mensagem)
-            try:
-                numero = int(resposta_usuario)
-                if numero not in numeros_validos:
-                    raise ValueError
-                return numero
-            except ValueError:
-                print("Por favor, digite uma das opções:")
