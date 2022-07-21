@@ -13,7 +13,7 @@ class ControladorHeroi:
 
     def criar_heroi(self):
         novo_heroi = Heroi(self.__tela_heroi.pegar_nome_heroi(), 50, 10, "o(a) Noob")
-        self.__tela_heroi.mensagem("Herói criado!")
+        self.__tela_heroi.mostrar_mensagem("Herói criado!")
         self.__heroi_dao.add(novo_heroi)
         return novo_heroi
 
@@ -51,7 +51,7 @@ class ControladorHeroi:
     def descansar(self, heroi):
         heroi.hp_total = heroi.hp + heroi.hp_extra
 
-        self.__tela_heroi.mensagem("Sua vida foi totalmente regenerada!")
+        self.__tela_heroi.mostrar_mensagem("Sua vida foi totalmente regenerada!")
 
         return heroi.hp_total
 
@@ -60,7 +60,7 @@ class ControladorHeroi:
         if len(heroi.mochila.itens) > 0:
             indice = 1
             for item in heroi.mochila.itens:
-                self.__tela_heroi.mensagem("{} - {}".format(indice,item.nome_item))
+                self.__tela_heroi.mensagem("{} - {}".format(indice, item.nome_item))
                 indice += 1
 
             validacao = self.regularizacao(indice)

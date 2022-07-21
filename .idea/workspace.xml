@@ -9,8 +9,6 @@
       <change beforePath="$PROJECT_DIR$/controladores/controlador_heroi.py" beforeDir="false" afterPath="$PROJECT_DIR$/controladores/controlador_heroi.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/herois.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/herois.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/telas/tela_heroi.py" beforeDir="false" afterPath="$PROJECT_DIR$/telas/tela_heroi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/telas/tela_sistema.py" beforeDir="false" afterPath="$PROJECT_DIR$/telas/tela_sistema.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/telas/tela_usuario.py" beforeDir="false" afterPath="$PROJECT_DIR$/telas/tela_usuario.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

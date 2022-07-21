@@ -9,6 +9,9 @@ class TelaHeroi:
         print(texto)
         input()
 
+    def mostrar_mensagem(self, msg):
+        interface_heroi.popup(msg)
+
     def close(self):
         self.__window.Close()
 
@@ -55,11 +58,11 @@ class TelaHeroi:
         interface_heroi.ChangeLookAndFeel('DarkBlue9')
 
         layout = [
-            [interface_heroi.Text(heroi.nome, font=("Helvica", 25))],
-            [interface_heroi.Text('Vida: ')],
-            [interface_heroi.Text('Ataque: ')],
+            [interface_heroi.Text(heroi.nome, font=("Helvica", 20))],
+            [interface_heroi.Text('Vida: {}'.format(heroi.hp_total))],
+            [interface_heroi.Text('Ataque: {}'.format(heroi.ataque))],
             [interface_heroi.Text('Título atual: ' + heroi.titulo)],
-            [interface_heroi.Text('Títulos disponíveis: ')],
+            [interface_heroi.Text('Títulos disponíveis: {}'.format(heroi.lista_titulos))],
             [interface_heroi.Button('Ok')],
         ]
 
