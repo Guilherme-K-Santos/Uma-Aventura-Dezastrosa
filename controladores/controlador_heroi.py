@@ -14,7 +14,8 @@ class ControladorHeroi:
     def criar_heroi(self):
         novo_heroi = Heroi(self.__tela_heroi.pegar_nome_heroi(), 50, 10, "o(a) Noob")
         self.__tela_heroi.mostrar_mensagem("Herói criado!")
-        self.__heroi_dao.add(novo_heroi)
+        self.__heroi_dao.add(novo_heroi.nome, novo_heroi)
+        self.__
         return novo_heroi
 
     def combate(self, heroi, usuario):

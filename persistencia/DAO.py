@@ -4,7 +4,7 @@ import pickle
 
 class AbstractDAO(ABC):
     @abstractmethod
-    def __init__(self, nome_arquivo = ""):
+    def __init__(self, nome_arquivo=""):
         self.__nome_arquivo = nome_arquivo
         self.__cache = {}
         try:

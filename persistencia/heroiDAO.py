@@ -6,7 +6,7 @@ class HeroiDAO(AbstractDAO):
     def __init__(self):
         super().__init__("herois.pkl")
 
-    def add(self, heroi: Heroi):
+    def add(self, key, heroi: Heroi):
         if heroi is not None and isinstance(heroi, Heroi):
             super().add(heroi.nome, heroi)
 

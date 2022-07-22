@@ -6,7 +6,7 @@ class UsuarioDAO(AbstractDAO):
     def __init__(self):
         super().__init__("usuarios.pkl")
 
-    def add(self, usuario: Usuario):
+    def add(self, key, usuario: Usuario):
         if usuario is not None and isinstance(usuario, Usuario):
             super().add(usuario.login, usuario)
 
@@ -17,4 +17,3 @@ class UsuarioDAO(AbstractDAO):
     def remove(self, login_usuario: str):
         if login_usuario is not None and isinstance(login_usuario, str):
             return super().remove(login_usuario)
-
