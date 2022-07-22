@@ -12,6 +12,7 @@ class AbstractDAO(ABC):
         except FileNotFoundError:
             self.__dump()
 
+
     def __load(self):
         self.__cache = pickle.load(open(self.__nome_arquivo, 'rb'))
 
@@ -41,3 +42,6 @@ class AbstractDAO(ABC):
     def update_key(self, old_key, new_key, new_obj):
         self.remove(old_key)
         self.add(new_key, new_obj)
+
+    def persist(self):
+        self.__dump()

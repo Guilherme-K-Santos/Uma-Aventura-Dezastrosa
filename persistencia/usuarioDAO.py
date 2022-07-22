@@ -3,8 +3,16 @@ from entidades.usuario import Usuario
 
 
 class UsuarioDAO(AbstractDAO):
+    __instance = None
     def __init__(self):
         super().__init__("usuarios.pkl")
+
+    def __new__(cls):
+        if UsuarioDAO.__instance is None:
+            UsuarioDAO.__instance = object.__new__(cls)
+        else:
+            return UsuarioDAO.__instance
+
 
     def add(self, key, usuario: Usuario):
         if usuario is not None and isinstance(usuario, Usuario):

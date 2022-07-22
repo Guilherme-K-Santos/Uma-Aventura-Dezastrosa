@@ -68,6 +68,7 @@ class ControladorUsuario:
             usuario_pego = self.__usuario_dao.get(credenciais["login"])
             if (usuario_pego is not None) and usuario_pego.senha == credenciais["senha"]:
                 usuario_pego.senha = self.__tela_usuario.tela_alteracao_senha()
+                self.__usuario_dao.add(usuario_pego)
             else:
                 self.__tela_usuario.mensagem("Credenciais Incorretas!")
 
