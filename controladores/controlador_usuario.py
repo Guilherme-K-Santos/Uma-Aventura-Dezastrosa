@@ -122,9 +122,8 @@ class ControladorUsuario:
                 if heroi.nome == heroi_escolhido:
                     return heroi
                 else:
-                    self.__tela_usuario.mensagem("Nome de herói inválido, escolha um nome válido!")
+                    return None
         else:
-            self.__tela_usuario.mensagem("Nenhum herói disponível, crie algum")
             return None
 
     def remove_heroi(self, heroi, usuario):

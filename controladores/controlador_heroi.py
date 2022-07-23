@@ -15,9 +15,9 @@ class ControladorHeroi:
         nome = self.__tela_heroi.abrir_pegar_nome_heroi()
         print(nome)
         novo_heroi = Heroi(nome, 50, 10, "o(a) Noob")
-        self.__tela_heroi.mostrar_mensagem("Herói criado!")
+        advice = 'Herói Criado!'
         self.__heroi_dao.add(nome, novo_heroi)
-        return novo_heroi
+        return novo_heroi, advice
 
     def combate(self, heroi, usuario):
         monstro = self.__controlador_sistema.controlador_monstro.pega_monstro()
@@ -39,9 +39,8 @@ class ControladorHeroi:
 
                     return self.__controlador_sistema.abrir_tela_logados(usuario)
         elif monstro == "na":
-            self.__tela_heroi.mensagem("O mundo foi salvo! Todos os monstros foram derrotados :D")
-            self.__tela_heroi.mensagem("Obrigada grande herói!")
-
+            self.__tela_heroi.mostrar_mensagem("O mundo foi salvo! Todos os monstros foram derrotados, "
+                                               "Obrigada grande herói! :D")
             self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
         else:
             return None
