@@ -16,8 +16,24 @@ class TelaHeroi:
         self.__window.Close()
 
     def pegar_nome_heroi(self):
-        nome = input("Nome do herói: ")
-        return nome
+        interface_heroi.ChangeLookAndFeel('DarkBlue9')
+        layout = [
+            [interface_heroi.Text('Nome do Herói'), interface_heroi.InputText('')],
+            [interface_heroi.Button('Confirmar')]
+        ]
+        self.__window = interface_heroi.Window('Criação de Herói').Layout(layout)
+
+    def abrir_pegar_nome_heroi(self):
+        while True:
+            self.pegar_nome_heroi()
+            botao, nome = self.__window.Read()
+
+            if nome[0] is None or nome[0] == '':
+                self.close()
+                self.mostrar_mensagem('Nome Inválido, Coloque um nome válido')
+            else:
+                self.close()
+                return nome[0]
 
     def opcoes_itens(self):
         interface_heroi.ChangeLookAndFeel('DarkBlue9')

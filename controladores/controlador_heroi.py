@@ -12,10 +12,11 @@ class ControladorHeroi:
         self.__heroi_dao = HeroiDAO()
 
     def criar_heroi(self):
-        novo_heroi = Heroi(self.__tela_heroi.pegar_nome_heroi(), 50, 10, "o(a) Noob")
+        nome = self.__tela_heroi.abrir_pegar_nome_heroi()
+        print(nome)
+        novo_heroi = Heroi(nome, 50, 10, "o(a) Noob")
         self.__tela_heroi.mostrar_mensagem("Herói criado!")
-        self.__heroi_dao.add(novo_heroi.nome, novo_heroi)
-        self.__
+        self.__heroi_dao.add(nome, novo_heroi)
         return novo_heroi
 
     def combate(self, heroi, usuario):
