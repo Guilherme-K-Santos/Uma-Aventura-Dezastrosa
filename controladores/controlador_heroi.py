@@ -29,19 +29,15 @@ class ControladorHeroi:
                 heroi.hp_total = heroi.hp_total - monstro.ataque
                 self.__controlador_sistema.controlador_monstro.remove(monstro)
 
-                self.__tela_heroi.mensagem("Parabéns! Você matou o monstro!")
-                self.__tela_heroi.mensagem("Um novo item apareceu em sua mochila")
-                self.__tela_heroi.mensagem("Equipe-o para o próximo combate")
-                self.__tela_heroi.mensagem("ATENÇÃO: Lembre-se de descansar de sua última batalha")
-
-                return self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
+                ok = self.__tela_heroi.abrir_depois_matar_monstro()
+                if ok is not None:
+                    return self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
             else:
-                self.__tela_heroi.mensagem("GAME OVER")
-                self.__tela_heroi.mensagem("Seu herói morreu, crie outro herói")
-                self.__tela_heroi.mensagem("Foi uma aventura dezastrosa! >:(")
-                self.__controlador_sistema.controlador_usuario.remove_heroi(heroi, usuario)
+                ok = self.__tela_heroi.abrir_depois_morrer()
+                if ok is not None:
+                    self.__controlador_sistema.controlador_usuario.remove_heroi(heroi, usuario)
 
-                return self.__controlador_sistema.abrir_tela_logados(usuario)
+                    return self.__controlador_sistema.abrir_tela_logados(usuario)
         elif monstro == "na":
             self.__tela_heroi.mensagem("O mundo foi salvo! Todos os monstros foram derrotados :D")
             self.__tela_heroi.mensagem("Obrigada grande herói!")
