@@ -5,7 +5,6 @@ class Usuario:
         self.__login = login
         self.__senha = senha
         self.__lista_herois = []
-        self.__lista_nomes_herois = []
 
     @property
     def login(self):

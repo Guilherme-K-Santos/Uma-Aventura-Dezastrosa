@@ -23,7 +23,7 @@ class ControladorUsuario:
             return None
         else:
             novo_usuario = Usuario(dados_novos["login"], dados_novos["senha"])
-            self.__usuario_dao.add(novo_usuario.login, novo_usuario)
+            self.__usuario_dao.add(novo_usuario)
             self.__tela_usuario.mostrar_mensagem("Usuário Novo Criado! Faça o login para jogar")
             return novo_usuario
 
@@ -110,12 +110,10 @@ class ControladorUsuario:
 
     def acessar_herois(self, usuario):
 
-        if len(usuario.lista_nomes_herois) >= 1 and len(usuario.lista_herois) >= 1:
+        if len(usuario.lista_herois) >= 1:
             self.__tela_usuario.mostrar_mensagem("Olá Aventureiro! Em qual jornada você quer prosseguir?")
-            contador_herois = 0
-            for _ in usuario.lista_nomes_herois:
-                self.__tela_usuario.mostrar_mensagem(usuario.lista_nomes_herois[contador_herois])
-                contador_herois += 1
+            for hero in usuario.lista_herois:
+                self.__tela_usuario.mostrar_mensagem(hero.nome)
             nome = self.__tela_usuario.abrir_selecao_herois()
             for heroi in usuario.lista_herois:
                 if nome == heroi.nome:
