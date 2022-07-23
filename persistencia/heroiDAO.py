@@ -4,6 +4,7 @@ from persistencia.usuarioDAO import UsuarioDAO
 
 
 class HeroiDAO(AbstractDAO):
+
     __instance = None
 
     def __init__(self):
@@ -11,13 +12,11 @@ class HeroiDAO(AbstractDAO):
         self.__usuario_dao = UsuarioDAO()
 
     def __new__(cls):
-        if HeroiDAO.__instance is None:
+        if HeroiDAO.__instance == None:
             HeroiDAO.__instance = object.__new__(cls)
-        else:
-            return HeroiDAO.__instance
+        return HeroiDAO.__instance
 
-
-    def add(self, key, heroi: Heroi):
+    def add(self, heroi: Heroi):
         if heroi is not None and isinstance(heroi, Heroi):
             super().add(heroi.nome, heroi)
             self.__usuario_dao.persist()

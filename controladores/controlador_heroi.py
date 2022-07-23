@@ -14,8 +14,7 @@ class ControladorHeroi:
     def criar_heroi(self):
         novo_heroi = Heroi(self.__tela_heroi.pegar_nome_heroi(), 50, 10, "o(a) Noob")
         self.__tela_heroi.mostrar_mensagem("Herói criado!")
-        self.__heroi_dao.add(novo_heroi.nome, novo_heroi)
-        self.__
+        self.__heroi_dao.add(novo_heroi)
         return novo_heroi
 
     def combate(self, heroi, usuario):
@@ -26,7 +25,6 @@ class ControladorHeroi:
                 heroi.lista_titulos.append(monstro.titulo)
 
                 heroi.hp_total = heroi.hp_total - monstro.ataque
-                self.__controlador_sistema.controlador_monstro.remove(monstro)
 
                 self.__tela_heroi.mensagem("Parabéns! Você matou o monstro!")
                 self.__tela_heroi.mensagem("Um novo item apareceu em sua mochila")
@@ -41,13 +39,9 @@ class ControladorHeroi:
                 self.__controlador_sistema.controlador_usuario.remove_heroi(heroi, usuario)
 
                 return self.__controlador_sistema.abrir_tela_logados(usuario)
-        elif monstro == "na":
-            self.__tela_heroi.mensagem("O mundo foi salvo! Todos os monstros foram derrotados :D")
-            self.__tela_heroi.mensagem("Obrigada grande herói!")
 
-            self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
         else:
-            return None
+           return None
 
     def descansar(self, heroi):
         heroi.hp_total = heroi.hp + heroi.hp_extra

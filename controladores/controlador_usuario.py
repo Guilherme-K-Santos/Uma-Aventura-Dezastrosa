@@ -18,7 +18,7 @@ class ControladorUsuario:
 
         if dados_novos is None:
             self.retornar()
-        elif self.__usuario_dao.get(dados_novos["login"]):
+        elif self.__usuario_dao.get(dados_novos["login"]) is not None:
             self.__tela_usuario.mostrar_mensagem("Usuário já existente! Faça o login para jogar")
             return None
         else:
