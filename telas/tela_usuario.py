@@ -155,14 +155,27 @@ class TelaUsuario:
         return resposta
 
     #   -------------------------------------- OPÇÕES USUARIO X HEROI --------------------------------------
+    def tela_selecao_heroi(self):
+        interface_usuario.ChangeLookAndFeel('DarkBlue9')
+        layout = [
+            [interface_usuario.Text('Escreva o nome do herói que deseja')],
+            [interface_usuario.Text('Herói', size=(15, 1)), interface_usuario.InputText('', key='nome_heroi')],
+            [interface_usuario.Button('Confirmar'), interface_usuario.Cancel('Cancelar')]
+        ]
+
+        self.__window = interface_usuario.Window('Seleção Herói').Layout(layout)
 
     def abrir_selecao_herois(self):
-        print()
-        print("--------------------------------------")
-        print("Escreva abaixo o nome do herói que você deseja usar.")
+        self.tela_selecao_heroi()
+        botao, values = self.__window.Read()
 
-        heroi_escolhido = input("Herói Escolhido: ")
-        return heroi_escolhido
+        if botao in (None, 'Cancelar'):
+            self.close()
+        else:
+            heroi_nome = values['nome_heroi']
+            self.close()
+            return heroi_nome
+
 
     def excecoes_escrita_numerica(self, mensagem: ""):
         try:
