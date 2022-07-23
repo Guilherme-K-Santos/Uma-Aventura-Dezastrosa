@@ -10,9 +10,11 @@ class ControladorMonstro:
         self.__monstro_dao = MonstroDAO()
 
     def pega_monstro(self):
+        monstro = None
         id = self.__tela_monstro.escolher_monstro()
-        monstro = self.__monstro_dao.get(id)
-        self.__tela_monstro.mensagem(monstro.nome)
+        if id != 0:
+            monstro = self.__monstro_dao.get(id)
+            self.__tela_monstro.mensagem(monstro.nome)
         return monstro
 
     def remove(self, id):

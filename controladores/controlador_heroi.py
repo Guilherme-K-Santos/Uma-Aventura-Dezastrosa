@@ -21,15 +21,16 @@ class ControladorHeroi:
         monstro = self.__controlador_sistema.controlador_monstro.pega_monstro()
         if monstro is not None:
             if heroi.ataque >= monstro.hp and heroi.hp_total > monstro.ataque:
-                heroi.mochila.itens.append(monstro.item_monstro)
-                heroi.lista_titulos.append(monstro.titulo)
+                self.__tela_heroi.mensagem("Parabéns! Você derrotou o monstro!")
+                if monstro.item_monstro not in heroi.mochila.itens:
+                    heroi.mochila.itens.append(monstro.item_monstro)
+                    self.__tela_heroi.mensagem("Um novo item apareceu em sua mochila")
+                    self.__tela_heroi.mensagem("Equipe-o para o próximo combate")
+                if monstro.titulo not in heroi.lista_titulos:
+                    heroi.lista_titulos.append(monstro.titulo)
 
                 heroi.hp_total = heroi.hp_total - monstro.ataque
-
-                self.__tela_heroi.mensagem("Parabéns! Você matou o monstro!")
-                self.__tela_heroi.mensagem("Um novo item apareceu em sua mochila")
-                self.__tela_heroi.mensagem("Equipe-o para o próximo combate")
-                self.__tela_heroi.mensagem("ATENÇÃO: Lembre-se de descansar de sua última batalha")
+                self.__tela_heroi.mensagem("ATENÇÃO: O herói está ferido! Lembre-se de descansar após a batalha")
 
                 return self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
             else:
@@ -41,7 +42,7 @@ class ControladorHeroi:
                 return self.__controlador_sistema.abrir_tela_logados(usuario)
 
         else:
-           return None
+            return None
 
     def descansar(self, heroi):
         heroi.hp_total = heroi.hp + heroi.hp_extra
