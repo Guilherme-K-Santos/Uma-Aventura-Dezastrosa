@@ -27,3 +27,7 @@ class UsuarioDAO(AbstractDAO):
     def remove(self, login_usuario: str):
         if login_usuario is not None and isinstance(login_usuario, str):
             return super().remove(login_usuario)
+
+    def update_key(self, usuario_antigo_nome, usuario_novo_nome, usuario: Usuario):
+        self.remove(usuario_antigo_nome)
+        self.add(usuario_novo_nome, usuario)

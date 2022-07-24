@@ -53,24 +53,20 @@ class ControladorUsuario:
             funcao_escolhida()
 
     def alterar(self):
-        resposta_alteracao = self.__tela_usuario.tela_confirmar_alteraracao()
-        self.__tela_usuario.mensagem("Por favor, confirme que é você mesmo: ")
-        credenciais = self.__tela_usuario.tela_login()
+        credenciais = self.__tela_usuario.abrir_login()
 
-        if resposta_alteracao == 1:
+        if credenciais is None:
+            self.retornar()
+        else:
             usuario_pego = self.__usuario_dao.get(credenciais["login"])
+            nome_antigo = usuario_pego.login
             if (usuario_pego is not None) and usuario_pego.senha == credenciais["senha"]:
-                usuario_pego.login = self.__tela_usuario.tela_alteracao_login()
+                dados_novos = self.__tela_usuario.abrir_tela_alteracao(usuario_pego)
+                usuario_pego.login = dados_novos["login_novo"]
+                usuario_pego.senha = dados_novos["senha_novo"]
+                self.__usuario_dao.update_key(nome_antigo, usuario_pego.login, usuario_pego)
             else:
-                self.__tela_usuario.mensagem("Credenciais Incorretas!")
-
-        elif resposta_alteracao == 2:
-            usuario_pego = self.__usuario_dao.get(credenciais["login"])
-            if (usuario_pego is not None) and usuario_pego.senha == credenciais["senha"]:
-                usuario_pego.senha = self.__tela_usuario.tela_alteracao_senha()
-                self.__usuario_dao.add(usuario_pego)
-            else:
-                self.__tela_usuario.mensagem("Credenciais Incorretas!")
+                self.__tela_usuario.mostrar_mensagem("Credenciais Incorretas!")
 
     def excluir(self):
         credenciais = self.__tela_usuario.abrir_login()
@@ -109,7 +105,6 @@ class ControladorUsuario:
 #   abrir a tela da jornada salva dele (precisamos fazer)
 
     def acessar_herois(self, usuario):
-
         if len(usuario.lista_herois) >= 1:
             self.__tela_usuario.mostrar_mensagem("Olá Aventureiro! Em qual jornada você quer prosseguir?")
             for hero in usuario.lista_herois:

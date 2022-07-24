@@ -103,30 +103,30 @@ class TelaUsuario:
 
         return opcao
 
-    def tela_confirmar_alteraracao(self):
-        print("--------------------------------------")
-        print("O que você deseja alterar em sua conta?")
-        print("1 - Login")
-        print("2 - Senha")
+    def tela_alteracao(self, usuario):
+        interface_usuario.ChangeLookAndFeel('DarkBlue9')
+        layout = [
+            [interface_usuario.Text('Novo login', size=(15, 1)), interface_usuario.InputText(usuario.login,
+                                                                                             key='login_novo')],
+            [interface_usuario.Text('Nova senha', size=(15, 1)), interface_usuario.InputText(usuario.senha,
+                                                                                             key='senha_novo')],
+            [interface_usuario.Button('Confirmar'), interface_usuario.Cancel('Cancelar')]
+        ]
 
-        resposta_alteracao = self.excecoes_escolha("Escolha uma Opção ", [1, 2])
-        return resposta_alteracao
+        self.__window = interface_usuario.Window('Alteração').Layout(layout)
 
-    # unificar alteraçao login e senha na tela grafica e fazer com que o usuario altere manualmente
-    # a senha e o login ja existentes
-    def tela_alteracao_login(self):
-        print("--------------------------------------")
-        print("Qual será o seu novo login?")
-        login = input("Login:")
+    def abrir_tela_alteracao(self, usuario):
+        self.tela_alteracao(usuario)
+        botao, values = self.__window.Read()
 
-        return login
+        if botao in (None, 'Cancelar'):
+            self.close()
+        else:
+            login_novo = values['login_novo']
+            self.close()
+            senha_nova = self.excecoes_escrita_numerica(values['senha_novo'])
 
-    def tela_alteracao_senha(self):
-        print("--------------------------------------")
-        print("Qual será sua nova senha?")
-        senha = self.excecoes_escrita_numerica("Senha:")
-
-        return senha
+            return {"login_novo": login_novo, "senha_novo": senha_nova}
 
     def tela_deletar_usuario(self):
         interface_usuario.ChangeLookAndFeel('DarkBlue9')
