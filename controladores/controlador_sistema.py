@@ -45,7 +45,7 @@ class ControladorSistema:
 
     def cadastro_heroi(self, usuario):
         novo_heroi, advice = self.__controlador_heroi.criar_heroi()
-        if novo_heroi in usuario.lista_herois:
+        if novo_heroi.nome in usuario.lista_nomes_herois:
             self.__tela_sistema.mostra_mensagem("Heroi já existente")
             return None
         else:
@@ -53,6 +53,7 @@ class ControladorSistema:
             self.__heroi_dao = HeroiDAO()
             self.__tela_sistema.mostra_mensagem(advice)
             usuario.lista_herois.append(novo_heroi)
+            usuario.lista_nomes_herois.append(novo_heroi.nome)
 
     def abrir_tela_logados(self, usuario):
         opcao2 = self.__tela_sistema.tela_logados()
