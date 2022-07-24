@@ -12,35 +12,32 @@ class ControladorHeroi:
         self.__heroi_dao = HeroiDAO()
 
     def criar_heroi(self):
-        novo_heroi = Heroi(self.__tela_heroi.pegar_nome_heroi(), 50, 10, "o(a) Noob")
-        self.__tela_heroi.mostrar_mensagem("Herói criado!")
+        nome = self.__tela_heroi.abrir_pegar_nome_heroi()
+        print(nome)
+        novo_heroi = Heroi(nome, 50, 10, "o(a) Noob")
+        advice = 'Herói Criado!'
         self.__heroi_dao.add(novo_heroi)
-        return novo_heroi
+        return novo_heroi, advice
 
     def combate(self, heroi, usuario):
         monstro = self.__controlador_sistema.controlador_monstro.pega_monstro()
         if monstro is not None:
             if heroi.ataque >= monstro.hp and heroi.hp_total > monstro.ataque:
-                self.__tela_heroi.mensagem("Parabéns! Você derrotou o monstro!")
-                if monstro.item_monstro not in heroi.mochila.itens:
-                    heroi.mochila.itens.append(monstro.item_monstro)
-                    self.__tela_heroi.mensagem("Um novo item apareceu em sua mochila")
-                    self.__tela_heroi.mensagem("Equipe-o para o próximo combate")
-                if monstro.titulo not in heroi.lista_titulos:
-                    heroi.lista_titulos.append(monstro.titulo)
+                heroi.mochila.itens.append(monstro.item_monstro)
+                heroi.lista_titulos.append(monstro.titulo)
 
                 heroi.hp_total = heroi.hp_total - monstro.ataque
-                self.__tela_heroi.mensagem("ATENÇÃO: O herói está ferido! Lembre-se de descansar após a batalha")
+                self.__controlador_sistema.controlador_monstro.remove(monstro)
 
-                return self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
+                ok = self.__tela_heroi.abrir_depois_matar_monstro()
+                if ok is not None:
+                    return self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
             else:
-                self.__tela_heroi.mensagem("GAME OVER")
-                self.__tela_heroi.mensagem("Seu herói morreu, crie outro herói")
-                self.__tela_heroi.mensagem("Foi uma aventura dezastrosa! >:(")
-                self.__controlador_sistema.controlador_usuario.remove_heroi(heroi, usuario)
+                ok = self.__tela_heroi.abrir_depois_morrer()
+                if ok is not None:
+                    self.__controlador_sistema.controlador_usuario.remove_heroi(heroi, usuario)
 
-                return self.__controlador_sistema.abrir_tela_logados(usuario)
-
+                    return self.__controlador_sistema.abrir_tela_logados(usuario)
         else:
             return None
 

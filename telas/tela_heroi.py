@@ -15,9 +15,60 @@ class TelaHeroi:
     def close(self):
         self.__window.Close()
 
+    def depois_matar_monstro(self):
+        interface_heroi.ChangeLookAndFeel('DarkBlue9')
+        layout = [
+            [interface_heroi.Text('Parabéns! Você matou o monstro!', size=15)],
+            [interface_heroi.Text('Um novo item apareceu em sua mochila, equipe-o para o próximo combate!')],
+            [interface_heroi.Text('Você também ganhou um título do último monstro que você matou.')],
+            [interface_heroi.Text('ATENÇÃO: Lembre-se de descansar de sua última batalha!')],
+            [interface_heroi.Button('Ok')],
+        ]
+
+        self.__window = interface_heroi.Window('Parabéns').Layout(layout)
+
+    def abrir_depois_matar_monstro(self):
+        self.depois_matar_monstro()
+        botao = self.__window.Read()
+        self.close()
+        return ''
+
+    def depois_morrer(self):
+        interface_heroi.ChangeLookAndFeel('DarkBlue9')
+        layout = [
+            [interface_heroi.Text('Seu herói morreu', size=15)],
+            [interface_heroi.Text('Caso queira jogar novamente, crie outro herói!')],
+            [interface_heroi.Text('Sua aventura foi dezastrosa :(')],
+            [interface_heroi.Button('Ok')],
+        ]
+
+        self.__window = interface_heroi.Window('GAME OVER').Layout(layout)
+
+    def abrir_depois_morrer(self):
+        self.depois_morrer()
+        botao = self.__window.Read()
+        self.close()
+        return ''
+
     def pegar_nome_heroi(self):
-        nome = input("Nome do herói: ")
-        return nome
+        interface_heroi.ChangeLookAndFeel('DarkBlue9')
+        layout = [
+            [interface_heroi.Text('Nome do Herói'), interface_heroi.InputText('')],
+            [interface_heroi.Button('Confirmar')]
+        ]
+        self.__window = interface_heroi.Window('Criação de Herói').Layout(layout)
+
+    def abrir_pegar_nome_heroi(self):
+        while True:
+            self.pegar_nome_heroi()
+            botao, nome = self.__window.Read()
+
+            if nome[0] is None or nome[0] == '':
+                self.close()
+                self.mostrar_mensagem('Nome Inválido, Coloque um nome válido')
+            else:
+                self.close()
+                return nome[0]
 
     def opcoes_itens(self):
         interface_heroi.ChangeLookAndFeel('DarkBlue9')
