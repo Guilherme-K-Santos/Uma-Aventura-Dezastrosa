@@ -42,11 +42,12 @@ class ControladorSistema:
                 exit()
 
     def cadastro_heroi(self, usuario):
-        novo_heroi = self.__controlador_heroi.criar_heroi()
+        novo_heroi, advice = self.__controlador_heroi.criar_heroi()
         if novo_heroi in usuario.lista_herois:
             self.__tela_sistema.mostra_mensagem("Heroi já existente")
             return None
         else:
+            self.__tela_sistema.mostra_mensagem(advice)
             usuario.lista_herois.append(novo_heroi)
 
     def abrir_tela_logados(self, usuario):
@@ -56,7 +57,7 @@ class ControladorSistema:
             if heroi is not None:
                 self.abrir_tela_opcoes_jogo(heroi, usuario)
             else:
-                self.__tela_sistema.mostra_mensagem('Nenhum herói criado! Tente criar um!')
+                self.__tela_sistema.mostra_mensagem('Nome de herói inválido, escolha um nome válido!')
                 self.abrir_tela_logados(usuario)
         elif opcao2 == 2:
             self.cadastro_heroi(usuario)
