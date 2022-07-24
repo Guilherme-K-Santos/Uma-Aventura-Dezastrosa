@@ -54,55 +54,51 @@ class ControladorHeroi:
 
     def abre_mochila(self, heroi, usuario):
         antigo_heroi = heroi
-        self.__tela_heroi.mensagem("---- Mochila ----")
+        nomes_itens = []
         if len(heroi.mochila.itens) > 0:
-            indice = 1
             for item in heroi.mochila.itens:
-                self.__tela_heroi.mensagem("{} - {}".format(indice, item.nome_item))
-                indice += 1
+                nomes_itens.append(item.nome_item)
+            nomes = tuple(nomes_itens)
+            nome_item = self.__tela_heroi.escolhe_item(nomes)
+            item_escolhido = ""
 
-            validacao = self.regularizacao(indice)
+            if nome_item != 0:
+                for i in heroi.mochila.itens:
+                    if i.nome_item == nome_item:
+                        item_escolhido = i
 
-            indice_item = self.__tela_heroi.escolhe_itens(validacao)
-            if indice_item != 0:
-                item_escolhido = heroi.mochila.itens[indice_item-1]
-
-                self.__tela_heroi.mensagem("Você escolheu: {} ".format(item_escolhido.nome_item))
+                self.__tela_heroi.mostrar_mensagem("Você escolheu: {} ".format(item_escolhido.nome_item))
 
                 op = self.__tela_heroi.abrir_opcoes_itens()
                 if op == 1:
-                    self.__tela_heroi.mensagem(" ================================== ")
                     if heroi.item_equipado != item_escolhido:
                         heroi.item_equipado = item_escolhido
                         heroi.hp_extra = item_escolhido.hp_extra
                         heroi.ataque = item_escolhido.att_extra
                         self.__heroi_dao.update_key(antigo_heroi.nome, heroi.nome, heroi)
-                        self.__tela_heroi.mensagem(" === Item equipado com sucesso! === ")
-                        self.__tela_heroi.mensagem("Ataque atual: {} ".format(heroi.ataque))
-                        self.__tela_heroi.mensagem("HP atual: {} ".format(heroi.hp_total))
+                        self.__tela_heroi.mostrar_mensagem("Item equipado com sucesso!")
+                        self.__tela_heroi.mostrar_mensagem("Ataque atual: {} \n HP atual: {} ".format(heroi.ataque,
+                                                                                                      heroi.hp_total))
                     else:
-                        self.__tela_heroi.mensagem(" ================================== ")
-                        self.__tela_heroi.mensagem(" ======== Item já equipado! ======= ")
+                        self.__tela_heroi.mostrar_mensagem("Item já equipado!")
 
                 elif op == 2:
-                    self.__tela_heroi.mensagem(" =================================== ")
                     if heroi.item_equipado == item_escolhido:
                         heroi.hp_extra = 0
                         heroi.ataque = 0
-                        self.__tela_heroi.mensagem(" ===== O item foi desequipado ====== ")
+                        self.__tela_heroi.mostrar_mensagem("O item foi desequipado")
                     heroi.mochila.itens.remove(item_escolhido)
                     self.__heroi_dao.update_key(antigo_heroi.nome, heroi.nome, heroi)
-                    self.__tela_heroi.mensagem("{} foi removido da mochila".format(item_escolhido.nome_item))
+                    self.__tela_heroi.mostrar_mensagem("{} foi removido da mochila".format(item_escolhido.nome_item))
 
                 elif op == 3:
-                    self.__tela_heroi.mensagem(" =================================== ")
                     if heroi.item_equipado is not None:
                         heroi.item_equipado = None
                         heroi.hp_extra = 0
                         heroi.ataque = 0
-                        self.__tela_heroi.mensagem(" ===== O item foi desequipado ====== ")
-                        self.__tela_heroi.mensagem("Ataque atual: {} ".format(heroi.ataque))
-                        self.__tela_heroi.mensagem("HP atual: {} ".format(heroi.hp_total))
+                        self.__tela_heroi.mostrar_mensagem("O item foi desequipado")
+                        self.__tela_heroi.mostrar_mensagem("Ataque atual: {} \n HP atual: {} ".format(heroi.ataque,
+                                                                                                      heroi.hp_total))
                     else:
                         self.__tela_heroi.mostrar_mensagem("Nenhum item equipado")
                     self.__heroi_dao.update_key(antigo_heroi.nome, heroi.nome, heroi)
@@ -119,17 +115,11 @@ class ControladorHeroi:
 
     def mudar_titulo(self, heroi):
         antigo_heroi = heroi
-        indice = 0
-        for titulo in heroi.lista_titulos:
-            print("Selecione ", indice, "para equipar: ", titulo)
-            indice += 1
-
-        validacao = self.regularizacao(indice)
-
-        indice_escolhido = self.__tela_heroi.escolhe_titulo(validacao)
-        heroi.titulo = heroi.lista_titulos[indice_escolhido]
+        tupla_titulos = tuple(heroi.lista_titulos)
+        titulo_escolhido = self.__tela_heroi.escolhe_titulo(tupla_titulos)
+        heroi.titulo = titulo_escolhido
         self.__heroi_dao.update_key(antigo_heroi.nome, heroi.nome, heroi)
-        self.__tela_heroi.mensagem("Título {} equipado com sucesso".format(heroi.titulo))
+        self.__tela_heroi.mostrar_mensagem("Título {} equipado com sucesso".format(heroi.titulo))
 
     def regularizacao(self, indice):
         validacao = []

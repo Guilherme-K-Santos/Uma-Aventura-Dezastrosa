@@ -107,14 +107,15 @@ class ControladorUsuario:
     def acessar_herois(self, usuario):
         if len(usuario.lista_herois) >= 1:
             self.__tela_usuario.mostrar_mensagem("Olá Aventureiro! Em qual jornada você quer prosseguir?")
-            for hero in usuario.lista_herois:
-                self.__tela_usuario.mostrar_mensagem(hero.nome)
-            nome = self.__tela_usuario.abrir_selecao_herois()
+            nomes = []
             for heroi in usuario.lista_herois:
-                if nome == heroi.nome:
+                nomes.append(heroi.nome)
+            tupla = tuple(nomes)
+            nome_escolhido = self.__tela_usuario.escolhe_heroi(tupla)
+
+            for heroi in usuario.lista_herois:
+                if nome_escolhido == heroi.nome:
                     return heroi
-            else:
-                return None
         else:
             return None
 

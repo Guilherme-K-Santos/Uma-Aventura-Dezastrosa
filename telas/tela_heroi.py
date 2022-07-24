@@ -73,7 +73,7 @@ class TelaHeroi:
     def opcoes_itens(self):
         interface_heroi.ChangeLookAndFeel('DarkBlue9')
         layout = [
-            [interface_heroi.Text('Qual item você deseja, mestre?', font=("Helvica", 15))],
+            [interface_heroi.Text('O que deseja fazer com o item?', font=("Helvica", 15))],
             [interface_heroi.Radio('Equipar', "RD1", key='1')],
             [interface_heroi.Radio('Deletar', "RD1", key='2')],
             [interface_heroi.Radio('Desequipar', "RD1", key='3')],
@@ -99,11 +99,30 @@ class TelaHeroi:
 
         return opcao
 
-    def escolhe_itens(self, validacao):
-        print("Escolha um item para equipar ou deletar")
-        print("Ou digite 0 para retornar")
-        item = self.excecoes_escolha("Escolha uma Opção ", validacao)
-        return item
+    def janela_itens(self, tupla_itens):
+        interface_heroi.ChangeLookAndFeel('DarkBlue9')
+        layout_mochila = [
+            [interface_heroi.InputCombo((tupla_itens), size=(20,3), key='cb_opcoes')],
+            [interface_heroi.Radio("Retornar", "RD1", key='0')],
+            [interface_heroi.Button('Confirmar'), interface_heroi.Cancel('Cancelar')]
+        ]
+        self.__window = interface_heroi.Window('Mochila').Layout(layout_mochila)
+
+    def escolhe_item(self, tupla):
+        self.janela_itens(tupla)
+        button, values = self.__window.Read()
+        indice = 0
+
+        if values['cb_opcoes'] is not None:
+            indice = values['cb_opcoes']
+
+        if values['0'] or button in (None, 'Cancelar'):
+            indice = 0
+
+        self.close()
+
+        return indice
+
 
     def status_heroi(self, heroi):
         interface_heroi.ChangeLookAndFeel('DarkBlue9')
@@ -126,9 +145,29 @@ class TelaHeroi:
         if botao is not None:
             self.close()
 
-    def escolhe_titulo(self, validacao):
-        titulo_escolhido = self.excecoes_escolha("Escolha uma Opção ", validacao)
-        return titulo_escolhido
+    def janela_titulos(self, tupla_titulos):
+        interface_heroi.ChangeLookAndFeel('DarkBlue9')
+        layout_titulos = [
+            [interface_heroi.Text("Equipe um título para o herói")],
+            [interface_heroi.InputCombo((tupla_titulos), size=(20,3), key='cb_opcoes')],
+            [interface_heroi.Button('Confirmar'), interface_heroi.Cancel('Cancelar')]
+        ]
+        self.__window = interface_heroi.Window('Títulos').Layout(layout_titulos)
+
+    def escolhe_titulo(self, tupla):
+        self.janela_titulos(tupla)
+        button, values = self.__window.Read()
+        titulo = None
+
+        if values['cb_opcoes'] is not None:
+            titulo = values['cb_opcoes']
+
+        if button in (None, 'Cancelar'):
+            titulo = None
+
+        self.close()
+
+        return titulo
 
     def excecoes_escolha(self, mensagem: "", numeros_validos: [] = None):
         while True:

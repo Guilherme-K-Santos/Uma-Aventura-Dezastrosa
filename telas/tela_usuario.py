@@ -155,22 +155,30 @@ class TelaUsuario:
         return resposta
 
     #   -------------------------------------- OPÇÕES USUARIO X HEROI --------------------------------------
-    def tela_selecao_heroi(self):
+    def janela_herois(self, tupla_herois):
         interface_usuario.ChangeLookAndFeel('DarkBlue9')
-        layout = [
-            [interface_usuario.Text('Escreva o nome do herói que deseja')],
-            [interface_usuario.Text('Herói', size=(15, 1)), interface_usuario.InputText('', key='nome_heroi')],
-            [interface_usuario.Button('Confirmar')]
+        layout_mochila = [
+            [interface_usuario.Text("Escolha um herói para a aventura!")],
+            [interface_usuario.InputCombo((tupla_herois), size=(20,3), key='cb_opcoes')],
+            [interface_usuario.Button('Confirmar'), interface_usuario.Cancel('Cancelar')]
         ]
+        self.__window = interface_usuario.Window('Heróis').Layout(layout_mochila)
 
-        self.__window = interface_usuario.Window('Seleção Herói').Layout(layout)
+    def escolhe_heroi(self, tupla):
+        self.janela_herois(tupla)
+        button, values = self.__window.Read()
+        heroi = 0
 
-    def abrir_selecao_herois(self):
-        self.tela_selecao_heroi()
-        botao, values = self.__window.Read()
-        heroi_nome = values['nome_heroi']
+        if values['cb_opcoes'] is not None:
+            heroi = values['cb_opcoes']
+
+        if button in (None, 'Cancelar'):
+            heroi = 0
+
         self.close()
-        return heroi_nome
+
+        return heroi
+
 
     def excecoes_escrita_numerica(self, mensagem: ""):
         try:
