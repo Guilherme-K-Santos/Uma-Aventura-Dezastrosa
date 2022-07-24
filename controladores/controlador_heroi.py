@@ -27,6 +27,9 @@ class ControladorHeroi:
                 heroi.lista_titulos.append(monstro.titulo)
 
                 heroi.hp_total = heroi.hp_total - monstro.ataque
+                if monstro.nome == "Lorde Demônio":
+                    self.__tela_heroi.mostrar_mensagem("Você matou o Lorde Demônio \n"
+                                                       "O monstro mais forte do jogo!")
                 self.__controlador_sistema.controlador_monstro.remove(monstro)
 
                 self.__heroi_dao.update_key(antigo_heroi.nome, heroi.nome, heroi)
