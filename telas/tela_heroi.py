@@ -18,7 +18,7 @@ class TelaHeroi:
     def depois_matar_monstro(self):
         interface_heroi.ChangeLookAndFeel('DarkBlue9')
         layout = [
-            [interface_heroi.Text('Parabéns! Você matou o monstro!', font=("Helvica", 15)],
+            [interface_heroi.Text('Parabéns! Você matou o monstro!', font=("Helvica", 15))],
             [interface_heroi.Text('Um novo item apareceu em sua mochila, equipe-o para o próximo combate!')],
             [interface_heroi.Text('Você também ganhou um título do último monstro que você matou.')],
             [interface_heroi.Text('ATENÇÃO: Lembre-se de descansar de sua última batalha!')],
@@ -36,10 +36,10 @@ class TelaHeroi:
     def depois_morrer(self):
         interface_heroi.ChangeLookAndFeel('DarkBlue9')
         layout = [
-            [interface_heroi.Text('Seu herói morreu', font=("Helvica", 15)],
+            [interface_heroi.Text('Seu herói morreu', font=("Helvica", 15))],
             [interface_heroi.Text('Caso queira jogar novamente, crie outro herói!')],
             [interface_heroi.Text('Sua aventura foi dezastrosa :(')],
-            [interface_heroi.Button('Ok')],
+            [interface_heroi.Button('Ok')]
         ]
 
         self.__window = interface_heroi.Window('GAME OVER').Layout(layout)
@@ -103,7 +103,7 @@ class TelaHeroi:
         interface_heroi.ChangeLookAndFeel('DarkBlue9')
         layout_mochila = [
             [interface_heroi.Text("Mochila", font=("Helvica", 15))],
-            [interface_heroi.InputCombo((tupla_itens), size=(20,3), key='cb_opcoes')],
+            [interface_heroi.InputCombo(tupla_itens, size=(20,3), key='cb_opcoes')],
             [interface_heroi.Button('Escolher'), interface_heroi.Cancel('Retornar')]
         ]
         self.__window = interface_heroi.Window('Mochila').Layout(layout_mochila)
@@ -116,7 +116,7 @@ class TelaHeroi:
         if values['cb_opcoes'] is not None:
             indice = values['cb_opcoes']
 
-        if values['0'] or button in (None, 'Retornar'):
+        if button in (None, 'Retornar'):
             indice = 0
 
         self.close()
