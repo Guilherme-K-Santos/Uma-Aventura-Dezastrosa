@@ -19,6 +19,7 @@ class ControladorHeroi:
         return novo_heroi, advice
 
     def combate(self, heroi, usuario):
+        antigo_heroi = heroi
         monstro = self.__controlador_sistema.controlador_monstro.pega_monstro()
         if monstro is not None:
             if heroi.ataque >= monstro.hp and heroi.hp_total > monstro.ataque:
@@ -28,6 +29,8 @@ class ControladorHeroi:
                 heroi.hp_total = heroi.hp_total - monstro.ataque
                 self.__controlador_sistema.controlador_monstro.remove(monstro)
 
+                self.__heroi_dao.update_key(antigo_heroi.nome, heroi.nome, heroi)
+
                 ok = self.__tela_heroi.abrir_depois_matar_monstro()
                 if ok is not None:
                     return self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
@@ -35,19 +38,22 @@ class ControladorHeroi:
                 ok = self.__tela_heroi.abrir_depois_morrer()
                 if ok is not None:
                     self.__controlador_sistema.controlador_usuario.remove_heroi(heroi, usuario)
-
+                    self.__heroi_dao.remove(heroi.nome)
                     return self.__controlador_sistema.abrir_tela_logados(usuario)
         else:
             return None
 
     def descansar(self, heroi):
+        antigo_heroi = heroi
         heroi.hp_total = heroi.hp + heroi.hp_extra
 
+        self.__heroi_dao.update_key(antigo_heroi.nome, heroi.nome, heroi)
         self.__tela_heroi.mostrar_mensagem("Sua vida foi totalmente regenerada!")
 
         return heroi.hp_total
 
     def abre_mochila(self, heroi, usuario):
+        antigo_heroi = heroi
         self.__tela_heroi.mensagem("---- Mochila ----")
         if len(heroi.mochila.itens) > 0:
             indice = 1
@@ -70,6 +76,7 @@ class ControladorHeroi:
                         heroi.item_equipado = item_escolhido
                         heroi.hp_extra = item_escolhido.hp_extra
                         heroi.ataque = item_escolhido.att_extra
+                        self.__heroi_dao.update_key(antigo_heroi.nome, heroi.nome, heroi)
                         self.__tela_heroi.mensagem(" === Item equipado com sucesso! === ")
                         self.__tela_heroi.mensagem("Ataque atual: {} ".format(heroi.ataque))
                         self.__tela_heroi.mensagem("HP atual: {} ".format(heroi.hp_total))
@@ -84,6 +91,7 @@ class ControladorHeroi:
                         heroi.ataque = 0
                         self.__tela_heroi.mensagem(" ===== O item foi desequipado ====== ")
                     heroi.mochila.itens.remove(item_escolhido)
+                    self.__heroi_dao.update_key(antigo_heroi.nome, heroi.nome, heroi)
                     self.__tela_heroi.mensagem("{} foi removido da mochila".format(item_escolhido.nome_item))
 
                 elif op == 3:
@@ -97,7 +105,7 @@ class ControladorHeroi:
                         self.__tela_heroi.mensagem("HP atual: {} ".format(heroi.hp_total))
                     else:
                         self.__tela_heroi.mostrar_mensagem("Nenhum item equipado")
-
+                    self.__heroi_dao.update_key(antigo_heroi.nome, heroi.nome, heroi)
                 elif op == 0:
                     return self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
             else:
@@ -110,6 +118,7 @@ class ControladorHeroi:
         self.__tela_heroi.abrir_status_heroi(heroi)
 
     def mudar_titulo(self, heroi):
+        antigo_heroi = heroi
         indice = 0
         for titulo in heroi.lista_titulos:
             print("Selecione ", indice, "para equipar: ", titulo)
@@ -119,7 +128,7 @@ class ControladorHeroi:
 
         indice_escolhido = self.__tela_heroi.escolhe_titulo(validacao)
         heroi.titulo = heroi.lista_titulos[indice_escolhido]
-
+        self.__heroi_dao.update_key(antigo_heroi.nome, heroi.nome, heroi)
         self.__tela_heroi.mensagem("Título {} equipado com sucesso".format(heroi.titulo))
 
     def regularizacao(self, indice):

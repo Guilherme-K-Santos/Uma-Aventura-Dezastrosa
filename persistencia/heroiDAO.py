@@ -28,3 +28,7 @@ class HeroiDAO(AbstractDAO):
     def remove(self, nome_heroi: str):
         if nome_heroi is not None and isinstance(nome_heroi, str):
             return super().remove(nome_heroi)
+
+    def update_key(self, nome_heroi_antigo, novo_heroi_nome, heroi: Heroi):
+        self.remove(nome_heroi_antigo)
+        self.add(novo_heroi_nome, heroi)
