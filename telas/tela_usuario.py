@@ -176,7 +176,6 @@ class TelaUsuario:
             self.close()
             return heroi_nome
 
-
     def excecoes_escrita_numerica(self, mensagem: ""):
         try:
             valor_comparativo = int(mensagem)

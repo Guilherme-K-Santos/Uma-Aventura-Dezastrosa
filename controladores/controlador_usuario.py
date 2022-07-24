@@ -118,12 +118,9 @@ class ControladorUsuario:
             for heroi in usuario.lista_herois:
                 if nome == heroi.nome:
                     return heroi
-                    break
                 else:
-                    self.__tela_usuario.mensagem("Heroi nao existente")
                     return None
         else:
-            self.__tela_usuario.mensagem("Nenhum herói disponível, crie algum")
             return None
 
     def remove_heroi(self, heroi, usuario):
