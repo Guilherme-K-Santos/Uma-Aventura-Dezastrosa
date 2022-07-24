@@ -2,6 +2,7 @@ from controladores.controlador_heroi import ControladorHeroi
 from controladores.controlador_monstro import ControladorMonstro
 from controladores.controlador_usuario import ControladorUsuario
 from telas.tela_sistema import TelaSistema
+from persistencia.heroiDAO import HeroiDAO
 
 
 class ControladorSistema:
@@ -10,6 +11,7 @@ class ControladorSistema:
         self.__controlador_monstro = ControladorMonstro(self)
         self.__controlador_heroi = ControladorHeroi(self)
         self.__tela_sistema = TelaSistema()
+        self.__heroi_dao = HeroiDAO()
 
     @property
     def controlador_usuario(self):
@@ -47,6 +49,8 @@ class ControladorSistema:
             self.__tela_sistema.mostra_mensagem("Heroi já existente")
             return None
         else:
+            print('adicionado')
+            self.__heroi_dao = HeroiDAO()
             self.__tela_sistema.mostra_mensagem(advice)
             usuario.lista_herois.append(novo_heroi)
 

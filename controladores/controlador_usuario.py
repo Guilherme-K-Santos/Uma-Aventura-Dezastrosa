@@ -125,5 +125,4 @@ class ControladorUsuario:
 
     def remove_heroi(self, heroi, usuario):
         usuario.lista_herois.remove(heroi)
-        usuario.lista_nomes_herois.remove(heroi.nome)
         return self.__controlador_sistema.abrir_tela_logados(usuario)

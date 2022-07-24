@@ -16,7 +16,6 @@ class ControladorHeroi:
         print(nome)
         novo_heroi = Heroi(nome, 50, 10, "o(a) Noob")
         advice = 'Herói Criado!'
-        self.__heroi_dao.add(novo_heroi)
         return novo_heroi, advice
 
     def combate(self, heroi, usuario):

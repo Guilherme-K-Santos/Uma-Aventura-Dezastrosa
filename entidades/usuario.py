@@ -31,11 +31,3 @@ class Usuario:
     @lista_herois.setter
     def lista_herois(self, lista_herois: list):
         self.__lista_herois = lista_herois
-
-    @property
-    def lista_nomes_herois(self):
-        return self.__lista_nomes_herois
-
-    @lista_nomes_herois.setter
-    def lista_nomes_herois(self, lista_nomes_herois: list):
-        self.__lista_nomes_herois = lista_nomes_herois
