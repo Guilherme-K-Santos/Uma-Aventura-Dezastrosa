@@ -118,8 +118,8 @@ class ControladorUsuario:
             for heroi in usuario.lista_herois:
                 if nome == heroi.nome:
                     return heroi
-                else:
-                    return None
+            else:
+                return None
         else:
             return None
 

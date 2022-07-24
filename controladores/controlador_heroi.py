@@ -96,14 +96,14 @@ class ControladorHeroi:
                         self.__tela_heroi.mensagem("Ataque atual: {} ".format(heroi.ataque))
                         self.__tela_heroi.mensagem("HP atual: {} ".format(heroi.hp_total))
                     else:
-                        self.__tela_heroi.mensagem(" ====== Nenhum item equipado ======= ")
+                        self.__tela_heroi.mostrar_mensagem("Nenhum item equipado")
 
                 elif op == 0:
                     return self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
             else:
                 return self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
         else:
-            self.__tela_heroi.mensagem(" ========= Mochila vazia ========= ")
+            self.__tela_heroi.mostrar_mensagem('Mochila vazia')
             return self.__controlador_sistema.abrir_tela_opcoes_jogo(heroi, usuario)
 
     def ver_status(self, heroi):

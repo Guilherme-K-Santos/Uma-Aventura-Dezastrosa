@@ -5,7 +5,7 @@ class MonstroDAO(AbstractDAO):
 
     def __init__(self):
         super().__init__("monstros.pkl")
-        self.__cache = {1:lista_monstros[0], 2:lista_monstros[1], 3:lista_monstros[2]}
+        self.__cache = {1: lista_monstros[0], 2: lista_monstros[1], 3: lista_monstros[2]}
 
     def get_all(self):
         return list(self.__cache.values())

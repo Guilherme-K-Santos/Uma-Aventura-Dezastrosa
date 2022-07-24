@@ -160,7 +160,7 @@ class TelaUsuario:
         layout = [
             [interface_usuario.Text('Escreva o nome do herói que deseja')],
             [interface_usuario.Text('Herói', size=(15, 1)), interface_usuario.InputText('', key='nome_heroi')],
-            [interface_usuario.Button('Confirmar'), interface_usuario.Cancel('Cancelar')]
+            [interface_usuario.Button('Confirmar')]
         ]
 
         self.__window = interface_usuario.Window('Seleção Herói').Layout(layout)
@@ -168,13 +168,9 @@ class TelaUsuario:
     def abrir_selecao_herois(self):
         self.tela_selecao_heroi()
         botao, values = self.__window.Read()
-
-        if botao in (None, 'Cancelar'):
-            self.close()
-        else:
-            heroi_nome = values['nome_heroi']
-            self.close()
-            return heroi_nome
+        heroi_nome = values['nome_heroi']
+        self.close()
+        return heroi_nome
 
     def excecoes_escrita_numerica(self, mensagem: ""):
         try:
