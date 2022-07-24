@@ -12,11 +12,11 @@ class HeroiDAO(AbstractDAO):
         self.__usuario_dao = UsuarioDAO()
 
     def __new__(cls):
-        if HeroiDAO.__instance == None:
+        if HeroiDAO.__instance is None:
             HeroiDAO.__instance = object.__new__(cls)
         return HeroiDAO.__instance
 
-    def add(self, heroi: Heroi):
+    def add(self, key, heroi: Heroi):
         if heroi is not None and isinstance(heroi, Heroi):
             super().add(heroi.nome, heroi)
             self.__usuario_dao.persist()

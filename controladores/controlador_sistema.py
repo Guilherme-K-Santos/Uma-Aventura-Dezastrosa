@@ -50,7 +50,7 @@ class ControladorSistema:
             return None
         else:
             print('adicionado')
-            self.__heroi_dao = HeroiDAO()
+            self.__heroi_dao.add(novo_heroi.nome, novo_heroi)
             self.__tela_sistema.mostra_mensagem(advice)
             usuario.lista_herois.append(novo_heroi)
             usuario.lista_nomes_herois.append(novo_heroi.nome)

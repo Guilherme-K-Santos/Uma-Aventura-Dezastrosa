@@ -23,7 +23,7 @@ class ControladorUsuario:
             return None
         else:
             novo_usuario = Usuario(dados_novos["login"], dados_novos["senha"])
-            self.__usuario_dao.add(novo_usuario)
+            self.__usuario_dao.add(novo_usuario.login, novo_usuario)
             self.__tela_usuario.mostrar_mensagem("Usuário Novo Criado! Faça o login para jogar")
             return novo_usuario
 
